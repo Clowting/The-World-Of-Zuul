@@ -1,4 +1,4 @@
-package test;
+package nl.corebooster.setup;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -20,8 +20,8 @@ public class SetupClass extends BasicGame {
 		
 	}
 	
-	public void render(GameContainer container, Graphics arg1) throws SlickException {
-		
+	public void render(GameContainer container, Graphics g) throws SlickException {
+		g.drawString("Hello Word!", 50, 50);
 	}
 
 	public static void main(String[] args) throws SlickException {

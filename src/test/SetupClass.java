@@ -1,5 +1,6 @@
 package test;
 
+import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -12,23 +13,23 @@ public class SetupClass extends BasicGame {
 	}
 	
 	public void init(GameContainer container) throws SlickException {
-		// TODO Auto-generated method stub
 		
 	}
 	
 	public void update(GameContainer container, int delta) throws SlickException {
-		// TODO Auto-generated method stub
 		
 	}
 	
 	public void render(GameContainer container, Graphics arg1) throws SlickException {
-		// TODO Auto-generated method stub
 		
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	public static void main(String[] args) throws SlickException {
+		AppGameContainer app = new AppGameContainer(new SetupClass("The World Of Zuul"));
+		
+		app.setDisplayMode(1280, 720, false);
+		
+		app.start();
 	}
 
 }

@@ -28,6 +28,7 @@ public class SetupClass extends BasicGame {
 		AppGameContainer app = new AppGameContainer(new SetupClass("The World Of Zuul"));
 		
 		app.setDisplayMode(1280, 720, false);
+		app.setVSync(true);
 		
 		app.start();
 	}

@@ -26,6 +26,38 @@ public class AnimatedSprite {
 	}
 	
 	/**
+	 * Returns the X-position
+	 */
+	public int getX()
+	{
+		return x;
+	}
+	
+	/**
+	 * Returns the Y-position
+	 */
+	public int getY()
+	{
+		return y;
+	}
+	
+	/**
+	 * Sets the X-position
+	 */
+	public void setX(int x)
+	{
+		this.x = x;
+	}
+	
+	/**
+	 * Sets the Y-position
+	 */
+	public void setY(int y)
+	{
+		this.y = y;
+	}
+	
+	/**
 	 * Gets a spritesheet image from the given location
 	 * @param folder
 	 * @param filename

@@ -6,6 +6,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 //import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
@@ -38,7 +39,13 @@ public class Game extends BasicGame {
 	 * Updates the game
 	 */
 	public void update(GameContainer container, int delta) throws SlickException {
-		intro.animate();
+		Input input = container.getInput();
+		
+		if(!intro.hasEnded())
+		{
+			intro.animate();
+			intro.keyHandler(input);
+		}
 	}
 	
 	/**

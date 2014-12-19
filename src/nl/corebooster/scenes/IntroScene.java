@@ -73,12 +73,7 @@ public class IntroScene {
 	 */
 	public AnimatedSprite getAnimatedSprite(String key)
 	{
-<<<<<<< HEAD
 		return (AnimatedSprite) sprites.get(key);
-	}
-		
-=======
-		 return (AnimatedSprite) sprites.get(key);
 	}
 	
 	
@@ -90,7 +85,6 @@ public class IntroScene {
 		}
 	}
 	
->>>>>>> FETCH_HEAD
 	/**
 	 * Animates all elements in the scene
 	 */

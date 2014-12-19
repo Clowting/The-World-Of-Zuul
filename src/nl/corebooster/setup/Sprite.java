@@ -1,5 +1,6 @@
 package nl.corebooster.setup;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -73,6 +74,14 @@ public class Sprite {
 		Image image = new Image("data/" + folder + "/" + filename);
 		
 		return image;
+	}
+	
+	/**
+	 * Draws the sprite on the screen
+	 */
+	public void drawSprite(Graphics g)
+	{
+		g.drawImage(image, x ,y);
 	}
 	
 }

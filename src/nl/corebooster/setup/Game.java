@@ -1,5 +1,6 @@
 package nl.corebooster.setup;
 
+import nl.corebooster.scenes.GameScene;
 import nl.corebooster.scenes.IntroScene;
 
 import org.newdawn.slick.AppGameContainer;
@@ -18,6 +19,7 @@ import org.newdawn.slick.SlickException;
 public class Game extends BasicGame {
 	
 	private IntroScene intro;
+	private GameScene currentScene;
 	//private HashSet<>;
 	
 	/**
@@ -33,6 +35,7 @@ public class Game extends BasicGame {
 	 */
 	public void init(GameContainer container) throws SlickException {
 		intro = new IntroScene();
+		currentScene = new GameScene();
 	}
 	
 	/**
@@ -46,9 +49,15 @@ public class Game extends BasicGame {
 			intro.animate();
 			intro.keyHandler(input);
 		}
-		else
+		else if(!currentScene.hasEnded())
 		{
-			intro.getAnimatedSprite("start").stopAnimation();
+			if(!currentScene.hasRendered())
+			{
+				intro.getAnimatedSprite("start").stopAnimation();
+				render(container, container.getGraphics());
+				currentScene.setRendered();
+			}
+			//gamelogic for currentScene goes here
 		}
 	}
 	
@@ -56,8 +65,14 @@ public class Game extends BasicGame {
 	 * Renders the game
 	 */
 	public void render(GameContainer container, Graphics g) throws SlickException {
-		intro.render(g);
-		
+		if(!intro.hasEnded())
+		{
+			intro.render(g);
+		}
+		else
+		{
+			currentScene.render(g);
+		}
 	}
 
 	/**

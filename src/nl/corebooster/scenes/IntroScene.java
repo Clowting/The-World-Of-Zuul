@@ -83,6 +83,7 @@ public class IntroScene {
 		if(input.isKeyDown(Input.KEY_SPACE))
 		{
 			sceneEnded = true;
+			
 		}
 	}
 	

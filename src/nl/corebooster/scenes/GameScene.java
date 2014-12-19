@@ -16,6 +16,8 @@ public class GameScene {
 	private static final int screenWidth = 960;
 	private static final int screenHeight = 540;
 	
+	private boolean hasEnded, hasRendered;
+	
 	/**
 	 * Initializes the scene
 	 * @throws SlickException 
@@ -24,7 +26,10 @@ public class GameScene {
 	{
 		sprites = new LinkedHashMap<String, Object>();
 		
-		sprites.put("player", new AnimatedSprite("sprites", "player.png", 166, 470, 64, 64, 200));
+		sprites.put("player", new AnimatedSprite("sprites", "player.png", 166, 470, 64, 64, 100));
+		
+		hasEnded = false;
+		hasRendered = false;
 	}
 	
 	/**
@@ -33,6 +38,32 @@ public class GameScene {
 	public Sprite getSprite(String key)
 	{
 		return (Sprite) sprites.get(key);
+	}
+	
+	/**
+	 * Returns if intro has ended
+	 * @return
+	 */
+	public boolean hasEnded()
+	{
+		return hasEnded;
+	}
+	
+	/**
+	 * Returns if currentScene has been rendered
+	 * @return
+	 */
+	public boolean hasRendered()
+	{
+		return hasRendered;
+	}
+	
+	/**
+	 * set hasRendered to true
+	 */
+	public void setRendered()
+	{
+		hasRendered = true;
 	}
 		
 	/**

@@ -1,6 +1,5 @@
 package nl.corebooster.setup;
 
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Random;
 

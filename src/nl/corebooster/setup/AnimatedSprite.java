@@ -1,0 +1,52 @@
+package nl.corebooster.setup;
+
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
+
+/**
+ * Describes an animated tile from the game with an X and Y position
+ * @author Raymon de Looff, Thijs Clowting, Richard Weug
+ * @version 1.0
+ */
+public class AnimatedSprite {
+
+	private SpriteSheet spritesheet;
+	private Animation spritesheetAnimation;
+	private int x, y;
+	
+	public AnimatedSprite(String folder, String filename, int x, int y, int width, int height, int interval) throws SlickException
+	{
+		this.spritesheet = getSpriteSheet(folder, filename, width, height);
+		spritesheetAnimation = new Animation(spritesheet, interval);
+		
+		this.x = x;
+		this.y = y;
+	}
+	
+	/**
+	 * Gets a spritesheet image from the given location
+	 * @param folder
+	 * @param filename
+	 * @param width
+	 * @param height
+	 * @return
+	 * @throws SlickException
+	 */
+	public SpriteSheet getSpriteSheet(String folder, String filename, int width, int height) throws SlickException
+	{
+		SpriteSheet spritesheet = new SpriteSheet("data/" + folder + "/" + filename, width, height);
+		
+		return spritesheet;
+	}
+	
+	/**
+	 * Draws the sprite on the screen
+	 */
+	public void drawSprite(Graphics g)
+	{
+		g.drawAnimation(spritesheetAnimation, x, y);
+	}
+	
+}

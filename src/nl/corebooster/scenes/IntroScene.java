@@ -3,6 +3,7 @@ package nl.corebooster.scenes;
 import java.util.LinkedHashMap;
 import java.util.Random;
 
+import nl.corebooster.setup.AnimatedSprite;
 import nl.corebooster.setup.Sprite;
 import nl.corebooster.setup.StarBackground;
 
@@ -16,10 +17,10 @@ import org.newdawn.slick.SlickException;
  */
 public class IntroScene {
 	
-	private LinkedHashMap<String, Sprite> sprites;
+	private LinkedHashMap<String, Object> sprites;
 	
-	private Sprite background;
-	private Sprite title;
+	private Sprite background, title;
+	private AnimatedSprite start;
 	private StarBackground stars;
 	
 	private static final int screenWidth = 960;
@@ -31,28 +32,28 @@ public class IntroScene {
 	 */
 	public IntroScene() throws SlickException
 	{
-		sprites = new LinkedHashMap<String, Sprite>();
-		
+		sprites = new LinkedHashMap<String, Object>();
 		stars = new StarBackground(screenWidth, screenHeight);
-		displayIntro();
-	}
-	
-	/**
-	 * Initializes a intro scene
-	 * @throws SlickException 
-	 */
-	private void displayIntro() throws SlickException
-	{
-		// Set background
-		background = new Sprite("img", "intro_background.png", 0, -1080);
 		
-		// Set title
-		title = new Sprite("img", "title.png", 130, 0);
+		// Set background
+		background = new Sprite("img", "intro_background.png", 0, -2160);
+		
+		// Set title and 'press space to start'
+		title = new Sprite("img", "title.png", 153, 50);
+		start = new AnimatedSprite("sprites", "press_space.png", 166, 470, 627, 29, 200);
 		
 		// Make sprite objects
 		Sprite spaceship = new Sprite("sprites", "spaceship.png", 416, 210);
 		
 		sprites.put("spaceship", spaceship);
+	}
+	
+	/**
+	 * Gets a sprite from the sprites
+	 */
+	public Sprite getSprite(String key)
+	{
+		return (Sprite) sprites.get(key);
 	}
 		
 	/**
@@ -60,7 +61,7 @@ public class IntroScene {
 	 */
 	public void animate()
 	{
-		background.animateDown(screenHeight * 2);
+		background.animateDown(screenHeight * 4);
 		
 		if(background.hasMaxYReached()) {
 			background.resetY();
@@ -69,8 +70,8 @@ public class IntroScene {
 		stars.animateStars();
 		
 		// Move spaceship
-		sprites.get("spaceship").animateUpDown(randInt(50, 150));
-		sprites.get("spaceship").animateLeftRight(randInt(50, 250));
+		getSprite("spaceship").animateUpDown(randInt(50, 150));
+		getSprite("spaceship").animateLeftRight(randInt(50, 250));
 	}
 
 	/**
@@ -81,10 +82,18 @@ public class IntroScene {
 	{
 		background.drawSprite(g);
 		title.drawSprite(g);
+		start.drawSprite(g);
 		stars.drawStars(g);
 		
-		for(Sprite s : sprites.values()) {
-			s.drawSprite(g);
+		for(Object o : sprites.values()) {
+			if(o instanceof Sprite) {
+				Sprite s = (Sprite) o;
+				s.drawSprite(g);
+			}
+			else if(o instanceof AnimatedSprite) {
+				AnimatedSprite as = (AnimatedSprite) o;
+				as.drawSprite(g);
+			}
 		}
 	}
 	

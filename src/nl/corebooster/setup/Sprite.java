@@ -10,13 +10,13 @@ import org.newdawn.slick.SlickException;
  * @version 1.0
  */
 public class Sprite {
-
+	
 	private Image image;
 	private boolean maxXReached, maxYReached;
 	private int x, y, newX, newY;
 	
 	/**
-	 * Constructs a new tile
+	 * Constructs a new sprite from an image
 	 * @throws SlickException 
 	 */
 	public Sprite(String folder, String filename, int x, int y) throws SlickException

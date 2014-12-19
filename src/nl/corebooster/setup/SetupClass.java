@@ -52,7 +52,7 @@ public class SetupClass extends BasicGame {
 	 */
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer app = new AppGameContainer(new SetupClass("The World Of Zuul"));
-		int updateInterval = 50;
+		int updateInterval = 20;
 		
 		app.setDisplayMode(960, 540, false);
 		

@@ -19,6 +19,7 @@ public class IntroScene {
 	private LinkedHashMap<String, Sprite> sprites;
 	
 	private Sprite background;
+	private Sprite title;
 	private StarBackground stars;
 	
 	private static final int screenWidth = 960;
@@ -45,6 +46,9 @@ public class IntroScene {
 		// Set background
 		background = new Sprite("img", "intro_background.png", 0, -1080);
 		
+		// Set title
+		title = new Sprite("img", "title.png", 130, 0);
+		
 		// Make sprite objects
 		Sprite spaceship = new Sprite("sprites", "spaceship.png", 416, 210);
 		
@@ -56,12 +60,17 @@ public class IntroScene {
 	 */
 	public void animate()
 	{
-		background.animateVertical(screenHeight * 3);
+		background.animateDown(screenHeight * 2);
+		
+		if(background.hasMaxYReached()) {
+			background.resetY();
+		}
+		
 		stars.animateStars();
 		
 		// Move spaceship
-		sprites.get("spaceship").animateVertical(randInt(50, 150));
-		sprites.get("spaceship").animateHorizontal(randInt(50, 250));
+		sprites.get("spaceship").animateUpDown(randInt(50, 150));
+		sprites.get("spaceship").animateLeftRight(randInt(50, 250));
 	}
 
 	/**
@@ -71,6 +80,7 @@ public class IntroScene {
 	public void render(Graphics g) 
 	{
 		background.drawSprite(g);
+		title.drawSprite(g);
 		stars.drawStars(g);
 		
 		for(Sprite s : sprites.values()) {

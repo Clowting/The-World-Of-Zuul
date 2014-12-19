@@ -12,7 +12,7 @@ import org.newdawn.slick.SlickException;
 public class Sprite {
 
 	private Image image;
-	private boolean pointYReached, pointXReached;
+	private boolean maxYReached, pointXReached;
 	private int x, y, newX, newY;
 	
 	/**
@@ -23,7 +23,7 @@ public class Sprite {
 	{
 		this.image = getImage(folder, filename);
 		
-		pointYReached = false;
+		maxYReached = false;
 		pointXReached = false;
 		
 		this.x = x;
@@ -88,11 +88,21 @@ public class Sprite {
 	 */
 	public void animateVertical(int yChange)
 	{
-		if(y <= newY + yChange) {
-			y += 10;
+		int minY = newY - yChange;
+		int maxY = newY + yChange;
+		
+		if(!maxYReached && y < maxY) {
+			y += 1;
 		}
 		else {
-			pointYReached = true;
+			maxYReached = true;
+		}
+		
+		if(maxYReached && y > minY) {
+			y -= 1;
+		}
+		else {
+			maxYReached = false;
 		}
 	}
 	
@@ -132,7 +142,7 @@ public class Sprite {
 	 */
 	public void drawSprite(Graphics g)
 	{
-		g.drawString("pointYReached: " + pointYReached, x, y - 60);
+		g.drawString("pointYReached: " + maxYReached, x, y - 60);
 		g.drawString("y: " + y, x, y - 40);
 		g.drawString("newY: " + newY, x, y - 20);
 		

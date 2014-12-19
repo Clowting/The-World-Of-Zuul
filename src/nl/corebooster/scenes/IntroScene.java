@@ -60,8 +60,8 @@ public class IntroScene {
 		stars.animateStars();
 		
 		// Move spaceship
-		sprites.get("spaceship").animateVertical(randInt(25, 100));
-		sprites.get("spaceship").animateHorizontal(randInt(50, 250));
+		sprites.get("spaceship").animateVertical(100);
+		//sprites.get("spaceship").animateHorizontal(randInt(50, 250));
 	}
 
 	/**

@@ -21,8 +21,7 @@ public class IntroScene {
 	private LinkedHashMap<String, Object> sprites;
 	private boolean sceneEnded;
 	
-	private Sprite background, title;
-	private AnimatedSprite start;
+	private Sprite background;
 	private StarBackground stars;
 	
 	private static final int screenWidth = 960;
@@ -42,12 +41,14 @@ public class IntroScene {
 		background = new Sprite("img", "intro_background.png", 0, -2160);
 		
 		// Set title and 'press space to start'
-		title = new Sprite("img", "title.png", 153, 50);
-		start = new AnimatedSprite("sprites", "press_space.png", 166, 470, 627, 29, 200);
+		Sprite title = new Sprite("img", "title.png", 153, 50);
+		sprites.put("title", title);
+		
+		AnimatedSprite start = new AnimatedSprite("sprites", "press_space.png", 166, 470, 627, 29, 200);
+		sprites.put("start", start);
 		
 		// Make sprite objects
 		Sprite spaceship = new Sprite("sprites", "spaceship.png", 416, 210);
-		
 		sprites.put("spaceship", spaceship);
 	}
 	
@@ -111,8 +112,6 @@ public class IntroScene {
 	{
 		background.drawSprite(g);
 		stars.drawStars(g);
-		title.drawSprite(g);
-		start.drawSprite(g);
 		
 		for(Object o : sprites.values()) {
 			if(o instanceof Sprite) {

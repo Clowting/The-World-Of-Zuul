@@ -46,6 +46,10 @@ public class Game extends BasicGame {
 			intro.animate();
 			intro.keyHandler(input);
 		}
+		else
+		{
+			intro.getAnimatedSprite("start").stopAnimation();
+		}
 	}
 	
 	/**

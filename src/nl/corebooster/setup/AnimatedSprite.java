@@ -81,4 +81,8 @@ public class AnimatedSprite {
 		g.drawAnimation(spritesheetAnimation, x, y);
 	}
 	
+	public void stopAnimation()
+	{
+		spritesheetAnimation.stop();
+	}
 }

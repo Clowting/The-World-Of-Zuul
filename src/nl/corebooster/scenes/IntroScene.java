@@ -55,6 +55,14 @@ public class IntroScene {
 	{
 		return (Sprite) sprites.get(key);
 	}
+	
+	/**
+	 * Gets an animated sprite from the sprites
+	 */
+	public AnimatedSprite getAnimatedSprite(String key)
+	{
+		return (AnimatedSprite) sprites.get(key);
+	}
 		
 	/**
 	 * Animates all elements in the scene
@@ -81,9 +89,9 @@ public class IntroScene {
 	public void render(Graphics g) 
 	{
 		background.drawSprite(g);
+		stars.drawStars(g);
 		title.drawSprite(g);
 		start.drawSprite(g);
-		stars.drawStars(g);
 		
 		for(Object o : sprites.values()) {
 			if(o instanceof Sprite) {

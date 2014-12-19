@@ -134,10 +134,6 @@ public class Sprite {
 	 */
 	public void drawSprite(Graphics g)
 	{
-		g.drawString("pointYReached: " + maxYReached, x, y - 60);
-		g.drawString("y: " + y, x, y - 40);
-		g.drawString("newY: " + newY, x, y - 20);
-		
 		g.drawImage(image, x, y);
 	}
 }

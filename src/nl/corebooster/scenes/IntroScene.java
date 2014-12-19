@@ -46,7 +46,7 @@ public class IntroScene {
 		background = new Sprite("img", "intro_background.png", 0, -1080);
 		
 		// Make sprite objects
-		Sprite spaceship = new Sprite("sprites", "spaceship.png", 466, 220);
+		Sprite spaceship = new Sprite("sprites", "spaceship.png", 416, 210);
 		
 		sprites.put("spaceship", spaceship);
 	}
@@ -60,8 +60,8 @@ public class IntroScene {
 		stars.animateStars();
 		
 		// Move spaceship
-		sprites.get("spaceship").animateVertical(100);
-		//sprites.get("spaceship").animateHorizontal(randInt(50, 250));
+		sprites.get("spaceship").animateVertical(randInt(50, 150));
+		sprites.get("spaceship").animateHorizontal(randInt(50, 250));
 	}
 
 	/**

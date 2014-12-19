@@ -12,7 +12,7 @@ import org.newdawn.slick.SlickException;
 public class Sprite {
 
 	private Image image;
-	private boolean maxYReached, maxXReached;
+	private boolean maxXReached, maxYReached;
 	private int x, y, newX, newY;
 	
 	/**
@@ -23,8 +23,8 @@ public class Sprite {
 	{
 		this.image = getImage(folder, filename);
 		
-		maxYReached = false;
 		maxXReached = false;
+		maxYReached = false;
 		
 		this.x = x;
 		this.y = y;
@@ -38,6 +38,22 @@ public class Sprite {
 	public Image getImage()
 	{
 		return image;
+	}
+	
+	/**
+	 * Returns true if the sprite has reached the maximum X-position
+	 */
+	public boolean hasMaxXReached()
+	{
+		return maxXReached;
+	}
+	
+	/**
+	 * Returns true if the sprite has reached the maximum Y-position
+	 */
+	public boolean hasMaxYReached()
+	{
+		return maxYReached;
 	}
 	
 	/**
@@ -57,6 +73,22 @@ public class Sprite {
 	}
 	
 	/**
+	 * Returns the new X-position
+	 */
+	public int getNewX()
+	{
+		return newX;
+	}
+	
+	/**
+	 * Returns the new Y-position
+	 */
+	public int getNewY()
+	{
+		return newY;
+	}
+	
+	/**
 	 * Sets the X-position
 	 */
 	public void setX(int x)
@@ -73,6 +105,22 @@ public class Sprite {
 	}
 	
 	/**
+	 * Sets the new X-position
+	 */
+	public void setNewX(int newX)
+	{
+		this.newX = newX;
+	}
+	
+	/**
+	 * Sets the new Y-position
+	 */
+	public void setNewY(int newY)
+	{
+		this.newY = newY;
+	}
+	
+	/**
 	 * Gets the image from the specified location
 	 * @throws SlickException 
 	 */
@@ -84,19 +132,12 @@ public class Sprite {
 	}
 	
 	/**
-	 * Moves the sprite slowly up and down
+	 * Moves the sprite slowly up
+	 * @param yChange
 	 */
-	public void animateVertical(int yChange)
+	public void animateUp(int yChange)
 	{
 		int minY = newY - yChange;
-		int maxY = newY + yChange;
-		
-		if(!maxYReached && y < maxY) {
-			y += 1;
-		}
-		else {
-			maxYReached = true;
-		}
 		
 		if(maxYReached && y > minY) {
 			y -= 1;
@@ -107,19 +148,28 @@ public class Sprite {
 	}
 	
 	/**
-	 * Moves the sprite slowly left and right
+	 * Moves the sprite slowly down
+	 * @param yChange
 	 */
-	public void animateHorizontal(int yChange)
+	public void animateDown(int yChange)
 	{
-		int minX = newX - yChange;
-		int maxX = newX + yChange;
+		int maxY = newY + yChange;
 		
-		if(!maxXReached && x < maxX) {
-			x += 1;
+		if(!maxYReached && y < maxY) {
+			y += 1;
 		}
 		else {
-			maxXReached = true;
+			maxYReached = true;
 		}
+	}
+	
+	/**
+	 * Moves the sprite slowly to left
+	 * @param xChange
+	 */
+	public void animateLeft(int xChange)
+	{
+		int minX = newX - xChange;
 		
 		if(maxXReached && x > minX) {
 			x -= 1;
@@ -127,6 +177,58 @@ public class Sprite {
 		else {
 			maxXReached = false;
 		}
+	}
+	
+	/**
+	 * Moves the sprite slowly to right
+	 * @param xChange
+	 */
+	public void animateRight(int xChange)
+	{
+		int maxX = newX + xChange;
+		
+		if(!maxXReached && x < maxX) {
+			x += 1;
+		}
+		else {
+			maxXReached = true;
+		}
+	}
+	
+	/**
+	 * Moves the sprite slowly up and down
+	 */
+	public void animateUpDown(int yChange)
+	{
+		animateUp(yChange);
+		animateDown(yChange);
+	}
+	
+	/**
+	 * Moves the sprite slowly left and right
+	 */
+	public void animateLeftRight(int xChange)
+	{
+		animateLeft(xChange);
+		animateRight(xChange);
+	}
+	
+	/**
+	 * Reset the X-position to the default
+	 */
+	public void resetX()
+	{
+		x = newX;
+		maxXReached = false;
+	}
+	
+	/**
+	 * Reset the Y-position to the default
+	 */
+	public void resetY()
+	{
+		y = newY;
+		maxYReached = false;
 	}
 	
 	/**

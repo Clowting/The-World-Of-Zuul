@@ -16,31 +16,47 @@ public class StarBackground {
 	private HashSet<Sprite> stars;
 	private int screenWidth, screenHeight;
 	
+	/**
+	 * Initializes a StarBackground with the given screen size
+	 * @param screenWidth
+	 * @param screenHeight
+	 * @throws SlickException
+	 */
 	public StarBackground(int screenWidth, int screenHeight) throws SlickException
 	{
 		stars = new HashSet<Sprite>();
+		
 		this.screenWidth = screenWidth;
 		this.screenHeight = screenHeight;
 		
-		addStars();
+		addSprite("star.png", 50);
 	}
 	
-	private void addStars() throws SlickException
+	/**
+	 * Generate an amount of stars
+	 * @throws SlickException
+	 */
+	private void addSprite(String filename, int amount) throws SlickException
 	{
 		Random rand = new Random();
 		
-		for(int i = 0; i < 50; i++) {
+		for(int i = 0; i < amount; i++) {
 			int x = rand.nextInt(screenWidth);
 			int y = rand.nextInt(screenHeight);
 			
-			stars.add(new Sprite("sprites", "star.png", x, y));
+			Sprite sprite = new Sprite("sprites", filename, x, y);
+			stars.add(sprite);
 		}
 	}
 	
+	/**
+	 * Animate all the stars
+	 */
 	public void animateStars()
 	{
 		Random rand = new Random();
 		
+		// For every star
 		for(Sprite s : stars) {
 			int x = rand.nextInt(screenWidth);
 			int y = s.getY();
@@ -55,6 +71,10 @@ public class StarBackground {
 		}
 	}
 	
+	/**
+	 * Draw every star to the graphics
+	 * @param g
+	 */
 	public void drawStars(Graphics g)
 	{
 		for(Sprite s : stars) {

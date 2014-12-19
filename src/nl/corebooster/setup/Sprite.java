@@ -12,7 +12,8 @@ import org.newdawn.slick.SlickException;
 public class Sprite {
 
 	private Image image;
-	private int x, y;
+	private boolean pointYReached, pointXReached;
+	private int x, y, newX, newY;
 	
 	/**
 	 * Constructs a new tile
@@ -21,8 +22,14 @@ public class Sprite {
 	public Sprite(String folder, String filename, int x, int y) throws SlickException
 	{
 		this.image = getImage(folder, filename);
+		
+		pointYReached = false;
+		pointXReached = false;
+		
 		this.x = x;
 		this.y = y;
+		this.newX = x;
+		this.newY = y;
 	}
 	
 	/**
@@ -77,11 +84,58 @@ public class Sprite {
 	}
 	
 	/**
+	 * Moves the sprite slowly up and down
+	 */
+	public void animateVertical(int yChange)
+	{
+		if(y <= newY + yChange) {
+			y += 10;
+		}
+		else {
+			pointYReached = true;
+		}
+	}
+	
+	/*public void animateVertical(int yChange)
+	{
+		if(!pointYReached && y > newY - yChange) {
+			y = y - 1;
+		}
+		else if(y < newY) {
+			pointYReached = true;
+			y = y + 1;
+		}
+		else {
+			pointYReached = false;
+		}
+	}*/
+	
+	/**
+	 * Moves the sprite slowly left and right
+	 */
+	public void animateHorizontal(int xChange)
+	{
+		if(!pointXReached && x > newX - xChange) {
+			x = x - 1;
+		}
+		else if(x < newX) {
+			pointXReached = true;
+			x = x + 1;
+		}
+		else {
+			pointXReached = false;
+		}
+	}
+	
+	/**
 	 * Draws the sprite on the screen
 	 */
 	public void drawSprite(Graphics g)
 	{
-		g.drawImage(image, x ,y);
+		g.drawString("pointYReached: " + pointYReached, x, y - 60);
+		g.drawString("y: " + y, x, y - 40);
+		g.drawString("newY: " + newY, x, y - 20);
+		
+		g.drawImage(image, x, y);
 	}
-	
 }

@@ -5,25 +5,13 @@ import java.util.Random;
 
 import nl.corebooster.setup.AnimatedSprite;
 import nl.corebooster.setup.Sprite;
-import nl.corebooster.setup.StarBackground;
 
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-/**
- * Describes the intro scene
- * @author Raymon de Looff, Thijs Clowting, Richard Weug
- * @version 1.0
- */
-public class IntroScene {
+public class GameScene {
 	
 	private LinkedHashMap<String, Object> sprites;
-	private boolean sceneEnded;
-	
-	private Sprite background, title;
-	private AnimatedSprite start;
-	private StarBackground stars;
 	
 	private static final int screenWidth = 960;
 	private static final int screenHeight = 540;
@@ -32,32 +20,11 @@ public class IntroScene {
 	 * Initializes the scene
 	 * @throws SlickException 
 	 */
-	public IntroScene() throws SlickException
+	public GameScene() throws SlickException
 	{
 		sprites = new LinkedHashMap<String, Object>();
-		stars = new StarBackground(screenWidth, screenHeight);
-		sceneEnded = false;
 		
-		// Set background
-		background = new Sprite("img", "intro_background.png", 0, -2160);
-		
-		// Set title and 'press space to start'
-		title = new Sprite("img", "title.png", 153, 50);
-		start = new AnimatedSprite("sprites", "press_space.png", 166, 470, 627, 29, 200);
-		
-		// Make sprite objects
-		Sprite spaceship = new Sprite("sprites", "spaceship.png", 416, 210);
-		
-		sprites.put("spaceship", spaceship);
-	}
-	
-	/**
-	 * Returns true if scene has ended
-	 * @return 
-	 */
-	public boolean hasEnded()
-	{
-		return sceneEnded;
+		sprites.put("player", new AnimatedSprite("sprites", "player.png", 166, 470, 64, 64, 200));
 	}
 	
 	/**
@@ -67,46 +34,12 @@ public class IntroScene {
 	{
 		return (Sprite) sprites.get(key);
 	}
-	
-	/**
-	 * Gets an animated sprite from the sprites
-	 */
-	public AnimatedSprite getAnimatedSprite(String key)
-	{
-<<<<<<< HEAD
-		return (AnimatedSprite) sprites.get(key);
-	}
 		
-=======
-		 return (AnimatedSprite) sprites.get(key);
-	}
-	
-	
-	public void keyHandler(Input input)
-	{
-		if(input.isKeyDown(Input.KEY_SPACE))
-		{
-			sceneEnded = true;
-		}
-	}
-	
->>>>>>> FETCH_HEAD
 	/**
 	 * Animates all elements in the scene
 	 */
 	public void animate()
 	{
-		background.animateDown(screenHeight * 4);
-		
-		if(background.hasMaxYReached()) {
-			background.resetY();
-		}
-		
-		stars.animateStars();
-		
-		// Move spaceship
-		getSprite("spaceship").animateUpDown(randInt(50, 150));
-		getSprite("spaceship").animateLeftRight(randInt(50, 250));
 	}
 
 	/**
@@ -115,10 +48,7 @@ public class IntroScene {
 	 */
 	public void render(Graphics g) 
 	{
-		background.drawSprite(g);
-		stars.drawStars(g);
-		title.drawSprite(g);
-		start.drawSprite(g);
+		//Objects to be rendered go here
 		
 		for(Object o : sprites.values()) {
 			if(o instanceof Sprite) {
@@ -155,5 +85,4 @@ public class IntroScene {
 
 	    return randomNum;
 	}
-	
 }

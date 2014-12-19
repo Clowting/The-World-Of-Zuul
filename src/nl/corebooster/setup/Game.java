@@ -1,11 +1,11 @@
 package nl.corebooster.setup;
 
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.Random;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
 
 /**
  * Describes the World of Zuul game
@@ -14,7 +14,11 @@ import org.newdawn.slick.geom.Rectangle;
  */
 public class Game {
 	
-	private HashMap<String, Sprite> sprites;
+	private LinkedHashMap<String, Sprite> sprites;
+	
+	private Sprite background;
+	private StarBackground stars;
+	
 	private boolean yWasTouched, pointYReached, xWasTouched, pointXReached;
 	private int y, x;
 	private static final int screenWidth = 960;
@@ -26,13 +30,15 @@ public class Game {
 	 */
 	public Game() throws SlickException
 	{
-		sprites = new HashMap<String, Sprite>();
+		sprites = new LinkedHashMap<String, Sprite>();
 		yWasTouched = false;
 		pointYReached = false;
 		xWasTouched = false;
 		pointXReached = false;
 		y = 0;
 		x = 0;
+		
+		stars = new StarBackground(screenWidth, screenHeight);
 		displayIntro();
 	}
 	
@@ -42,12 +48,13 @@ public class Game {
 	 */
 	private void displayIntro() throws SlickException
 	{
+		// Set background
+		background = new Sprite("img", "intro_background.png", 0, 0);
+		
 		// Make sprite objects
-		Sprite introBackground = new Sprite("img", "intro_background.png", 0, 0);
 		Sprite spaceship = new Sprite("sprites", "spaceship.png", 466, 220);
 		
 		sprites.put("spaceship", spaceship);
-		//sprites.put("introBackground", introBackground);
 	}
 	
 	/**
@@ -65,7 +72,6 @@ public class Game {
 		}
 		else if(s.getY() < y) {
 			pointYReached = true;
-			animateHorizontal(sprites.get("spaceship"), randInt(50, 250));
 			s.setY(s.getY() + 1);
 		}
 		else {
@@ -100,16 +106,23 @@ public class Game {
 	 */
 	public void animate()
 	{
+		stars.animateStars();
+		
 		animateVertical(sprites.get("spaceship"), randInt(25, 100));
+		animateHorizontal(sprites.get("spaceship"), randInt(50, 250));
 	}
 
 	/**
 	 * Renders the game
 	 * @param graphics
 	 */
-	public void render(Graphics g) {
+	public void render(Graphics g) 
+	{
+		background.drawSprite(g);
+		stars.drawStars(g);
+		
 		for(Sprite s : sprites.values()) {
-			g.drawImage(s.getImage(), s.getX(), s.getY());
+			s.drawSprite(g);
 		}
 	}
 	
@@ -123,7 +136,8 @@ public class Game {
 	 * @return Integer between min and max, inclusive.
 	 * @see java.util.Random#nextInt(int)
 	 */
-	private static int randInt(int min, int max) {
+	private static int randInt(int min, int max) 
+	{
 
 	    // NOTE: Usually this should be a field rather than a method
 	    // variable so that it is not re-seeded every call.

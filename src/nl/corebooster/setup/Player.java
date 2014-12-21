@@ -16,18 +16,27 @@ public class Player {
 	private Animation spritesheetAnimation;
 	private int x, y;
 	private int movementSpeed;
+	private int angle;
+	private static final int playerSize = 64;
 	
 	public Player(int x, int y) throws SlickException
 	{
-		this.spritesheet = getSpriteSheet("sprites", "player.png", 64, 64);
+		this.spritesheet = getSpriteSheet("sprites", "player_up.png", playerSize, playerSize);
 		spritesheetAnimation = new Animation(spritesheet, 100);
-		
-		spritesheet.setCenterOfRotation(32, 32);
 		
 		this.x = x;
 		this.y = y;
 		
 		movementSpeed = 3;
+		angle = 0;
+	}
+	
+	/**
+	 * Returns the spritesheet
+	 */
+	public SpriteSheet getSpriteSheet()
+	{
+		return spritesheet;
 	}
 	
 	/**
@@ -47,12 +56,30 @@ public class Player {
 	}
 	
 	/**
-	 * Retruns the movementSpeed
+	 * Returns the movementSpeed
 	 * @return
 	 */
 	public int getMovementSpeed()
 	{
 		return movementSpeed;
+	}
+	
+	/**
+	 * Returns the rotation angle
+	 * @return
+	 */
+	public int getRotation()
+	{
+		return angle;
+	}
+	
+	/**
+	 * Sets a new spritesheet for the player
+	 */
+	public void setSpriteSheet(SpriteSheet spritesheet)
+	{
+		
+		this.spritesheet = spritesheet;
 	}
 	
 	/**
@@ -72,6 +99,36 @@ public class Player {
 	}
 	
 	/**
+	 * Sets the movement speed
+	 * @param movementSpeed
+	 */
+	public void setMovementSpeed(int movementSpeed)
+	{
+		this.movementSpeed = movementSpeed;
+	}
+	
+	/**
+	 * Sets a new rotation angle
+	 * @param angle
+	 */
+	public void setRotation(int angle)
+	{
+		this.angle = angle;
+	}
+	
+	/**
+	 * Sets a new rotation angle and refreshes the animation
+	 * @param angle
+	 */
+	public void rotateAndRefresh(int angle)
+	{
+		if(this.angle != angle) {
+			setRotation(angle);
+			refreshAnimation();
+		}
+	}
+	
+	/**
 	 * Gets a spritesheet image from the given location
 	 * @param folder
 	 * @param filename
@@ -87,49 +144,73 @@ public class Player {
 		return spritesheet;
 	}
 	
-	public void moveUp()
+	public void moveUp() throws SlickException
 	{
-		spritesheetAnimation.getCurrentFrame().setRotation(0);
+		setSpriteSheet(getSpriteSheet("sprites", "player_up.png", playerSize, playerSize));
+		
+		rotateAndRefresh(0);
+		
 		startAnimation();
 		y -= movementSpeed;
 	}
 	
-	public void moveDown()
+	public void moveDown() throws SlickException
 	{
-		spritesheetAnimation.getCurrentFrame().setRotation(180);
+		setSpriteSheet(getSpriteSheet("sprites", "player_down.png", playerSize, playerSize));
+		
+		rotateAndRefresh(180);
+		
 		startAnimation();
 		y += movementSpeed;
 	}
 	
-	public void moveRight()
+	public void moveRight() throws SlickException
 	{
-		spritesheetAnimation.getCurrentFrame().setRotation(90);
+		setSpriteSheet(getSpriteSheet("sprites", "player_right.png", playerSize, playerSize));
+		
+		rotateAndRefresh(90);
+		
 		startAnimation();
 		x += movementSpeed;
 	}
 	
-	public void moveLeft()
+	public void moveLeft() throws SlickException
 	{
-		spritesheetAnimation.getCurrentFrame().setRotation(270);
+		setSpriteSheet(getSpriteSheet("sprites", "player_left.png", playerSize, playerSize));
+		
+		rotateAndRefresh(270);
+		
 		startAnimation();
 		x -= movementSpeed;
 	}
-	
 	
 	/**
 	 * Draws the sprite on the screen
 	 */
 	public void drawSprite(Graphics g)
 	{
-		//g.drawAnimation(spritesheetAnimation, x, y);
-		g.drawImage(spritesheetAnimation.getCurrentFrame(), x, y);
+		g.drawAnimation(spritesheetAnimation, x, y);
 	}
 	
+	/**
+	 * Starts the animation
+	 */
 	public void startAnimation()
 	{
-		spritesheetAnimation.update(100);
+		spritesheetAnimation.start();
 	}
 	
+	/**
+	 * Refreshes the animation
+	 */
+	public void refreshAnimation()
+	{
+		spritesheetAnimation = new Animation(spritesheet, 100);
+	}
+	
+	/**
+	 * Stops the animation
+	 */
 	public void stopAnimation()
 	{
 		spritesheetAnimation.stop();

@@ -58,8 +58,6 @@ public class Game extends BasicGame {
 				currentScene.setRendered();
 			}
 			currentScene.keyHandler(input);
-			
-			currentScene.kaas();
 		}
 	}
 	

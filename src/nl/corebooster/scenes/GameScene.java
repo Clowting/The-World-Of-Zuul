@@ -1,7 +1,6 @@
 package nl.corebooster.scenes;
 
 import java.util.LinkedHashMap;
-import java.util.Random;
 
 import nl.corebooster.setup.AnimatedSprite;
 import nl.corebooster.setup.Player;
@@ -31,7 +30,7 @@ public class GameScene {
 	{
 		sprites = new LinkedHashMap<String, Object>();
 		
-		background = new Sprite("img", "intro_background.png", 0, 0);
+		background = new Sprite("img", "background1.png", 0, 0);
 		player = new Player(screenWidth / 2, screenHeight / 2);
 		
 		hasEnded = false;
@@ -47,7 +46,7 @@ public class GameScene {
 	}
 	
 	/**
-	 * Returns if intro has ended
+	 * Returns true if intro has ended
 	 * @return
 	 */
 	public boolean hasEnded()
@@ -56,7 +55,7 @@ public class GameScene {
 	}
 	
 	/**
-	 * Returns if currentScene has been rendered
+	 * Returns true if currentScene has been rendered
 	 * @return
 	 */
 	public boolean hasRendered()
@@ -65,7 +64,7 @@ public class GameScene {
 	}
 	
 	/**
-	 * set hasRendered to true
+	 * Set hasRendered to true
 	 */
 	public void setRendered()
 	{
@@ -77,6 +76,7 @@ public class GameScene {
 	 */
 	public void animate()
 	{
+		// Call methods on objects to animate
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class GameScene {
 	 */
 	public void render(Graphics g) 
 	{
-		//Objects to be rendered go here
+		// Objects to be rendered go here
 		background.drawSprite(g);
 		player.drawSprite(g);
 		

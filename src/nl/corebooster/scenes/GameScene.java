@@ -4,12 +4,15 @@ import java.util.LinkedHashMap;
 import java.util.Random;
 
 import nl.corebooster.setup.AnimatedSprite;
+import nl.corebooster.setup.Player;
 import nl.corebooster.setup.Sprite;
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 public class GameScene {
+	private Player player;
 	
 	private LinkedHashMap<String, Object> sprites;
 	
@@ -24,9 +27,9 @@ public class GameScene {
 	 */
 	public GameScene() throws SlickException
 	{
-		sprites = new LinkedHashMap<String, Object>();
+		player = new Player(screenWidth/2, screenHeight/2);
 		
-		sprites.put("player", new AnimatedSprite("sprites", "player.png", 166, 470, 64, 64, 100));
+		sprites = new LinkedHashMap<String, Object>();
 		
 		hasEnded = false;
 		hasRendered = false;
@@ -80,6 +83,7 @@ public class GameScene {
 	public void render(Graphics g) 
 	{
 		//Objects to be rendered go here
+		player.drawSprite(g);
 		
 		for(Object o : sprites.values()) {
 			if(o instanceof Sprite) {
@@ -115,5 +119,53 @@ public class GameScene {
 	    int randomNum = rand.nextInt((max - min) + 1) + min;
 
 	    return randomNum;
+	}
+	
+	/**
+	 * Handles user input
+	 * @param input
+	 */
+	public void keyHandler(Input input)
+	{
+		if(input.isKeyDown(Input.KEY_LEFT))
+		{
+			player.moveLeft();
+		}
+		else if(input.isKeyDown(Input.KEY_RIGHT))
+		{
+			player.moveRight();
+		}
+		else if(input.isKeyDown(Input.KEY_UP))
+		{
+			player.moveUp();
+		}
+		else if(input.isKeyDown(Input.KEY_DOWN))
+		{
+			player.moveDown();
+		}
+		else
+		{
+			player.stopAnimation();
+		}
+	}
+	
+	public void kaas()
+	{
+		if(player.getX() > screenWidth)
+		{
+			player.setX(-64);
+		}
+		if(player.getX() < -64)
+		{
+			player.setX(screenWidth);
+		}
+		if(player.getY() < -64)
+		{
+			player.setY(screenHeight);
+		}
+		if(player.getY() > screenHeight)
+		{
+			player.setY(-64);
+		}
 	}
 }

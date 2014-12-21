@@ -57,7 +57,9 @@ public class Game extends BasicGame {
 				render(container, container.getGraphics());
 				currentScene.setRendered();
 			}
-			//gamelogic for currentScene goes here
+			currentScene.keyHandler(input);
+			
+			currentScene.kaas();
 		}
 	}
 	

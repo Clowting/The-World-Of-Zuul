@@ -77,13 +77,15 @@ public class IntroScene {
 		return (AnimatedSprite) sprites.get(key);
 	}
 	
-	
+	/**
+	 * Handles user input
+	 * @param input
+	 */
 	public void keyHandler(Input input)
 	{
 		if(input.isKeyDown(Input.KEY_SPACE))
 		{
 			sceneEnded = true;
-			
 		}
 	}
 	

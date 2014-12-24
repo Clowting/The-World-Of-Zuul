@@ -117,32 +117,36 @@ public class GameScene {
 		Rectangle boxToCheck = player.getCollisionBox().getShape();
 		boolean isColliding = as.getCollisionBox().isColliding(boxToCheck);
 		
-		if(input.isKeyDown(Input.KEY_LEFT)) {
-			if(!isColliding) {
+		if(!isColliding) {
+			if(input.isKeyDown(Input.KEY_LEFT)) {
 				player.moveLeft();
 			}
-		}
-		
-		else if(input.isKeyDown(Input.KEY_RIGHT)) {
-			if(!isColliding) {
+			
+			else if(input.isKeyDown(Input.KEY_RIGHT)) {
 				player.moveRight();
 			}
-		}
-		
-		else if(input.isKeyDown(Input.KEY_UP)) {
-			if(!isColliding) {
+			
+			else if(input.isKeyDown(Input.KEY_UP)) {
 				player.moveUp();
 			}
-		}
-		
-		else if(input.isKeyDown(Input.KEY_DOWN)) {
-			if(!isColliding) {
+			
+			else if(input.isKeyDown(Input.KEY_DOWN)) {
 				player.moveDown();
 			}
-		}
-		
-		else {
-			player.stopAnimation();
+			
+			else {
+				player.stopAnimation();
+			}
+		} else {
+			if(player.getRotation() == 270) {
+				player.setX(player.getX() + 1);
+			} else if(player.getRotation() == 90) {
+				player.setX(player.getX() - 1);
+			} else if(player.getRotation() == 0) {
+				player.setY(player.getY() + 1);
+			} else if(player.getRotation() == 180) {
+				player.setY(player.getY() - 1);
+			}
 		}
 	}
 }

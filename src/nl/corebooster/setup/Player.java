@@ -30,7 +30,7 @@ public class Player {
 		this.x = x;
 		this.y = y;
 		
-		movementSpeed = 1;
+		movementSpeed = 5;
 		angle = 0;
 	}
 	

@@ -36,8 +36,10 @@ public class GameScene {
 		sprites = new LinkedHashMap<String, Object>();
 		
 		background = new Sprite("img", "background1.png", false, 0, 0);
+		sprites.put("ice_cliff", new Sprite("sprites", "ice_cliff.png", true, 0, 0));
 		
-		sprites.put("landingpad", new AnimatedSprite("sprites", "landingpad.png", true, 50, 50, 384, 384, 1000));
+		sprites.put("landingpad", new AnimatedSprite("sprites", "landingpad.png", true, 50, 75, 384, 384, 1000));
+		sprites.put("spaceship", new Sprite("sprites", "spaceship_big.png", false, 104, 137));
 		
 		player = new Player(screenWidth / 2, screenHeight / 2);
 		

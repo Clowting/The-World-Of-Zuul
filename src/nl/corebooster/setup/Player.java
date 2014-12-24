@@ -12,6 +12,7 @@ import org.newdawn.slick.SpriteSheet;
  */
 public class Player {
 
+	private CollisionBox collisionbox;
 	private SpriteSheet spritesheet;
 	private Animation spritesheetAnimation;
 	private int x, y;
@@ -24,11 +25,20 @@ public class Player {
 		this.spritesheet = getSpriteSheet("sprites", "player_up.png", playerSize, playerSize);
 		spritesheetAnimation = new Animation(spritesheet, 100);
 		
+		collisionbox = new CollisionBox(x, y, playerSize, playerSize);
+		
 		this.x = x;
 		this.y = y;
 		
-		movementSpeed = 5;
+		movementSpeed = 1;
 		angle = 0;
+	}
+	
+	/**
+	 * Get collision box.
+	 */
+	public CollisionBox getCollisionBox() {
+		return collisionbox;
 	}
 	
 	/**
@@ -182,7 +192,7 @@ public class Player {
 		
 		startAnimation();
 		x -= movementSpeed;
-	}
+	}	
 	
 	/**
 	 * Draws the sprite on the screen
@@ -190,6 +200,7 @@ public class Player {
 	public void drawSprite(Graphics g)
 	{
 		g.drawAnimation(spritesheetAnimation, x, y);
+		collisionbox.drawBox(g, x, y);
 	}
 	
 	/**

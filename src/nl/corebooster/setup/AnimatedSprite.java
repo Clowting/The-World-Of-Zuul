@@ -12,6 +12,7 @@ import org.newdawn.slick.SpriteSheet;
  */
 public class AnimatedSprite {
 
+	private CollisionBox collisionbox;
 	private SpriteSheet spritesheet;
 	private Animation spritesheetAnimation;
 	private int x, y;
@@ -21,8 +22,17 @@ public class AnimatedSprite {
 		this.spritesheet = getSpriteSheet(folder, filename, width, height);
 		spritesheetAnimation = new Animation(spritesheet, interval);
 		
+		collisionbox = new CollisionBox(x, y, width, height);
+		
 		this.x = x;
 		this.y = y;
+	}
+	
+	/**
+	 * Get collision box.
+	 */
+	public CollisionBox getCollisionBox() {
+		return collisionbox;
 	}
 	
 	/**
@@ -78,6 +88,7 @@ public class AnimatedSprite {
 	 */
 	public void drawSprite(Graphics g)
 	{
+		collisionbox.drawBox(g, x, y);
 		g.drawAnimation(spritesheetAnimation, x, y);
 	}
 	

@@ -9,6 +9,7 @@ import nl.corebooster.setup.Sprite;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 
 public class GameScene {
 	
@@ -31,6 +32,9 @@ public class GameScene {
 		sprites = new LinkedHashMap<String, Object>();
 		
 		background = new Sprite("img", "background1.png", 0, 0);
+		
+		sprites.put("landingpad", new AnimatedSprite("sprites", "landingpad.png", 50, 50, 384, 384, 1000));
+		
 		player = new Player(screenWidth / 2, screenHeight / 2);
 		
 		hasEnded = false;
@@ -108,24 +112,36 @@ public class GameScene {
 	 */
 	public void keyHandler(Input input) throws SlickException
 	{
-		if(input.isKeyDown(Input.KEY_LEFT))
-		{
-			player.moveLeft();
+		Object objectBoxToCheck = sprites.get("landingpad");
+		AnimatedSprite as = (AnimatedSprite) objectBoxToCheck;
+		Rectangle boxToCheck = player.getCollisionBox().getShape();
+		boolean isColliding = as.getCollisionBox().isColliding(boxToCheck);
+		
+		if(input.isKeyDown(Input.KEY_LEFT)) {
+			if(!isColliding) {
+				player.moveLeft();
+			}
 		}
-		else if(input.isKeyDown(Input.KEY_RIGHT))
-		{
-			player.moveRight();
+		
+		else if(input.isKeyDown(Input.KEY_RIGHT)) {
+			if(!isColliding) {
+				player.moveRight();
+			}
 		}
-		else if(input.isKeyDown(Input.KEY_UP))
-		{
-			player.moveUp();
+		
+		else if(input.isKeyDown(Input.KEY_UP)) {
+			if(!isColliding) {
+				player.moveUp();
+			}
 		}
-		else if(input.isKeyDown(Input.KEY_DOWN))
-		{
-			player.moveDown();
+		
+		else if(input.isKeyDown(Input.KEY_DOWN)) {
+			if(!isColliding) {
+				player.moveDown();
+			}
 		}
-		else
-		{
+		
+		else {
 			player.stopAnimation();
 		}
 	}

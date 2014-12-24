@@ -200,6 +200,12 @@ public class Player {
 	public void drawSprite(Graphics g)
 	{
 		g.drawAnimation(spritesheetAnimation, x, y);
+	}
+	
+	/**
+	 * Draw collision box.
+	 */
+	public void drawCollisionBox(Graphics g) {
 		collisionbox.drawBox(g, x, y);
 	}
 	

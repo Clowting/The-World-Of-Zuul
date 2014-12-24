@@ -88,8 +88,14 @@ public class AnimatedSprite {
 	 */
 	public void drawSprite(Graphics g)
 	{
-		collisionbox.drawBox(g, x, y);
 		g.drawAnimation(spritesheetAnimation, x, y);
+	}
+	
+	/**
+	 * Draws the collision box
+	 */
+	public void drawCollisionBox(Graphics g) {
+		collisionbox.drawBox(g, x, y);
 	}
 	
 	public void stopAnimation()

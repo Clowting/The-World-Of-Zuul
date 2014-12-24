@@ -11,6 +11,7 @@ import org.newdawn.slick.SlickException;
  */
 public class Sprite {
 	
+	private CollisionBox collisionbox;
 	private Image image;
 	private boolean maxXReached, maxYReached;
 	private int x, y, newX, newY;
@@ -26,10 +27,19 @@ public class Sprite {
 		maxXReached = false;
 		maxYReached = false;
 		
+		collisionbox = new CollisionBox(x, y, image.getWidth(), image.getHeight());
+		
 		this.x = x;
 		this.y = y;
 		this.newX = x;
 		this.newY = y;
+	}
+
+	/**
+	 * Get collision box.
+	 */
+	public CollisionBox getCollisionBox() {
+		return collisionbox;
 	}
 	
 	/**
@@ -237,5 +247,12 @@ public class Sprite {
 	public void drawSprite(Graphics g)
 	{
 		g.drawImage(image, x, y);
+	}
+	
+	/**
+	 * Draws the collision box
+	 */
+	public void drawCollisionBox(Graphics g) {
+		collisionbox.drawBox(g, x, y);
 	}
 }

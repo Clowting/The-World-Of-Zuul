@@ -89,10 +89,24 @@ public class GameScene {
 	 */
 	public void render(Graphics g) 
 	{
-		// Objects to be rendered go here
+		// Draws collision boxes
+		for(Object o : sprites.values()) {
+			if(o instanceof Sprite) {
+				Sprite s = (Sprite) o;
+				s.drawCollisionBox(g);
+			}
+			else if(o instanceof AnimatedSprite) {
+				AnimatedSprite as = (AnimatedSprite) o;
+				as.drawCollisionBox(g);
+			}
+		}
+		
+		// Draws the player + collision box and background
+		player.drawCollisionBox(g);
 		background.drawSprite(g);
 		player.drawSprite(g);
 		
+		// Draws the sprites.
 		for(Object o : sprites.values()) {
 			if(o instanceof Sprite) {
 				Sprite s = (Sprite) o;

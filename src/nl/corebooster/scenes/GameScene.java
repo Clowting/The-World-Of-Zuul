@@ -9,8 +9,12 @@ import nl.corebooster.setup.Sprite;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
 
+/**
+ * Describes a game scene with the standard features
+ * @author Raymon de Looff, Thijs Clowting, Richard Weug
+ * @version 1.0
+ */
 public class GameScene {
 	
 	private LinkedHashMap<String, Object> sprites;
@@ -31,9 +35,9 @@ public class GameScene {
 	{
 		sprites = new LinkedHashMap<String, Object>();
 		
-		background = new Sprite("img", "background1.png", 0, 0);
+		background = new Sprite("img", "background1.png", false, 0, 0);
 		
-		sprites.put("landingpad", new AnimatedSprite("sprites", "landingpad.png", 50, 50, 384, 384, 1000));
+		sprites.put("landingpad", new AnimatedSprite("sprites", "landingpad.png", true, 50, 50, 384, 384, 1000));
 		
 		player = new Player(screenWidth / 2, screenHeight / 2);
 		
@@ -93,18 +97,23 @@ public class GameScene {
 		for(Object o : sprites.values()) {
 			if(o instanceof Sprite) {
 				Sprite s = (Sprite) o;
-				s.drawCollisionBox(g);
+				
+				if(s.getCollisionBox() != null) {
+					s.drawCollisionBox(g);
+				}
 			}
 			else if(o instanceof AnimatedSprite) {
 				AnimatedSprite as = (AnimatedSprite) o;
-				as.drawCollisionBox(g);
+				
+				if(as.getCollisionBox() != null) {
+					as.drawCollisionBox(g);
+				}
 			}
 		}
 		
-		// Draws the player + collision box and background
+		// Draws the player collision box and background
 		player.drawCollisionBox(g);
 		background.drawSprite(g);
-		player.drawSprite(g);
 		
 		// Draws the sprites.
 		for(Object o : sprites.values()) {
@@ -117,6 +126,9 @@ public class GameScene {
 				as.drawSprite(g);
 			}
 		}
+		
+		// Draw the player
+		player.drawSprite(g);
 	}
 	
 	/**
@@ -126,10 +138,7 @@ public class GameScene {
 	 */
 	public void keyHandler(Input input) throws SlickException
 	{
-		Object objectBoxToCheck = sprites.get("landingpad");
-		AnimatedSprite as = (AnimatedSprite) objectBoxToCheck;
-		Rectangle boxToCheck = player.getCollisionBox().getShape();
-		boolean isColliding = as.getCollisionBox().isColliding(boxToCheck);
+		boolean isColliding = player.isCollidingWith(sprites);
 		
 		if(!isColliding) {
 			if(input.isKeyDown(Input.KEY_LEFT)) {

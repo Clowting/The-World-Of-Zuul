@@ -20,14 +20,19 @@ public class Sprite {
 	 * Constructs a new sprite from an image
 	 * @throws SlickException 
 	 */
-	public Sprite(String folder, String filename, int x, int y) throws SlickException
+	public Sprite(String folder, String filename, boolean isCollidable, int x, int y) throws SlickException
 	{
 		this.image = getImage(folder, filename);
 		
 		maxXReached = false;
 		maxYReached = false;
 		
-		collisionbox = new CollisionBox(x, y, image.getWidth(), image.getHeight());
+		if(isCollidable) {
+			collisionbox = new CollisionBox(x, y, image.getWidth(), image.getHeight());
+		}
+		else {
+			collisionbox = null;
+		}
 		
 		this.x = x;
 		this.y = y;

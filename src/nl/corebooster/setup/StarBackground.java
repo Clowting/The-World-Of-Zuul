@@ -44,7 +44,7 @@ public class StarBackground {
 			int x = rand.nextInt(screenWidth);
 			int y = rand.nextInt(screenHeight);
 			
-			Sprite sprite = new Sprite("sprites", filename, x, y);
+			Sprite sprite = new Sprite("sprites", filename, false, x, y);
 			stars.add(sprite);
 		}
 	}

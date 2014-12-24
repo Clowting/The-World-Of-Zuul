@@ -17,12 +17,17 @@ public class AnimatedSprite {
 	private Animation spritesheetAnimation;
 	private int x, y;
 	
-	public AnimatedSprite(String folder, String filename, int x, int y, int width, int height, int interval) throws SlickException
+	public AnimatedSprite(String folder, String filename, boolean isCollidable, int x, int y, int width, int height, int interval) throws SlickException
 	{
 		this.spritesheet = getSpriteSheet(folder, filename, width, height);
 		spritesheetAnimation = new Animation(spritesheet, interval);
 		
-		collisionbox = new CollisionBox(x, y, width, height);
+		if(isCollidable) {
+			collisionbox = new CollisionBox(x, y, width, height);
+		}
+		else {
+			collisionbox = null;
+		}
 		
 		this.x = x;
 		this.y = y;

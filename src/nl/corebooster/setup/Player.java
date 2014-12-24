@@ -1,5 +1,7 @@
 package nl.corebooster.setup;
 
+import java.util.LinkedHashMap;
+
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -205,8 +207,38 @@ public class Player {
 	/**
 	 * Draw collision box.
 	 */
-	public void drawCollisionBox(Graphics g) {
+	public void drawCollisionBox(Graphics g) 
+	{
 		collisionbox.drawBox(g, x, y);
+	}
+	
+	/**
+	 * Checks if the player collides with another collision box
+	 */
+	public boolean isCollidingWith(LinkedHashMap<String, Object> sprites)
+	{
+		boolean isColliding = false;
+		
+		for(Object o : sprites.values()) {
+			if(o instanceof Sprite) {
+				Sprite s = (Sprite) o;
+				CollisionBox spriteCollisionbox = s.getCollisionBox();
+				
+				if(spriteCollisionbox != null) {
+					isColliding = spriteCollisionbox.isColliding(collisionbox.getShape());
+				}
+			}
+			else if(o instanceof AnimatedSprite) {
+				AnimatedSprite as = (AnimatedSprite) o;
+				CollisionBox spriteCollisionbox = as.getCollisionBox();
+				
+				if(spriteCollisionbox != null) {
+					isColliding = spriteCollisionbox.isColliding(collisionbox.getShape());
+				}
+			}
+		}
+		
+		return isColliding;
 	}
 	
 	/**

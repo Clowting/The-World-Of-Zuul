@@ -217,15 +217,17 @@ public class Player {
 	 */
 	public boolean isCollidingWith(LinkedHashMap<String, Object> sprites)
 	{
-		boolean isColliding = false;
-		
 		for(Object o : sprites.values()) {
 			if(o instanceof Sprite) {
 				Sprite s = (Sprite) o;
 				CollisionBox spriteCollisionbox = s.getCollisionBox();
 				
 				if(spriteCollisionbox != null) {
-					isColliding = spriteCollisionbox.isColliding(collisionbox.getShape());
+					boolean isColliding = spriteCollisionbox.isColliding(collisionbox.getShape());
+					
+					if(isColliding) {
+						return true;
+					}
 				}
 			}
 			else if(o instanceof AnimatedSprite) {
@@ -233,12 +235,16 @@ public class Player {
 				CollisionBox spriteCollisionbox = as.getCollisionBox();
 				
 				if(spriteCollisionbox != null) {
-					isColliding = spriteCollisionbox.isColliding(collisionbox.getShape());
+					boolean isColliding = spriteCollisionbox.isColliding(collisionbox.getShape());
+					
+					if(isColliding) {
+						return true;
+					}
 				}
 			}
 		}
 		
-		return isColliding;
+		return false;
 	}
 	
 	/**

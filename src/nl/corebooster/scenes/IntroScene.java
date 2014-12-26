@@ -56,7 +56,7 @@ public class IntroScene {
 		
 		// Stars playing background music
 		bgMusic = new Music("data/music/IntroSong.ogg");
-		bgMusic.loop(1f, 0.2f);
+		bgMusic.loop(1f, 0.1f);
 		
 	}
 	

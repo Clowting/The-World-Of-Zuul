@@ -8,6 +8,7 @@ import nl.corebooster.setup.Sprite;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 
 /**
@@ -27,6 +28,8 @@ public class GameScene {
 	
 	private boolean hasEnded, hasRendered;
 	
+	private Music bgMusic;
+	
 	/**
 	 * Initializes the scene
 	 * @throws SlickException 
@@ -45,6 +48,8 @@ public class GameScene {
 		
 		hasEnded = false;
 		hasRendered = false;
+		
+		bgMusic = null;
 	}
 	
 	/**
@@ -87,6 +92,11 @@ public class GameScene {
 	public void animate()
 	{
 		// Call methods on objects to animate
+	}
+	
+	public void playMusic(String filename, float volume) throws SlickException {
+		bgMusic = new Music("data/music/" + filename);
+		bgMusic.loop(1f, volume);
 	}
 
 	/**

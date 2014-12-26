@@ -55,6 +55,7 @@ public class Game extends BasicGame {
 			{
 				intro.getAnimatedSprite("start").stopAnimation();
 				render(container, container.getGraphics());
+				currentScene.playMusic("GameSong01.ogg", 0.05f);
 				currentScene.setRendered();
 			}
 			currentScene.keyHandler(input);

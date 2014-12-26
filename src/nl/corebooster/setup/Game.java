@@ -8,7 +8,6 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-//import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 /**
@@ -86,6 +85,7 @@ public class Game extends BasicGame {
 		int updateInterval = 50;
 		
 		app.setDisplayMode(960, 540, false);
+		app.setIcon("data/img/icon.png");
 		
 		app.setMinimumLogicUpdateInterval(updateInterval);
 		app.setMaximumLogicUpdateInterval(updateInterval);

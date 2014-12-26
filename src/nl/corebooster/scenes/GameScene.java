@@ -147,6 +147,7 @@ public class GameScene {
 				player.moveLeft();
 				
 				if(input.isKeyPressed(Input.KEY_LEFT)) {
+					player.stopFootstepSound();
 					player.playFootstepSound();
 				}
 			}
@@ -155,6 +156,7 @@ public class GameScene {
 				player.moveRight();
 				
 				if(input.isKeyPressed(Input.KEY_RIGHT)) {
+					player.stopFootstepSound();
 					player.playFootstepSound();
 				}
 			}
@@ -163,6 +165,7 @@ public class GameScene {
 				player.moveUp();
 				
 				if(input.isKeyPressed(Input.KEY_UP)) {
+					player.stopFootstepSound();
 					player.playFootstepSound();
 				}
 			}
@@ -171,6 +174,7 @@ public class GameScene {
 				player.moveDown();
 				
 				if(input.isKeyPressed(Input.KEY_DOWN)) {
+					player.stopFootstepSound();
 					player.playFootstepSound();
 				}
 			}

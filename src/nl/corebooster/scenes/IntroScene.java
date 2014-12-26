@@ -91,11 +91,9 @@ public class IntroScene {
 	 */
 	public void keyHandler(Input input)
 	{
-		if(input.isKeyPressed(Input.KEY_SPACE)) {
-			stopBackgroundMusic();
-		}
 		if(input.isKeyDown(Input.KEY_SPACE))
 		{
+			stopBackgroundMusic();
 			sceneEnded = true;
 		}
 	}

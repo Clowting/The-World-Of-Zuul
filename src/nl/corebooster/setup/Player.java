@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.SpriteSheet;
 
 /**
@@ -21,6 +22,7 @@ public class Player {
 	private int movementSpeed;
 	private int angle;
 	private static final int playerSize = 64;
+	private Sound footstep;
 	
 	public Player(int x, int y) throws SlickException
 	{
@@ -34,6 +36,8 @@ public class Player {
 		
 		movementSpeed = 5;
 		angle = 0;
+		
+		footstep = new Sound("data/soundeffects/FootstepIce.ogg");
 	}
 	
 	/**
@@ -270,5 +274,19 @@ public class Player {
 	{
 		spritesheetAnimation.stop();
 		spritesheetAnimation.setCurrentFrame(0);
+	}
+	
+	/**
+	 * Plays footstep sound
+	 */
+	public void playFootstepSound() {
+		footstep.loop(1f, 0.1f);
+	}
+	
+	/**
+	 * Stops playing footstep sound
+	 */
+	public void stopFootstepSound() {
+		footstep.stop();
 	}
 }

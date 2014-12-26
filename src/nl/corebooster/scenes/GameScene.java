@@ -145,22 +145,39 @@ public class GameScene {
 		if(!isColliding) {
 			if(input.isKeyDown(Input.KEY_LEFT)) {
 				player.moveLeft();
+				
+				if(input.isKeyPressed(Input.KEY_LEFT)) {
+					player.playFootstepSound();
+				}
 			}
 			
 			else if(input.isKeyDown(Input.KEY_RIGHT)) {
 				player.moveRight();
+				
+				if(input.isKeyPressed(Input.KEY_RIGHT)) {
+					player.playFootstepSound();
+				}
 			}
 			
 			else if(input.isKeyDown(Input.KEY_UP)) {
 				player.moveUp();
+				
+				if(input.isKeyPressed(Input.KEY_UP)) {
+					player.playFootstepSound();
+				}
 			}
 			
 			else if(input.isKeyDown(Input.KEY_DOWN)) {
 				player.moveDown();
+				
+				if(input.isKeyPressed(Input.KEY_DOWN)) {
+					player.playFootstepSound();
+				}
 			}
 			
 			else {
 				player.stopAnimation();
+				player.stopFootstepSound();
 			}
 		} else {
 			if(player.getRotation() == 270) {

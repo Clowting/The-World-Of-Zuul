@@ -9,6 +9,7 @@ import nl.corebooster.setup.StarBackground;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 
 /**
@@ -24,6 +25,8 @@ public class IntroScene {
 	private Sprite background;
 	private StarBackground stars;
 	
+	private Music bgMusic;
+			
 	private static final int screenWidth = 960;
 	private static final int screenHeight = 540;
 	
@@ -50,6 +53,11 @@ public class IntroScene {
 		// Make sprite objects
 		Sprite spaceship = new Sprite("sprites", "spaceship.png", false, 416, 210);
 		sprites.put("spaceship", spaceship);
+		
+		// Stars playing background music
+		bgMusic = new Music("data/music/IntroSong.ogg");
+		bgMusic.loop(1f, 0.2f);
+		
 	}
 	
 	/**
@@ -83,6 +91,9 @@ public class IntroScene {
 	 */
 	public void keyHandler(Input input)
 	{
+		if(input.isKeyPressed(Input.KEY_SPACE)) {
+			stopBackgroundMusic();
+		}
 		if(input.isKeyDown(Input.KEY_SPACE))
 		{
 			sceneEnded = true;
@@ -126,6 +137,13 @@ public class IntroScene {
 				as.drawSprite(g);
 			}
 		}
+	}
+	
+	/**
+	 * Stops playing background music
+	 */
+	private void stopBackgroundMusic() {
+		bgMusic.stop();
 	}
 	
 	/**

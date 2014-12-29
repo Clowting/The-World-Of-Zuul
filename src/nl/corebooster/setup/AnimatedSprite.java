@@ -1,5 +1,7 @@
 package nl.corebooster.setup;
 
+import nl.corebooster.setup.TriggerBox.TriggerType;
+
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -13,10 +15,23 @@ import org.newdawn.slick.SpriteSheet;
 public class AnimatedSprite {
 
 	private CollisionBox collisionbox;
+	private TriggerBox triggerbox;
 	private SpriteSheet spritesheet;
 	private Animation spritesheetAnimation;
 	private int x, y;
 	
+	/**
+	 * Constructs a new animated sprite from a spritesheet
+	 * @param folder
+	 * @param filename
+	 * @param isCollidable
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param interval
+	 * @throws SlickException
+	 */
 	public AnimatedSprite(String folder, String filename, boolean isCollidable, int x, int y, int width, int height, int interval) throws SlickException
 	{
 		this.spritesheet = getSpriteSheet(folder, filename, width, height);
@@ -29,15 +44,57 @@ public class AnimatedSprite {
 			collisionbox = null;
 		}
 		
+		this.triggerbox = null;
+		
 		this.x = x;
 		this.y = y;
 	}
 	
 	/**
-	 * Get collision box.
+	 * Constructs a new animated sprite from a spritesheet with a trigger
+	 * @param folder
+	 * @param filename
+	 * @param isCollidable
+	 * @param triggerType
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param interval
+	 * @throws SlickException
 	 */
-	public CollisionBox getCollisionBox() {
+	public AnimatedSprite(String folder, String filename, boolean isCollidable, TriggerType triggerType, String triggerValue, int x, int y, int width, int height, int interval) throws SlickException
+	{
+		this.spritesheet = getSpriteSheet(folder, filename, width, height);
+		spritesheetAnimation = new Animation(spritesheet, interval);
+		
+		if(isCollidable) {
+			collisionbox = new CollisionBox(x, y, width, height);
+		}
+		else {
+			collisionbox = null;
+		}
+		
+		this.triggerbox = new TriggerBox(triggerType, triggerValue, x, y, width, height);
+		
+		this.x = x;
+		this.y = y;
+	}
+	
+	/**
+	 * Get the collision box.
+	 */
+	public CollisionBox getCollisionBox() 
+	{
 		return collisionbox;
+	}
+	
+	/**
+	 * Get the triggerbox
+	 */
+	public TriggerBox getTriggerBox()
+	{
+		return triggerbox;
 	}
 	
 	/**
@@ -99,8 +156,14 @@ public class AnimatedSprite {
 	/**
 	 * Draws the collision box
 	 */
-	public void drawCollisionBox(Graphics g) {
-		collisionbox.drawBox(g, x, y);
+	public void drawBoxes(Graphics g) {
+		if(collisionbox != null) {
+			collisionbox.drawBox(g, x, y);
+		}
+		
+		if(triggerbox != null) {
+			triggerbox.drawBox(g, x, y);
+		}
 	}
 	
 	public void stopAnimation()

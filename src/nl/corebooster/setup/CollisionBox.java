@@ -19,8 +19,18 @@ public class CollisionBox {
 	 * @param width
 	 * @param height
 	 */
-	public CollisionBox(int x, int y, int width, int height) {
+	public CollisionBox(int x, int y, int width, int height) 
+	{
 		box = new Rectangle(x, y, width, height);
+	}
+	
+	/**
+	 * Returns the rectangle of the collision box
+	 * @return
+	 */
+	public Rectangle getShape() 
+	{
+		return box;
 	}
 	
 	/**
@@ -29,7 +39,8 @@ public class CollisionBox {
 	 * @param x
 	 * @param y
 	 */
-	public void drawBox(Graphics g, int x, int y) {
+	public void drawBox(Graphics g, int x, int y) 
+	{
 		box.setX(x);
 		box.setY(y);
 		g.setColor(null);
@@ -37,25 +48,19 @@ public class CollisionBox {
 	}
 	
 	/**
-	 * Returns the rectangle of the collision box
-	 * @return
-	 */
-	public Rectangle getShape() {
-		return box;
-	}
-	
-	/**
 	 * Returns true if the ColissionBox is colliding with another ColissionBox
 	 * @param boxToCheck
 	 * @return
 	 */
-	public boolean isColliding(Rectangle boxToCheck) {
+	public boolean isColliding(Rectangle boxToCheck) 
+	{
 		
 		if(box.intersects(boxToCheck)) {
 			return true;
 		} else {
 			return false;
 		}
+		
 	}
 	
 }

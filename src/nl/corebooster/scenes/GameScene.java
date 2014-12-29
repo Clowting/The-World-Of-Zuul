@@ -5,6 +5,8 @@ import java.util.LinkedHashMap;
 import nl.corebooster.setup.AnimatedSprite;
 import nl.corebooster.setup.Player;
 import nl.corebooster.setup.Sprite;
+import nl.corebooster.setup.TriggerBox;
+import nl.corebooster.setup.TriggerBox.TriggerType;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -26,7 +28,9 @@ public class GameScene {
 	private Sprite background;
 	private Player player;
 	
-	private boolean hasEnded, hasRendered;
+	private String sceneName;
+	private String nextScene;
+	private boolean isActive, isRendered;
 	
 	private Music bgMusic;
 	
@@ -34,22 +38,41 @@ public class GameScene {
 	 * Initializes the scene
 	 * @throws SlickException 
 	 */
-	public GameScene() throws SlickException
+	public GameScene(String sceneName) throws SlickException
 	{
+		// Initialize objects
 		sprites = new LinkedHashMap<String, Object>();
-		
-		background = new Sprite("img", "background1.png", false, 0, 0);
-		sprites.put("ice_cliff", new Sprite("sprites", "ice_cliff.png", true, 0, 0));
-		
-		sprites.put("landingpad", new AnimatedSprite("sprites", "landingpad.png", true, 50, 75, 384, 384, 1000));
-		sprites.put("spaceship", new Sprite("sprites", "spaceship_big.png", false, 104, 137));
 		
 		player = new Player(screenWidth / 2, screenHeight / 2);
 		
-		hasEnded = false;
-		hasRendered = false;
+		this.sceneName = sceneName;
+		nextScene = null;
+		
+		isActive = false;
+		isRendered = false;
 		
 		bgMusic = null;
+		
+		// A switch for making different scenes
+		switch(sceneName) {
+			// "Ice"-scene: first scene after the intro
+			case "ice":
+				
+				background = new Sprite("img", "background1.png", false, 0, 0);
+				sprites.put("ice_cliff", new Sprite("sprites", "ice_cliff.png", true, 0, 0));
+				
+				sprites.put("landingpad", new AnimatedSprite("sprites", "landingpad.png", true, TriggerType.SCENESWITCH, "ice2", 50, 110, 384, 384, 1000));
+				sprites.put("spaceship", new Sprite("sprites", "spaceship_big.png", false, 104, 162));
+				
+			break;
+			
+			// Test Scene
+			case "ice2":
+				
+				background = new Sprite("img", "background1.png", false, 0, 0);
+				
+			break;
+		}
 	}
 	
 	/**
@@ -61,29 +84,97 @@ public class GameScene {
 	}
 	
 	/**
+	 * Returns the name of the scene
+	 */
+	public String getSceneName()
+	{
+		return sceneName;
+	}
+	
+	/**
+	 * Returns the name of the next scene
+	 */
+	public String getNextScene()
+	{
+		return nextScene;
+	}
+	
+	/**
+	 * Sets the current trigger
+	 */
+	
+	/**
 	 * Returns true if intro has ended
 	 * @return
 	 */
-	public boolean hasEnded()
+	public boolean isActive()
 	{
-		return hasEnded;
+		return isActive;
+	}
+	
+	/**
+	 * Sets the name of the scene
+	 */
+	public void setSceneName(String sceneName)
+	{
+		this.sceneName = sceneName;
+	}
+	
+	/**
+	 * Sets the name of the next scene
+	 */
+	public void setNextScene(String scene)
+	{
+		nextScene = scene;
 	}
 	
 	/**
 	 * Returns true if currentScene has been rendered
 	 * @return
 	 */
-	public boolean hasRendered()
+	public boolean isRendered()
 	{
-		return hasRendered;
+		return isRendered;
 	}
 	
 	/**
-	 * Set hasRendered to true
+	 * Makes a scene active
+	 */
+	public void setActive()
+	{
+		isActive = true;
+	}
+	
+	/**
+	 * Makes a scene inactive
+	 */
+	public void setInactive()
+	{
+		isActive = false;
+	}
+	
+	/**
+	 * Sets isRendered to true when a scene is rendered
 	 */
 	public void setRendered()
 	{
-		hasRendered = true;
+		isRendered = true;
+	}
+	
+	/**
+	 * Sets isRendered to false when a scene is not rendered
+	 */
+	public void setUnrendered()
+	{
+		isRendered = false;
+	}
+	
+	/**
+	 * Resets the next scene
+	 */
+	public void resetNextScene()
+	{
+		nextScene = null;
 	}
 		
 	/**
@@ -110,16 +201,12 @@ public class GameScene {
 			if(o instanceof Sprite) {
 				Sprite s = (Sprite) o;
 				
-				if(s.getCollisionBox() != null) {
-					s.drawCollisionBox(g);
-				}
+				s.drawBoxes(g);
 			}
 			else if(o instanceof AnimatedSprite) {
 				AnimatedSprite as = (AnimatedSprite) o;
 				
-				if(as.getCollisionBox() != null) {
-					as.drawCollisionBox(g);
-				}
+				as.drawBoxes(g);
 			}
 		}
 		
@@ -150,6 +237,7 @@ public class GameScene {
 	 */
 	public void keyHandler(Input input) throws SlickException
 	{
+		// Checks if the player is colliding with a sprite
 		boolean isColliding = player.isCollidingWith(sprites);
 		
 		if(!isColliding) {
@@ -193,15 +281,34 @@ public class GameScene {
 				player.stopAnimation();
 				player.stopFootstepSound();
 			}
-		} else {
+		} 
+		else {
 			if(player.getRotation() == 270) {
 				player.setX(player.getX() + 1);
-			} else if(player.getRotation() == 90) {
+			} 
+			else if(player.getRotation() == 90) {
 				player.setX(player.getX() - 1);
-			} else if(player.getRotation() == 0) {
+			} 
+			else if(player.getRotation() == 0) {
 				player.setY(player.getY() + 1);
-			} else if(player.getRotation() == 180) {
+			} 
+			else if(player.getRotation() == 180) {
 				player.setY(player.getY() - 1);
+			}
+		}
+		
+		// Checks if the player is triggering an event
+		TriggerBox currentTriggerBox = player.getCurrentTriggerBox(sprites);
+		
+		if(currentTriggerBox != null) {
+			switch(currentTriggerBox.getTriggerType()) {
+				case SCENESWITCH:
+					nextScene = currentTriggerBox.getValue();
+				break;
+				
+				case MESSAGE:
+					// Display an in-game message
+				break;
 			}
 		}
 	}

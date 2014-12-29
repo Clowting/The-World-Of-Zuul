@@ -252,6 +252,43 @@ public class Player {
 	}
 	
 	/**
+	 * Returns the TriggerBox when a player is touching a trigger box, null if not triggering
+	 * @param sprites
+	 * @return
+	 */
+	public TriggerBox getCurrentTriggerBox(LinkedHashMap<String, Object> sprites)
+	{
+		for(Object o : sprites.values()) {
+			if(o instanceof Sprite) {
+				Sprite s = (Sprite) o;
+				TriggerBox spriteTriggerbox = s.getTriggerBox();
+				
+				if(spriteTriggerbox != null) {
+					boolean isTriggering = spriteTriggerbox.isTriggering(collisionbox.getShape());
+					
+					if(isTriggering) {
+						return spriteTriggerbox;
+					}
+				}
+			}
+			else if(o instanceof AnimatedSprite) {
+				AnimatedSprite as = (AnimatedSprite) o;
+				TriggerBox spriteTriggerbox = as.getTriggerBox();
+				
+				if(spriteTriggerbox != null) {
+					boolean isTriggering = spriteTriggerbox.isTriggering(collisionbox.getShape());
+					
+					if(isTriggering) {
+						return spriteTriggerbox;
+					}
+				}
+			}
+		}
+		
+		return null;
+	}
+	
+	/**
 	 * Starts the animation
 	 */
 	public void startAnimation()

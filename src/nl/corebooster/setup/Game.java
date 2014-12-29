@@ -1,5 +1,7 @@
 package nl.corebooster.setup;
 
+import java.util.HashMap;
+
 import nl.corebooster.scenes.GameScene;
 import nl.corebooster.scenes.IntroScene;
 
@@ -19,7 +21,7 @@ public class Game extends BasicGame {
 	
 	private IntroScene intro;
 	private GameScene currentScene;
-	//private HashSet<>;
+	private HashMap<String, GameScene> scenes;
 	
 	/**
 	 * Constructs the SetupClass
@@ -27,6 +29,8 @@ public class Game extends BasicGame {
 	 */
 	public Game(String title) {
 		super(title);
+		
+		scenes = new HashMap<String, GameScene>();
 	}
 	
 	/**
@@ -34,7 +38,12 @@ public class Game extends BasicGame {
 	 */
 	public void init(GameContainer container) throws SlickException {
 		intro = new IntroScene();
-		currentScene = new GameScene();
+		
+		scenes.put("ice", new GameScene("ice"));
+		scenes.put("ice2", new GameScene("ice2"));
+		
+		currentScene = scenes.get("ice");
+		currentScene.setActive();
 	}
 	
 	/**
@@ -48,16 +57,35 @@ public class Game extends BasicGame {
 			intro.animate();
 			intro.keyHandler(input);
 		}
-		else if(!currentScene.hasEnded())
+		else if(currentScene.isActive())
 		{
-			if(!currentScene.hasRendered())
+			if(!currentScene.isRendered())
 			{
-				intro.getAnimatedSprite("start").stopAnimation();
-				render(container, container.getGraphics());
-				currentScene.playMusic("GameSong01.ogg", 0.05f);
 				currentScene.setRendered();
+				//currentScene.playMusic("GameSong01.ogg", 0.05f);
 			}
+			
+			if(currentScene.getNextScene() != null) {
+				GameScene nextScene = scenes.get(currentScene.getNextScene());
+				
+				currentScene.setInactive();
+				nextScene.setActive();
+			}
+			
 			currentScene.keyHandler(input);
+		}
+		else
+		{
+			for(GameScene scene: scenes.values()) {
+				if(scene.isActive()) {
+					// Sets the current scene unrendered and resets the 'nextScene' value
+					currentScene.setUnrendered();
+					currentScene.resetNextScene();
+					
+					// Set the new current scene to the new scene
+					currentScene = scene;
+				}
+			}
 		}
 	}
 	
@@ -68,10 +96,12 @@ public class Game extends BasicGame {
 		if(!intro.hasEnded())
 		{
 			intro.render(g);
+			g.drawString("Current scene: intro", 10, 30);
 		}
 		else
 		{
 			currentScene.render(g);
+			g.drawString("Current scene: " + currentScene.getSceneName(), 10, 30);
 		}
 	}
 

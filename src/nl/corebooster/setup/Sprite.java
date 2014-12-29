@@ -1,5 +1,7 @@
 package nl.corebooster.setup;
 
+import nl.corebooster.setup.TriggerBox.TriggerType;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -12,6 +14,7 @@ import org.newdawn.slick.SlickException;
 public class Sprite {
 	
 	private CollisionBox collisionbox;
+	private TriggerBox triggerbox;
 	private Image image;
 	private boolean maxXReached, maxYReached;
 	private int x, y, newX, newY;
@@ -34,6 +37,34 @@ public class Sprite {
 			collisionbox = null;
 		}
 		
+		this.triggerbox = null;
+		
+		this.x = x;
+		this.y = y;
+		this.newX = x;
+		this.newY = y;
+	}
+	
+	/**
+	 * Constructs a new sprite from an image with a trigger
+	 * @throws SlickException 
+	 */
+	public Sprite(String folder, String filename, boolean isCollidable, TriggerType triggerType, String triggerValue, int x, int y) throws SlickException
+	{
+		this.image = getImage(folder, filename);
+		
+		maxXReached = false;
+		maxYReached = false;
+		
+		if(isCollidable) {
+			collisionbox = new CollisionBox(x, y, image.getWidth(), image.getHeight());
+		}
+		else {
+			collisionbox = null;
+		}
+		
+		this.triggerbox = new TriggerBox(triggerType, triggerValue, x, y, image.getWidth(), image.getHeight());
+		
 		this.x = x;
 		this.y = y;
 		this.newX = x;
@@ -43,8 +74,17 @@ public class Sprite {
 	/**
 	 * Get collision box.
 	 */
-	public CollisionBox getCollisionBox() {
+	public CollisionBox getCollisionBox() 
+	{
 		return collisionbox;
+	}
+	
+	/**
+	 * Returns the triggerbox
+	 */
+	public TriggerBox getTriggerBox()
+	{
+		return triggerbox;
 	}
 	
 	/**
@@ -255,9 +295,15 @@ public class Sprite {
 	}
 	
 	/**
-	 * Draws the collision box
+	 * Draws the collision box and trigger box (if they exist)
 	 */
-	public void drawCollisionBox(Graphics g) {
-		collisionbox.drawBox(g, x, y);
+	public void drawBoxes(Graphics g) {
+		if(collisionbox != null) {
+			collisionbox.drawBox(g, x, y);
+		}
+		
+		if(triggerbox != null) {
+			triggerbox.drawBox(g, x, y);
+		}
 	}
 }

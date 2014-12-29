@@ -20,6 +20,15 @@ public class TriggerBox {
 	private String value;
 	private boolean isTriggered;
 	
+	/**
+	 * Constructs a new trigger box with a specific type and value
+	 * @param type
+	 * @param value
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 */
 	public TriggerBox(TriggerType type, String value, int x, int y, int width, int height)
 	{
 		triggerType = type;
@@ -28,40 +37,81 @@ public class TriggerBox {
 		isTriggered = false;
 	}
 	
+	/**
+	 * Returns the type of the trigger
+	 * @return
+	 */
 	public TriggerType getTriggerType()
 	{
 		return triggerType;
 	}
 	
+	/**
+	 * Returns the shape of the trigger
+	 * @return
+	 */
 	public Rectangle getShape() {
 		return box;
 	}
 	
+	/**
+	 * Returns the value of the trigger
+	 * @return
+	 */
 	public String getValue()
 	{
 		return value;
 	}
 	
+	/**
+	 * Returns true if the trigger box is already triggered
+	 * @return
+	 */
 	public boolean isTriggered()
 	{
 		return isTriggered;
 	}
 	
+	/**
+	 * Sets the trigger type
+	 * @param type
+	 */
 	public void setTriggerType(TriggerType type)
 	{
 		triggerType = type;
 	}
 	
+	/**
+	 * Sets the value of the trigger
+	 * @param value
+	 */
 	public void setValue(String value)
 	{
 		this.value = value;
 	}
 	
+	/**
+	 * Sets isTriggered to true
+	 */
+	public void setTriggered()
+	{
+		isTriggered = true;
+	}
+	
+	/**
+	 * Resets the trigger when it is already triggered
+	 */
 	public void resetTrigger()
 	{
 		isTriggered = false;
 	}
 	
+	/**
+	 * Draws the trigger box on the screen
+	 * @param g
+	 * @param x
+	 * @param y
+	 */
 	public void drawBox(Graphics g, int x, int y) 
 	{
 		box.setX(x - boxMargin);
@@ -70,6 +120,11 @@ public class TriggerBox {
 		g.draw(box);
 	}
 	
+	/**
+	 * Returns true if the given shape is triggering this trigger box
+	 * @param boxToCheck
+	 * @return
+	 */
 	public boolean isTriggering(Rectangle boxToCheck) 
 	{
 		

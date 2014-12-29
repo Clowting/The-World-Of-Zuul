@@ -300,10 +300,11 @@ public class GameScene {
 		// Checks if the player is triggering an event
 		TriggerBox currentTriggerBox = player.getCurrentTriggerBox(sprites);
 		
-		if(currentTriggerBox != null) {
+		if(currentTriggerBox != null && currentTriggerBox.isTriggered() == false) {
 			switch(currentTriggerBox.getTriggerType()) {
 				case SCENESWITCH:
 					nextScene = currentTriggerBox.getValue();
+					currentTriggerBox.resetTrigger();
 				break;
 				
 				case MESSAGE:

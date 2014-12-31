@@ -264,7 +264,9 @@ public class GameScene {
 		
 		if(!isColliding) {
 			if(input.isKeyDown(Input.KEY_LEFT)) {
-				player.moveLeft();
+				if(player.canMoveLeft(0)) {
+					player.moveLeft();
+				}
 				
 				if(input.isKeyPressed(Input.KEY_LEFT)) {
 					player.stopFootstepSound();
@@ -273,7 +275,9 @@ public class GameScene {
 			}
 			
 			else if(input.isKeyDown(Input.KEY_RIGHT)) {
-				player.moveRight();
+				if(player.canMoveRight(screenWidth)) {
+					player.moveRight();
+				}
 				
 				if(input.isKeyPressed(Input.KEY_RIGHT)) {
 					player.stopFootstepSound();
@@ -282,7 +286,9 @@ public class GameScene {
 			}
 			
 			else if(input.isKeyDown(Input.KEY_UP)) {
-				player.moveUp();
+				if(player.canMoveUp(0)) {
+					player.moveUp();
+				}
 				
 				if(input.isKeyPressed(Input.KEY_UP)) {
 					player.stopFootstepSound();
@@ -291,7 +297,9 @@ public class GameScene {
 			}
 			
 			else if(input.isKeyDown(Input.KEY_DOWN)) {
-				player.moveDown();
+				if(player.canMoveDown(screenHeight)) {
+					player.moveDown();
+				}
 				
 				if(input.isKeyPressed(Input.KEY_DOWN)) {
 					player.stopFootstepSound();

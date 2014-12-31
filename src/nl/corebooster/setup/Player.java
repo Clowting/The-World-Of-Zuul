@@ -160,6 +160,66 @@ public class Player {
 		return spritesheet;
 	}
 	
+	/**
+	 * Returns true if the player can move up
+	 * @param maxValue
+	 * @return
+	 */
+	public boolean canMoveUp(int limit)
+	{
+		if(y - movementSpeed > limit) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Returns true if the player can move down
+	 * @param maxValue
+	 * @return
+	 */
+	public boolean canMoveDown(int limit)
+	{
+		if(y + playerSize + movementSpeed < limit) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Returns true if the player can move right
+	 * @param maxValue
+	 * @return
+	 */
+	public boolean canMoveRight(int limit)
+	{
+		if(x + playerSize + movementSpeed < limit) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Returns true if the player van move left
+	 * @param limit
+	 * @return
+	 */
+	public boolean canMoveLeft(int limit)
+	{
+		if(x - movementSpeed > limit) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
 	public void moveUp() throws SlickException
 	{
 		setSpriteSheet(getSpriteSheet("sprites", "player_up.png", playerSize, playerSize));

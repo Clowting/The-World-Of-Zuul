@@ -61,8 +61,8 @@ public class Game extends BasicGame {
 		{
 			if(!currentScene.isRendered())
 			{
+				currentScene.playMusic("GameSong01.ogg", 0.05f);
 				currentScene.setRendered();
-				//currentScene.playMusic("GameSong01.ogg", 0.05f);
 			}
 			
 			if(currentScene.getNextScene() != null) {
@@ -79,6 +79,7 @@ public class Game extends BasicGame {
 			for(GameScene scene: scenes.values()) {
 				if(scene.isActive()) {
 					// Sets the current scene unrendered and resets the 'nextScene' value
+					currentScene.stopMusic();
 					currentScene.setUnrendered();
 					currentScene.resetNextScene();
 					

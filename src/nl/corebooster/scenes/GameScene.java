@@ -100,10 +100,6 @@ public class GameScene {
 	}
 	
 	/**
-	 * Sets the current trigger
-	 */
-	
-	/**
 	 * Returns true if intro has ended
 	 * @return
 	 */
@@ -185,9 +181,23 @@ public class GameScene {
 		// Call methods on objects to animate
 	}
 	
+	/**
+	 * Plays the given music in the background
+	 * @param filename
+	 * @param volume
+	 * @throws SlickException
+	 */
 	public void playMusic(String filename, float volume) throws SlickException {
 		bgMusic = new Music("data/music/" + filename);
 		bgMusic.loop(1f, volume);
+	}
+	
+	/**
+	 * Stops the background music
+	 */
+	public void stopMusic()
+	{
+		bgMusic.stop();
 	}
 
 	/**

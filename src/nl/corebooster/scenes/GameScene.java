@@ -33,6 +33,8 @@ public class GameScene {
 	private boolean isActive, isRendered;
 	
 	private Music bgMusic;
+	private String bgMusicName;
+	private float bgMusicVolume;
 	
 	/**
 	 * Initializes the scene
@@ -63,6 +65,9 @@ public class GameScene {
 				
 				sprites.put("landingpad", new AnimatedSprite("sprites", "landingpad.png", true, TriggerType.SCENESWITCH, "ice2", 50, 110, 384, 384, 1000));
 				sprites.put("spaceship", new Sprite("sprites", "spaceship_big.png", false, 104, 162));
+				
+				bgMusicName = "GameSong01.ogg";
+				bgMusicVolume = 0.05f;
 				
 			break;
 			
@@ -187,17 +192,24 @@ public class GameScene {
 	 * @param volume
 	 * @throws SlickException
 	 */
-	public void playMusic(String filename, float volume) throws SlickException {
-		bgMusic = new Music("data/music/" + filename);
-		bgMusic.loop(1f, volume);
+	public void playMusic() throws SlickException {
+		if(bgMusicName != null) {
+			bgMusic = new Music("data/music/" + bgMusicName);
+			bgMusic.loop(1f, bgMusicVolume);
+		}
+
 	}
 	
 	/**
-	 * Stops the background music
+	 * Stops all the sounds playing
 	 */
-	public void stopMusic()
+	public void stopAllSounds()
 	{
-		bgMusic.stop();
+		if(bgMusic != null) {
+			bgMusic.stop();
+		}
+		
+		player.stopFootstepSound();
 	}
 
 	/**

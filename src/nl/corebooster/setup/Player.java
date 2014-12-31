@@ -324,6 +324,8 @@ public class Player {
 	 * Stops playing footstep sound
 	 */
 	public void stopFootstepSound() {
-		footstep.stop();
+		if(footstep.playing()) {
+			footstep.stop();
+		}
 	}
 }

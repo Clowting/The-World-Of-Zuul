@@ -24,6 +24,12 @@ public class Player {
 	private static final int playerSize = 64;
 	private Sound footstep;
 	
+	/**
+	 * Constructs a player at a given position.
+	 * @param x The players x position
+	 * @param y The players y position
+	 * @throws SlickException
+	 */
 	public Player(int x, int y) throws SlickException
 	{
 		this.spritesheet = getSpriteSheet("sprites", "player_up.png", playerSize, playerSize);
@@ -41,7 +47,8 @@ public class Player {
 	}
 	
 	/**
-	 * Get collision box.
+	 * Get collision box
+	 * @return The players collision box
 	 */
 	public CollisionBox getCollisionBox() {
 		return collisionbox;
@@ -49,6 +56,7 @@ public class Player {
 	
 	/**
 	 * Returns the spritesheet
+	 * @return The spritesheet the player is based on
 	 */
 	public SpriteSheet getSpriteSheet()
 	{
@@ -57,6 +65,7 @@ public class Player {
 	
 	/**
 	 * Returns the X-position
+	 * @return The players x position
 	 */
 	public int getX()
 	{
@@ -65,6 +74,7 @@ public class Player {
 	
 	/**
 	 * Returns the Y-position
+	 * @return The players y position
 	 */
 	public int getY()
 	{
@@ -73,7 +83,7 @@ public class Player {
 	
 	/**
 	 * Returns the movementSpeed
-	 * @return
+	 * @return The players movement speed
 	 */
 	public int getMovementSpeed()
 	{
@@ -82,7 +92,7 @@ public class Player {
 	
 	/**
 	 * Returns the rotation angle
-	 * @return
+	 * @return The angle the player is on
 	 */
 	public int getRotation()
 	{
@@ -91,15 +101,16 @@ public class Player {
 	
 	/**
 	 * Sets a new spritesheet for the player
+	 * @param spritesheet The players new spritesheet
 	 */
 	public void setSpriteSheet(SpriteSheet spritesheet)
 	{
-		
 		this.spritesheet = spritesheet;
 	}
 	
 	/**
 	 * Sets the X-position
+	 * @param x The player's new x position
 	 */
 	public void setX(int x)
 	{
@@ -108,6 +119,7 @@ public class Player {
 	
 	/**
 	 * Sets the Y-position
+	 * @param y The player's new y position
 	 */
 	public void setY(int y)
 	{
@@ -116,7 +128,7 @@ public class Player {
 	
 	/**
 	 * Sets the movement speed
-	 * @param movementSpeed
+	 * @param movementSpeed The player's new movement speed
 	 */
 	public void setMovementSpeed(int movementSpeed)
 	{
@@ -125,7 +137,7 @@ public class Player {
 	
 	/**
 	 * Sets a new rotation angle
-	 * @param angle
+	 * @param angle The player's new angle
 	 */
 	public void setRotation(int angle)
 	{
@@ -134,7 +146,7 @@ public class Player {
 	
 	/**
 	 * Sets a new rotation angle and refreshes the animation
-	 * @param angle
+	 * @param angle The player's new angle
 	 */
 	public void rotateAndRefresh(int angle)
 	{
@@ -146,11 +158,11 @@ public class Player {
 	
 	/**
 	 * Gets a spritesheet image from the given location
-	 * @param folder
-	 * @param filename
-	 * @param width
-	 * @param height
-	 * @return
+	 * @param folder The folder to look for the spritesheet
+	 * @param filename The filename of the spritesheet
+	 * @param width The with of the sprite
+	 * @param height The height of the sprite
+	 * @return The spritesheet that has been made
 	 * @throws SlickException
 	 */
 	public SpriteSheet getSpriteSheet(String folder, String filename, int width, int height) throws SlickException
@@ -162,8 +174,8 @@ public class Player {
 	
 	/**
 	 * Returns true if the player can move up
-	 * @param maxValue
-	 * @return
+	 * @param limit The vertical movement top limit
+	 * @return If the limit has been reached, true or false
 	 */
 	public boolean canMoveUp(int limit)
 	{
@@ -177,8 +189,8 @@ public class Player {
 	
 	/**
 	 * Returns true if the player can move down
-	 * @param maxValue
-	 * @return
+	 * @param limit The vertical movement bottom limit 
+	 * @return If the limit has been reached, true or false
 	 */
 	public boolean canMoveDown(int limit)
 	{
@@ -192,8 +204,8 @@ public class Player {
 	
 	/**
 	 * Returns true if the player can move right
-	 * @param maxValue
-	 * @return
+	 * @param limit The horizontal movement right limit 
+	 * @return If the limit has been reached, true or false
 	 */
 	public boolean canMoveRight(int limit)
 	{
@@ -207,8 +219,8 @@ public class Player {
 	
 	/**
 	 * Returns true if the player van move left
-	 * @param limit
-	 * @return
+	 * @param limit The horizontal movement left limit 
+	 * @return If the limit has been reached, true or false
 	 */
 	public boolean canMoveLeft(int limit)
 	{
@@ -220,6 +232,10 @@ public class Player {
 		}
 	}
 	
+	/**
+	 * Moves the player up
+	 * @throws SlickException
+	 */
 	public void moveUp() throws SlickException
 	{
 		setSpriteSheet(getSpriteSheet("sprites", "player_up.png", playerSize, playerSize));
@@ -230,6 +246,10 @@ public class Player {
 		y -= movementSpeed;
 	}
 	
+	/**
+	 * Moves the player down
+	 * @throws SlickException
+	 */
 	public void moveDown() throws SlickException
 	{
 		setSpriteSheet(getSpriteSheet("sprites", "player_down.png", playerSize, playerSize));
@@ -240,6 +260,10 @@ public class Player {
 		y += movementSpeed;
 	}
 	
+	/**
+	 * Moves the player right
+	 * @throws SlickException
+	 */
 	public void moveRight() throws SlickException
 	{
 		setSpriteSheet(getSpriteSheet("sprites", "player_right.png", playerSize, playerSize));
@@ -250,6 +274,10 @@ public class Player {
 		x += movementSpeed;
 	}
 	
+	/**
+	 * Moves the player left
+	 * @throws SlickException
+	 */
 	public void moveLeft() throws SlickException
 	{
 		setSpriteSheet(getSpriteSheet("sprites", "player_left.png", playerSize, playerSize));
@@ -262,6 +290,7 @@ public class Player {
 	
 	/**
 	 * Draws the sprite on the screen
+	 * @param g The graphics to draw on
 	 */
 	public void drawSprite(Graphics g)
 	{
@@ -270,6 +299,7 @@ public class Player {
 	
 	/**
 	 * Draw collision box.
+	 * @param g The graphics to draw on
 	 */
 	public void drawCollisionBox(Graphics g) 
 	{
@@ -278,6 +308,7 @@ public class Player {
 	
 	/**
 	 * Checks if the player collides with another collision box
+	 * @param sprites The list of sprites to check collision with
 	 */
 	public boolean isCollidingWith(LinkedHashMap<String, Object> sprites)
 	{
@@ -313,8 +344,8 @@ public class Player {
 	
 	/**
 	 * Returns the TriggerBox when a player is touching a trigger box, null if not triggering
-	 * @param sprites
-	 * @return
+	 * @param sprites The list of sprites to check triggers with
+	 * @return The trigger box that is triggered
 	 */
 	public TriggerBox getCurrentTriggerBox(LinkedHashMap<String, Object> sprites)
 	{

@@ -19,7 +19,7 @@ public class Player {
 	private SpriteSheet spritesheet;
 	private Animation spritesheetAnimation;
 	private int x, y;
-	private int movementSpeed;
+	private static final int movementSpeed = 5;
 	private int angle;
 	private static final int playerSize = 64;
 	private Sound footstep;
@@ -40,7 +40,6 @@ public class Player {
 		this.x = x;
 		this.y = y;
 		
-		movementSpeed = 5;
 		angle = 0;
 		
 		footstep = new Sound("data/soundeffects/FootstepIce.ogg");
@@ -82,15 +81,6 @@ public class Player {
 	}
 	
 	/**
-	 * Returns the movementSpeed
-	 * @return The players movement speed
-	 */
-	public int getMovementSpeed()
-	{
-		return movementSpeed;
-	}
-	
-	/**
 	 * Returns the rotation angle
 	 * @return The angle the player is on
 	 */
@@ -127,21 +117,38 @@ public class Player {
 	}
 	
 	/**
-	 * Sets the movement speed
-	 * @param movementSpeed The player's new movement speed
-	 */
-	public void setMovementSpeed(int movementSpeed)
-	{
-		this.movementSpeed = movementSpeed;
-	}
-	
-	/**
 	 * Sets a new rotation angle
 	 * @param angle The player's new angle
 	 */
 	public void setRotation(int angle)
 	{
 		this.angle = angle;
+	}
+	
+	/**
+	 * Rotates the player to the given angle
+	 * @param angle The player's new angle
+	 * @throws SlickException 
+	 */
+	public void rotatePlayer(int angle) throws SlickException
+	{
+		switch(angle) {
+			case 0:
+				moveUp();
+			break;
+			
+			case 180:
+				moveDown();
+			break;
+			
+			case 270:
+				moveLeft();
+			break;
+			
+			case 90:
+				moveRight();
+			break;
+		}
 	}
 	
 	/**

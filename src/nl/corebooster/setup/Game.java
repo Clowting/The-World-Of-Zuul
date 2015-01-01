@@ -21,11 +21,13 @@ public class Game extends BasicGame {
 	
 	private IntroScene intro;
 	private GameScene currentScene;
+	private Inventory inventory;
 	private HashMap<String, GameScene> scenes;
 	
 	/**
 	 * Constructs the SetupClass
 	 * @param title		The title of the window
+	 * @throws SlickException 
 	 */
 	public Game(String title) {
 		super(title);
@@ -38,9 +40,11 @@ public class Game extends BasicGame {
 	 */
 	public void init(GameContainer container) throws SlickException {
 		intro = new IntroScene();
+		inventory = new Inventory();
 		
-		scenes.put("ice", new GameScene("ice"));
-		scenes.put("ice2", new GameScene("ice2"));
+		scenes.put("ice", new GameScene("ice", 480, 270));
+		scenes.put("outside_headquarters", new GameScene("outside_headquarters", 10, 260));
+		scenes.put("headquarters", new GameScene("headquarters", 10, 260));
 		
 		currentScene = scenes.get("ice");
 		currentScene.setActive();
@@ -80,6 +84,9 @@ public class Game extends BasicGame {
 			for(GameScene scene: scenes.values()) {
 				if(scene.isActive()) {
 					// Sets the current scene unrendered and resets the 'nextScene' value
+					int currentPlayerRotation = currentScene.getPlayer().getRotation();
+					scene.getPlayer().rotatePlayer(currentPlayerRotation);
+					
 					currentScene.stopAllSounds();
 					currentScene.setUnrendered();
 					currentScene.resetNextScene();
@@ -103,7 +110,9 @@ public class Game extends BasicGame {
 		else
 		{
 			currentScene.render(g);
+			inventory.render(g);
 			g.drawString("Current scene: " + currentScene.getSceneName(), 10, 30);
+			
 		}
 	}
 

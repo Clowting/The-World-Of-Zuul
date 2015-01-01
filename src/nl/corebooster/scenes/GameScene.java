@@ -40,12 +40,12 @@ public class GameScene {
 	 * Initializes the scene
 	 * @throws SlickException 
 	 */
-	public GameScene(String sceneName) throws SlickException
+	public GameScene(String sceneName, int playerX, int playerY) throws SlickException
 	{
 		// Initialize objects
 		sprites = new LinkedHashMap<String, Object>();
 		
-		player = new Player(screenWidth / 2, screenHeight / 2);
+		player = new Player(playerX, playerY);
 		
 		this.sceneName = sceneName;
 		nextScene = null;
@@ -61,23 +61,52 @@ public class GameScene {
 			case "ice":
 				
 				background = new Sprite("img", "background1.png", false, 0, 0);
-				sprites.put("ice_cliff", new Sprite("sprites", "ice_cliff.png", true, 0, 0));
 				
-				sprites.put("landingpad", new AnimatedSprite("sprites", "landingpad.png", true, TriggerType.SCENESWITCH, "ice2", 50, 110, 384, 384, 1000));
-				sprites.put("spaceship", new Sprite("sprites", "spaceship_big.png", false, 104, 162));
+				sprites.put("ice_cliff", new Sprite("sprites", "ice_cliff.png", true, 0, 0));
+				sprites.put("landingpad", new AnimatedSprite("sprites", "landingpad.png", true, 50, 80, 384, 384, 1000));
+				sprites.put("spaceship", new Sprite("sprites", "spaceship_big.png", false, 104, 132));
+				sprites.put("trigger_right", new Sprite("img", "vertical_line_transparent.png", false, TriggerType.SCENESWITCH, "outside_headquarters", 960, 0));
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
 				
 			break;
 			
-			// Test Scene
-			case "ice2":
+			// "Outside headquarters"-scene
+			case "outside_headquarters":
 				
 				background = new Sprite("img", "background1.png", false, 0, 0);
 				
+				sprites.put("headquarters", new Sprite("sprites", "headquarters.png", true, 600, 0));
+				sprites.put("headquarters_entrance", new Sprite("sprites", "headquarters_entrance.png", false, TriggerType.SCENESWITCH, "headquarters", 440, 160));
+				
+				bgMusicName = "GameSong01.ogg";
+				bgMusicVolume = 0.05f;
+				
+			break;
+			
+			// "Inside headquarters"-scene
+			case "headquarters":
+				
+				background = new Sprite("img", "headquarters_background.png", false, 0, 0);
+				
+				sprites.put("table", new Sprite("sprites", "table.png", true, 290, 170));
+				sprites.put("trapdoor", new Sprite("sprites", "trapdoor.png", false, 0, 0));
+				sprites.put("plant", new Sprite("sprites", "plant.png", true, 850, 10));
+				
+				bgMusicName = "GameSong01.ogg";
+				bgMusicVolume = 0.05f;
+				
 			break;
 		}
+	}
+	
+	/**
+	 * Returns the player object of the game scene
+	 */
+	public Player getPlayer()
+	{
+		return player;
 	}
 	
 	/**

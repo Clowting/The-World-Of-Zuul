@@ -186,7 +186,7 @@ public class Player {
 	 */
 	public boolean canMoveUp(int limit)
 	{
-		if(y - movementSpeed > limit) {
+		if(y - movementSpeed >= limit) {
 			return true;
 		}
 		else {
@@ -201,7 +201,7 @@ public class Player {
 	 */
 	public boolean canMoveDown(int limit)
 	{
-		if(y + playerSize + movementSpeed < limit) {
+		if(y + playerSize + movementSpeed <= limit) {
 			return true;
 		}
 		else {
@@ -216,7 +216,7 @@ public class Player {
 	 */
 	public boolean canMoveRight(int limit)
 	{
-		if(x + playerSize + movementSpeed < limit) {
+		if(x + playerSize + movementSpeed <= limit) {
 			return true;
 		}
 		else {
@@ -231,7 +231,7 @@ public class Player {
 	 */
 	public boolean canMoveLeft(int limit)
 	{
-		if(x - movementSpeed > limit) {
+		if(x - movementSpeed >= limit) {
 			return true;
 		}
 		else {
@@ -425,5 +425,13 @@ public class Player {
 		if(footstep.playing()) {
 			footstep.stop();
 		}
+	}
+	
+	/**
+	 * Checks if the foostep sound is playing
+	 * @return Whether or not the footstep sound is playing, true/false
+	 */
+	public boolean isFootstepSoundPlaying() {
+		return footstep.playing();
 	}
 }

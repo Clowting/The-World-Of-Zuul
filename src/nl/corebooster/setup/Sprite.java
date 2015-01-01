@@ -306,4 +306,17 @@ public class Sprite {
 			triggerbox.drawBox(g, x, y);
 		}
 	}
+	
+	/**
+	 * Fades out a sprite
+	 * @param duration The time it takes to fade out in ms
+	 */
+	public void fadeOut(int duration) {
+		float alpha = 1;
+		image.setAlpha(alpha);
+		for(int i = 0; i < duration; i++) {
+			float alphaStep = 1/duration;
+			image.setAlpha(alphaStep);
+		}
+	}
 }

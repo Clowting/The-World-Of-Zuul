@@ -69,6 +69,7 @@ public class GameScene {
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
+				bgMusic = new Music("data/music/" + bgMusicName);
 				
 			break;
 			
@@ -84,6 +85,7 @@ public class GameScene {
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
+				bgMusic = new Music("data/music/" + bgMusicName);
 				
 			break;
 			
@@ -98,6 +100,7 @@ public class GameScene {
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
+				bgMusic = new Music("data/music/" + bgMusicName);
 				
 			break;
 		}
@@ -225,7 +228,6 @@ public class GameScene {
 	 */
 	public void playMusic() throws SlickException {
 		if(bgMusicName != null) {
-			bgMusic = new Music("data/music/" + bgMusicName);
 			bgMusic.loop(1f, bgMusicVolume);
 		}
 
@@ -299,7 +301,7 @@ public class GameScene {
 					player.moveLeft();
 				}
 				
-				if(input.isKeyPressed(Input.KEY_LEFT)) {
+				if(!player.isFootstepSoundPlaying()) {
 					player.stopFootstepSound();
 					player.playFootstepSound();
 				}
@@ -310,7 +312,7 @@ public class GameScene {
 					player.moveRight();
 				}
 				
-				if(input.isKeyPressed(Input.KEY_RIGHT)) {
+				if(!player.isFootstepSoundPlaying()) {
 					player.stopFootstepSound();
 					player.playFootstepSound();
 				}
@@ -321,7 +323,7 @@ public class GameScene {
 					player.moveUp();
 				}
 				
-				if(input.isKeyPressed(Input.KEY_UP)) {
+				if(!player.isFootstepSoundPlaying()) {
 					player.stopFootstepSound();
 					player.playFootstepSound();
 				}
@@ -332,7 +334,7 @@ public class GameScene {
 					player.moveDown();
 				}
 				
-				if(input.isKeyPressed(Input.KEY_DOWN)) {
+				if(!player.isFootstepSoundPlaying()) {
 					player.stopFootstepSound();
 					player.playFootstepSound();
 				}

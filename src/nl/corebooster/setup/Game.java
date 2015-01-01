@@ -43,8 +43,8 @@ public class Game extends BasicGame {
 		inventory = new Inventory();
 		
 		scenes.put("ice", new GameScene("ice", 480, 270));
-		scenes.put("outside_headquarters", new GameScene("outside_headquarters", 10, 260));
-		scenes.put("headquarters", new GameScene("headquarters", 10, 260));
+		scenes.put("outside_headquarters", new GameScene("outside_headquarters", 15, 260));
+		scenes.put("headquarters", new GameScene("headquarters", 15, 260));
 		
 		currentScene = scenes.get("ice");
 		currentScene.setActive();

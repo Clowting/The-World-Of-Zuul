@@ -65,7 +65,7 @@ public class GameScene {
 				sprites.put("ice_cliff", new Sprite("sprites", "ice_cliff.png", true, 0, 0));
 				sprites.put("landingpad", new AnimatedSprite("sprites", "landingpad.png", true, 50, 80, 384, 384, 1000));
 				sprites.put("spaceship", new Sprite("sprites", "spaceship_big.png", false, 104, 132));
-				sprites.put("trigger_right", new Sprite("img", "vertical_line_transparent.png", false, TriggerType.SCENESWITCH, "outside_headquarters", 960, 0));
+				sprites.put("trigger_right", new Sprite("img", "vertical_line_transparent.png", true, TriggerType.SCENESWITCH, "outside_headquarters", 960, 0));
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
@@ -78,7 +78,9 @@ public class GameScene {
 				background = new Sprite("img", "background1.png", false, 0, 0);
 				
 				sprites.put("headquarters", new Sprite("sprites", "headquarters.png", true, 600, 0));
-				sprites.put("headquarters_entrance", new Sprite("sprites", "headquarters_entrance.png", false, TriggerType.SCENESWITCH, "headquarters", 440, 160));
+				sprites.put("headquarters_entrance_light", new Sprite("sprites", "headquarters_entrance_light.png", false, 440, 160));
+				sprites.put("headquarters_entrance", new Sprite("sprites", "headquarters_entrance.png", false, TriggerType.SCENESWITCH, "headquarters", 500, 160));
+				sprites.put("trigger_left", new Sprite("img", "vertical_line_transparent.png", true, TriggerType.SCENESWITCH, "ice", 0, 0));
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;

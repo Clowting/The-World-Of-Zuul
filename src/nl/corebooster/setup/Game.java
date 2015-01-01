@@ -73,6 +73,7 @@ public class Game extends BasicGame {
 			}
 			
 			currentScene.keyHandler(input);
+			currentScene.triggerHandler();
 		}
 		else
 		{

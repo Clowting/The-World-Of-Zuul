@@ -326,8 +326,12 @@ public class GameScene {
 				player.setY(player.getY() - 1);
 			}
 		}
-		
-		// Checks if the player is triggering an event
+	}
+	
+	/**
+	 * Checks if the player is triggering an event
+	 */
+	public void triggerHandler() {
 		TriggerBox currentTriggerBox = player.getCurrentTriggerBox(sprites);
 		
 		if(currentTriggerBox != null && currentTriggerBox.isTriggered() == false) {
@@ -343,4 +347,5 @@ public class GameScene {
 			}
 		}
 	}
+	
 }

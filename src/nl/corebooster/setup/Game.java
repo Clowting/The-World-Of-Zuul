@@ -105,6 +105,7 @@ public class Game extends BasicGame {
 		if(!intro.hasEnded())
 		{
 			intro.render(g);
+			intro.getOverlay().fadeOut(150);
 			g.drawString("Current scene: intro", 10, 30);
 		}
 		else

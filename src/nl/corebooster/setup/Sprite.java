@@ -309,14 +309,33 @@ public class Sprite {
 	
 	/**
 	 * Fades out a sprite
-	 * @param duration The time it takes to fade out in ms
+	 * @param duration The time it takes to fade out
 	 */
 	public void fadeOut(int duration) {
-		float alpha = 1;
-		image.setAlpha(alpha);
-		for(int i = 0; i < duration; i++) {
-			float alphaStep = 1/duration;
-			image.setAlpha(alphaStep);
+		float alpha = image.getAlpha();
+		float alphaStep = 1f / duration;
+		
+		if(alpha > 0) {
+				
+			alpha -= alphaStep;
+			
+			image.setAlpha(alpha);
+		}
+	}
+	
+	/**
+	 * Fades in a sprite
+	 * @param duration The time it takes to fade in in ms
+	 */
+	public void fadeIn(int duration) {
+		float alpha = image.getAlpha();
+		float alphaStep = 1f / duration;
+		
+		if(alpha < 1) {
+				
+			alpha += alphaStep;
+			
+			image.setAlpha(alpha);
 		}
 	}
 }

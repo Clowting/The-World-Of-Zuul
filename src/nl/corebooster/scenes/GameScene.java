@@ -27,6 +27,7 @@ public class GameScene {
 	
 	private Sprite background;
 	private Player player;
+	private Sprite overlay;
 	
 	private String sceneName;
 	private String nextScene;
@@ -46,6 +47,10 @@ public class GameScene {
 		sprites = new LinkedHashMap<String, Object>();
 		
 		player = new Player(playerX, playerY);
+		
+		// Black overlay for fade in and fade out
+		overlay = new Sprite("img", "overlay.png", false, 0, 0);
+		overlay.getImage().setAlpha(0);
 		
 		this.sceneName = sceneName;
 		nextScene = null;
@@ -112,6 +117,15 @@ public class GameScene {
 	public Player getPlayer()
 	{
 		return player;
+	}
+	
+	/**
+	 * Returns the overlay
+	 * @return The sprite object of the overlay
+	 */
+	public Sprite getOverlay()
+	{
+		return overlay;
 	}
 	
 	/**
@@ -283,6 +297,9 @@ public class GameScene {
 		
 		// Draw the player
 		player.drawSprite(g);
+		
+		// Draw the overlay
+		overlay.drawSprite(g);
 	}
 	
 	/**

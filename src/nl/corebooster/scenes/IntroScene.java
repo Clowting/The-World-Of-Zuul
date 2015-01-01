@@ -24,6 +24,7 @@ public class IntroScene {
 	
 	private Sprite background;
 	private StarBackground stars;
+	private Sprite overlay;
 	
 	private Music bgMusic;
 			
@@ -54,6 +55,9 @@ public class IntroScene {
 		Sprite spaceship = new Sprite("sprites", "spaceship.png", false, 416, 210);
 		sprites.put("spaceship", spaceship);
 		
+		// Black overlay for fade in and fade out
+		overlay = new Sprite("img", "overlay.png", false, 0, 0);
+		
 		// Stars playing background music
 		bgMusic = new Music("data/music/IntroSong.ogg");
 		bgMusic.loop(1f, 0.1f);
@@ -83,6 +87,15 @@ public class IntroScene {
 	public AnimatedSprite getAnimatedSprite(String key)
 	{
 		return (AnimatedSprite) sprites.get(key);
+	}
+	
+	/**
+	 * Returns the overlay
+	 * @return The sprite object of the overlay
+	 */
+	public Sprite getOverlay()
+	{
+		return overlay;
 	}
 	
 	/**
@@ -135,6 +148,9 @@ public class IntroScene {
 				as.drawSprite(g);
 			}
 		}
+		
+		// Draw the overlay
+		overlay.drawSprite(g);
 	}
 	
 	/**

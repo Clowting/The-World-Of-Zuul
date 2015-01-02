@@ -63,7 +63,7 @@ public class AnimatedSprite {
 	 * @param interval
 	 * @throws SlickException
 	 */
-	public AnimatedSprite(String folder, String filename, boolean isCollidable, TriggerType triggerType, String triggerValue, int x, int y, int width, int height, int interval) throws SlickException
+	public AnimatedSprite(String folder, String filename, boolean isCollidable, TriggerType triggerType, String triggerValue, int triggerMargin, int x, int y, int width, int height, int interval) throws SlickException
 	{
 		this.spritesheet = getSpriteSheet(folder, filename, width, height);
 		spritesheetAnimation = new Animation(spritesheet, interval);
@@ -75,7 +75,7 @@ public class AnimatedSprite {
 			collisionbox = null;
 		}
 		
-		this.triggerbox = new TriggerBox(triggerType, triggerValue, x, y, width, height);
+		this.triggerbox = new TriggerBox(triggerType, triggerValue, x, y, width, height, triggerMargin);
 		
 		this.x = x;
 		this.y = y;

@@ -49,7 +49,7 @@ public class Sprite {
 	 * Constructs a new sprite from an image with a trigger
 	 * @throws SlickException 
 	 */
-	public Sprite(String folder, String filename, boolean isCollidable, TriggerType triggerType, String triggerValue, int x, int y) throws SlickException
+	public Sprite(String folder, String filename, boolean isCollidable, TriggerType triggerType, String triggerValue, int triggerMargin, int x, int y) throws SlickException
 	{
 		this.image = getImage(folder, filename);
 		
@@ -63,7 +63,7 @@ public class Sprite {
 			collisionbox = null;
 		}
 		
-		this.triggerbox = new TriggerBox(triggerType, triggerValue, x, y, image.getWidth(), image.getHeight());
+		this.triggerbox = new TriggerBox(triggerType, triggerValue, x, y, image.getWidth(), image.getHeight(), triggerMargin);
 		
 		this.x = x;
 		this.y = y;

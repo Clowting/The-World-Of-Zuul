@@ -16,7 +16,7 @@ public class TriggerBox {
 	
 	private TriggerType triggerType;
 	private Rectangle box;
-	private static final int boxMargin = 1;
+	private int boxMargin = 1;
 	private String value;
 	private boolean isTriggered;
 	
@@ -29,9 +29,10 @@ public class TriggerBox {
 	 * @param width
 	 * @param height
 	 */
-	public TriggerBox(TriggerType type, String value, int x, int y, int width, int height)
+	public TriggerBox(TriggerType type, String value, int x, int y, int width, int height, int boxMargin)
 	{
 		triggerType = type;
+		this.boxMargin = boxMargin;
 		box = new Rectangle((x - boxMargin), (y - boxMargin), (width + boxMargin * 2), (height + boxMargin * 2));
 		this.value = value;
 		isTriggered = false;

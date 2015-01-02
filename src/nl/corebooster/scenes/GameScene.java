@@ -8,6 +8,7 @@ import nl.corebooster.setup.Sprite;
 import nl.corebooster.setup.TriggerBox;
 import nl.corebooster.setup.TriggerBox.TriggerType;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
@@ -37,6 +38,8 @@ public class GameScene {
 	private String bgMusicName;
 	private float bgMusicVolume;
 	
+	private String currentMessage;
+	
 	/**
 	 * Initializes the scene
 	 * @throws SlickException 
@@ -59,6 +62,8 @@ public class GameScene {
 		isRendered = false;
 		
 		bgMusic = null;
+		
+		currentMessage = null;
 		
 		// A switch for making different scenes
 		switch(sceneName) {
@@ -102,6 +107,7 @@ public class GameScene {
 				sprites.put("table", new Sprite("sprites", "table.png", true, 290, 170));
 				sprites.put("trapdoor", new Sprite("sprites", "trapdoor.png", false, 0, 0));
 				sprites.put("plant", new Sprite("sprites", "plant.png", true, 850, 10));
+				sprites.put("npc1", new Sprite("sprites", "npc_left.png", true, TriggerType.MESSAGE, "Thank you for playing our game!", 896, 206));
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
@@ -300,6 +306,21 @@ public class GameScene {
 		
 		// Draw the overlay
 		overlay.drawSprite(g);
+		if(currentMessage != null) {
+			renderText(g, currentMessage, 10, 500);
+		}
+	}
+	
+	/**
+	 * Renders text to the screen
+	 * @param g The graphics to draw the text on
+	 * @param text The text to draw on the screen
+	 * @param x The x position of the text
+	 * @param y The y position of the text
+	 */
+	private void renderText(Graphics g, String text, int x, int y) {
+		g.setColor(new Color(Color.black));
+		g.drawString(text, x, y);
 	}
 	
 	/**
@@ -392,7 +413,7 @@ public class GameScene {
 				break;
 				
 				case MESSAGE:
-					// Display an in-game message
+					currentMessage = currentTriggerBox.getValue();
 				break;
 			}
 		}

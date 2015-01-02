@@ -27,6 +27,7 @@ public class GameScene {
 	private static final int screenHeight = 540;
 	
 	private Sprite background;
+	private Sprite messageBox;
 	private Player player;
 	private Sprite overlay;
 	
@@ -60,6 +61,7 @@ public class GameScene {
 		isRendered = false;
 		
 		bgMusic = null;
+		messageBox = new Sprite("img", "message_box.png", false, 5, 484);
 		
 		// A switch for making different scenes
 		switch(sceneName) {
@@ -297,16 +299,18 @@ public class GameScene {
 			}
 		}
 		
-		// Draw message
-		if(currentTriggerMessage() != null) {
-			renderText(g, currentTriggerMessage(), 15, 500);
-		}
-		
 		// Draw the player
 		player.drawSprite(g);
 		
+		// Draw message
+		messageBox.drawSprite(g);
+		if(currentTriggerMessage() != null) {
+			renderText(g, currentTriggerMessage(), 15, 500);
+		}		
+		
 		// Draw the overlay
 		overlay.drawSprite(g);
+		
 	}
 	
 	/**
@@ -410,8 +414,9 @@ public class GameScene {
 					nextScene = currentTriggerBox.getValue();
 					currentTriggerBox.resetTrigger();
 				break;
-				
-				
+				default:
+					// Do nothing
+				break;
 			}
 		}
 	}

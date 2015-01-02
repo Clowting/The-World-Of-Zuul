@@ -106,13 +106,13 @@ public class Game extends BasicGame {
 		{
 			intro.render(g);
 			intro.getOverlay().fadeOut(150);
-			g.drawString("Current scene: intro", 10, 30);
+			//g.drawString("Current scene: intro", 10, 30);
 		}
 		else
 		{
 			currentScene.render(g);
 			inventory.render(g);
-			g.drawString("Current scene: " + currentScene.getSceneName(), 10, 30);
+			//g.drawString("Current scene: " + currentScene.getSceneName(), 10, 30);
 			
 		}
 	}

@@ -307,7 +307,7 @@ public class GameScene {
 		// Draw the overlay
 		overlay.drawSprite(g);
 		if(currentMessage != null) {
-			renderText(g, currentMessage, 10, 500);
+			renderText(g, currentMessage, 15, 500);
 		}
 	}
 	

@@ -322,7 +322,12 @@ public class GameScene {
 	 */
 	private void renderText(Graphics g, String text, int x, int y) {
 		g.setColor(new Color(Color.black));
-		g.drawString(text, x, y);
+		String[] characterArray = text.split("");
+		
+		for(String character : characterArray) {
+			g.drawString(character, x, y);
+			x = x + 9;
+		}
 	}
 	
 	/**

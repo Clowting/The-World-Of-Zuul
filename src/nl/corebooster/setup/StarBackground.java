@@ -18,8 +18,8 @@ public class StarBackground {
 	
 	/**
 	 * Initializes a StarBackground with the given screen size
-	 * @param screenWidth
-	 * @param screenHeight
+	 * @param screenWidth The width of the screen
+	 * @param screenHeight The height of the screen
 	 * @throws SlickException
 	 */
 	public StarBackground(int screenWidth, int screenHeight) throws SlickException
@@ -34,6 +34,8 @@ public class StarBackground {
 	
 	/**
 	 * Generate an amount of stars
+	 * @param filename The filename of the sprite
+	 * @param amount The amount of sprites
 	 * @throws SlickException
 	 */
 	private void addSprite(String filename, int amount) throws SlickException
@@ -73,7 +75,7 @@ public class StarBackground {
 	
 	/**
 	 * Draw every star to the graphics
-	 * @param g
+	 * @param g The graphics to draw the stars on
 	 */
 	public void drawStars(Graphics g)
 	{

@@ -316,6 +316,7 @@ public class Player {
 	/**
 	 * Checks if the player collides with another collision box
 	 * @param sprites The list of sprites to check collision with
+	 * @return Whether or not anything is colliding, true/false
 	 */
 	public boolean isCollidingWith(LinkedHashMap<String, Object> sprites)
 	{

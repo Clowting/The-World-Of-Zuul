@@ -14,10 +14,10 @@ public class CollisionBox {
 	
 	/**
 	 * Initializes a new collision box
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height
+	 * @param x The initial x position of the collision box
+	 * @param y The initial y position of the collision box
+	 * @param width The width of the collision box
+	 * @param height The height of the collision box
 	 */
 	public CollisionBox(int x, int y, int width, int height) 
 	{
@@ -26,7 +26,7 @@ public class CollisionBox {
 	
 	/**
 	 * Returns the rectangle of the collision box
-	 * @return
+	 * @return The rectangle shape of the collision box
 	 */
 	public Rectangle getShape() 
 	{
@@ -35,9 +35,9 @@ public class CollisionBox {
 	
 	/**
 	 * Draws the box on the given graphics
-	 * @param g
-	 * @param x
-	 * @param y
+	 * @param g The graphics to draw the collision box on
+	 * @param x The new x-position of the collision box
+	 * @param y The new y-position of the collision box
 	 */
 	public void drawBox(Graphics g, int x, int y) 
 	{
@@ -49,8 +49,8 @@ public class CollisionBox {
 	
 	/**
 	 * Returns true if the ColissionBox is colliding with another ColissionBox
-	 * @param boxToCheck
-	 * @return
+	 * @param boxToCheck The shape to check collision with
+	 * @return Whether or not the two shapes collide, true/false
 	 */
 	public boolean isColliding(Rectangle boxToCheck) 
 	{

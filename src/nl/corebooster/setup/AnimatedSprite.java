@@ -22,14 +22,14 @@ public class AnimatedSprite {
 	
 	/**
 	 * Constructs a new animated sprite from a spritesheet
-	 * @param folder
-	 * @param filename
-	 * @param isCollidable
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height
-	 * @param interval
+	 * @param folder The folder where the spritesheet is located
+	 * @param filename The filename of the spritesheet
+	 * @param isCollidable Depends if you can collide with the animated sprite or not, true/false
+	 * @param x The initial x position of the animated sprite
+	 * @param y The initial y position of the animated sprite
+	 * @param width The width of the animated sprite
+	 * @param height The height of the animated sprite
+	 * @param interval The animation interval
 	 * @throws SlickException
 	 */
 	public AnimatedSprite(String folder, String filename, boolean isCollidable, int x, int y, int width, int height, int interval) throws SlickException
@@ -52,15 +52,17 @@ public class AnimatedSprite {
 	
 	/**
 	 * Constructs a new animated sprite from a spritesheet with a trigger
-	 * @param folder
-	 * @param filename
-	 * @param isCollidable
-	 * @param triggerType
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height
-	 * @param interval
+	 * @param folder The folder where the spritesheet is located
+	 * @param filename The filename of the spritesheet
+	 * @param isCollidable Depends if you can collide with the animated sprite or not, true/false
+	 * @param triggerType The type of trigger called when collided, SCENESWITCH/MESSAGE
+	 * @param triggerValue The value of the trigger called when collided
+	 * @param triggerMargin The margin of the trigger box
+	 * @param x The initial x position of the animated sprite
+	 * @param y The initial y position of the animated sprite
+	 * @param width The width of the animated sprite
+	 * @param height The height of the animated sprite
+	 * @param interval The animation interval
 	 * @throws SlickException
 	 */
 	public AnimatedSprite(String folder, String filename, boolean isCollidable, TriggerType triggerType, String triggerValue, int triggerMargin, int x, int y, int width, int height, int interval) throws SlickException
@@ -83,6 +85,7 @@ public class AnimatedSprite {
 	
 	/**
 	 * Get the collision box.
+	 * @return The collision box of the animated sprite
 	 */
 	public CollisionBox getCollisionBox() 
 	{
@@ -90,7 +93,8 @@ public class AnimatedSprite {
 	}
 	
 	/**
-	 * Get the triggerbox
+	 * Get the trigger box
+	 * @return The trigger box of the animated sprite
 	 */
 	public TriggerBox getTriggerBox()
 	{
@@ -98,7 +102,8 @@ public class AnimatedSprite {
 	}
 	
 	/**
-	 * Returns the X-position
+	 * Returns the x-position
+	 * @return The x-position of the animated sprite
 	 */
 	public int getX()
 	{
@@ -106,7 +111,8 @@ public class AnimatedSprite {
 	}
 	
 	/**
-	 * Returns the Y-position
+	 * Returns the y-position
+	 * @return The y-position of the animated sprite
 	 */
 	public int getY()
 	{
@@ -114,7 +120,8 @@ public class AnimatedSprite {
 	}
 	
 	/**
-	 * Sets the X-position
+	 * Sets the x-position
+	 * @param x The new x-position of the animated sprite
 	 */
 	public void setX(int x)
 	{
@@ -122,7 +129,8 @@ public class AnimatedSprite {
 	}
 	
 	/**
-	 * Sets the Y-position
+	 * Sets the y-position
+	 * @param y The new y-position of the animated sprite
 	 */
 	public void setY(int y)
 	{
@@ -131,11 +139,11 @@ public class AnimatedSprite {
 	
 	/**
 	 * Gets a spritesheet image from the given location
-	 * @param folder
-	 * @param filename
-	 * @param width
-	 * @param height
-	 * @return
+	 * @param folder The folder where the spritesheet is located
+	 * @param filename The filename of the spritesheet
+	 * @param width The width of the animated sprite that can be created out of the spritesheet
+	 * @param height The height of the animated sprite that can be created out of the spritesheet
+	 * @return The newly created spritesheet
 	 * @throws SlickException
 	 */
 	public SpriteSheet getSpriteSheet(String folder, String filename, int width, int height) throws SlickException
@@ -147,6 +155,7 @@ public class AnimatedSprite {
 	
 	/**
 	 * Draws the sprite on the screen
+	 * @param g The graphics to draw the animated sprite on
 	 */
 	public void drawSprite(Graphics g)
 	{
@@ -155,6 +164,7 @@ public class AnimatedSprite {
 	
 	/**
 	 * Draws the collision box
+	 * @param g The graphics to draw the collision/trigger box on
 	 */
 	public void drawBoxes(Graphics g) {
 		if(collisionbox != null) {
@@ -166,6 +176,9 @@ public class AnimatedSprite {
 		}
 	}
 	
+	/**
+	 * Stops the animation of the animated sprite
+	 */
 	public void stopAnimation()
 	{
 		spritesheetAnimation.stop();

@@ -21,6 +21,11 @@ public class Sprite {
 	
 	/**
 	 * Constructs a new sprite from an image
+	 * @param folder The folder where the sprite is located
+	 * @param filename The filename of the sprite
+	 * @param isCollidable Depends if you can collide with the sprite or not, true/false
+	 * @param x The initial x position of the sprite
+	 * @param y The initial y position of the sprite
 	 * @throws SlickException 
 	 */
 	public Sprite(String folder, String filename, boolean isCollidable, int x, int y) throws SlickException
@@ -47,6 +52,14 @@ public class Sprite {
 	
 	/**
 	 * Constructs a new sprite from an image with a trigger
+	 * @param folder The folder where the sprite is located
+	 * @param filename The filename of the sprite
+	 * @param isCollidable Depends if you can collide with the sprite or not, true/false
+	 * @param triggerType The type of trigger called when collided, SCENESWITCH/MESSAGE
+	 * @param triggerValue The value of the trigger called when collided
+	 * @param triggerMargin The margin of the trigger box
+	 * @param x The initial x position of the sprite
+	 * @param y The initial y position of the sprite
 	 * @throws SlickException 
 	 */
 	public Sprite(String folder, String filename, boolean isCollidable, TriggerType triggerType, String triggerValue, int triggerMargin, int x, int y) throws SlickException
@@ -73,6 +86,7 @@ public class Sprite {
 
 	/**
 	 * Get collision box.
+	 * @return The collision box of the animated sprite
 	 */
 	public CollisionBox getCollisionBox() 
 	{
@@ -80,7 +94,8 @@ public class Sprite {
 	}
 	
 	/**
-	 * Returns the triggerbox
+	 * Returns the trigger box
+	 * @return The trigger box of the animated sprite
 	 */
 	public TriggerBox getTriggerBox()
 	{
@@ -89,6 +104,7 @@ public class Sprite {
 	
 	/**
 	 * Returns the image
+	 * @return The image the sprite is based on
 	 */
 	public Image getImage()
 	{
@@ -96,7 +112,8 @@ public class Sprite {
 	}
 	
 	/**
-	 * Returns true if the sprite has reached the maximum X-position
+	 * Returns true if the sprite has reached the maximum x-position
+	 * @return The maximum x-position of the sprite
 	 */
 	public boolean hasMaxXReached()
 	{
@@ -104,7 +121,8 @@ public class Sprite {
 	}
 	
 	/**
-	 * Returns true if the sprite has reached the maximum Y-position
+	 * Returns true if the sprite has reached the maximum y-position
+	 * @return The maximum y-position of the sprite
 	 */
 	public boolean hasMaxYReached()
 	{
@@ -112,7 +130,8 @@ public class Sprite {
 	}
 	
 	/**
-	 * Returns the X-position
+	 * Returns the x-position
+	 * @return The x-position of the sprite
 	 */
 	public int getX()
 	{
@@ -120,7 +139,8 @@ public class Sprite {
 	}
 	
 	/**
-	 * Returns the Y-position
+	 * Returns the y-position
+	 * @return The y-position of the sprite
 	 */
 	public int getY()
 	{
@@ -128,7 +148,8 @@ public class Sprite {
 	}
 	
 	/**
-	 * Returns the new X-position
+	 * Returns the new x-position
+	 * @return The new x-position of the sprite
 	 */
 	public int getNewX()
 	{
@@ -136,7 +157,8 @@ public class Sprite {
 	}
 	
 	/**
-	 * Returns the new Y-position
+	 * Returns the new y-position
+	 * @return The new y-position of the sprite
 	 */
 	public int getNewY()
 	{
@@ -144,7 +166,8 @@ public class Sprite {
 	}
 	
 	/**
-	 * Sets the X-position
+	 * Sets the x-position
+	 * @param x The x-position of the sprite
 	 */
 	public void setX(int x)
 	{
@@ -152,7 +175,8 @@ public class Sprite {
 	}
 	
 	/**
-	 * Sets the Y-position
+	 * Sets the y-position
+	 * @param y The y-position of the sprite
 	 */
 	public void setY(int y)
 	{
@@ -160,7 +184,8 @@ public class Sprite {
 	}
 	
 	/**
-	 * Sets the new X-position
+	 * Sets the new x-position
+	 * @param newX The new x-position of the sprite
 	 */
 	public void setNewX(int newX)
 	{
@@ -168,7 +193,8 @@ public class Sprite {
 	}
 	
 	/**
-	 * Sets the new Y-position
+	 * Sets the new y-position
+	 * @param newY The new y-position of the sprite
 	 */
 	public void setNewY(int newY)
 	{
@@ -177,6 +203,9 @@ public class Sprite {
 	
 	/**
 	 * Gets the image from the specified location
+	 * @param folder The folder where the sprite is located
+	 * @param filename The filename of the sprite
+	 * @return The newly created image
 	 * @throws SlickException 
 	 */
 	private Image getImage(String folder, String filename) throws SlickException
@@ -188,7 +217,7 @@ public class Sprite {
 	
 	/**
 	 * Moves the sprite slowly up
-	 * @param yChange
+	 * @param yChange The max amount of pixels the sprite can move up on the y-access
 	 */
 	public void animateUp(int yChange)
 	{
@@ -204,7 +233,7 @@ public class Sprite {
 	
 	/**
 	 * Moves the sprite slowly down
-	 * @param yChange
+	 * @param yChange The max amount of pixels the sprite can move down on the y-access
 	 */
 	public void animateDown(int yChange)
 	{
@@ -220,7 +249,7 @@ public class Sprite {
 	
 	/**
 	 * Moves the sprite slowly to left
-	 * @param xChange
+	 * @param xChange The max amount of pixels the sprite can move left on the x-access
 	 */
 	public void animateLeft(int xChange)
 	{
@@ -236,7 +265,7 @@ public class Sprite {
 	
 	/**
 	 * Moves the sprite slowly to right
-	 * @param xChange
+	 * @param xChange The max amount of pixels the sprite can move right on the x-access
 	 */
 	public void animateRight(int xChange)
 	{
@@ -252,6 +281,7 @@ public class Sprite {
 	
 	/**
 	 * Moves the sprite slowly up and down
+	 * @param yChange The max amount of pixels the sprite can move on the y-access
 	 */
 	public void animateUpDown(int yChange)
 	{
@@ -261,6 +291,7 @@ public class Sprite {
 	
 	/**
 	 * Moves the sprite slowly left and right
+	 * @param xChange The max amount of pixels the sprite can move on the x-access
 	 */
 	public void animateLeftRight(int xChange)
 	{
@@ -288,6 +319,7 @@ public class Sprite {
 	
 	/**
 	 * Draws the sprite on the screen
+	 * @param g The graphics to draw the sprite on
 	 */
 	public void drawSprite(Graphics g)
 	{
@@ -296,6 +328,7 @@ public class Sprite {
 	
 	/**
 	 * Draws the collision box and trigger box (if they exist)
+	 * @param g The graphics to draw the collision/trigger box on
 	 */
 	public void drawBoxes(Graphics g) {
 		if(collisionbox != null) {

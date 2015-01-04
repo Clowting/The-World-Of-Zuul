@@ -66,7 +66,7 @@ public class IntroScene {
 	
 	/**
 	 * Returns true if scene has ended
-	 * @return 
+	 * @return Whether or not the intro scene has ended, true/false
 	 */
 	public boolean hasEnded()
 	{
@@ -75,6 +75,8 @@ public class IntroScene {
 	
 	/**
 	 * Gets a sprite from the sprites
+	 * @param key The key of the sprite to get
+	 * @return The Sprite objects from the sprites LinkedHashMap
 	 */
 	public Sprite getSprite(String key)
 	{
@@ -83,6 +85,8 @@ public class IntroScene {
 	
 	/**
 	 * Gets an animated sprite from the sprites
+	 * @param key The key of the animated sprite to get
+	 * @return The AnimatedSprite objects from the sprites LinkedHashMap
 	 */
 	public AnimatedSprite getAnimatedSprite(String key)
 	{
@@ -100,7 +104,7 @@ public class IntroScene {
 	
 	/**
 	 * Handles user input
-	 * @param input
+	 * @param input The input key
 	 */
 	public void keyHandler(Input input)
 	{
@@ -131,7 +135,7 @@ public class IntroScene {
 
 	/**
 	 * Renders the scene
-	 * @param graphics
+	 * @param g The graphics to draw the intro scene on
 	 */
 	public void render(Graphics g) 
 	{

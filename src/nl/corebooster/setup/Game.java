@@ -13,7 +13,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 /**
- * SetupClass is the main class, it's responsible for setting everything up
+ * Game is the main class, it's handles the initialization, game logic and rendering.
  * @author Raymon de Looff, Thijs Clowting, Richard Weug
  * @version 1.0
  */
@@ -27,7 +27,6 @@ public class Game extends BasicGame {
 	/**
 	 * Constructs the SetupClass
 	 * @param title		The title of the window
-	 * @throws SlickException 
 	 */
 	public Game(String title) {
 		super(title);
@@ -37,6 +36,7 @@ public class Game extends BasicGame {
 	
 	/**
 	 * Initializes the game
+	 * @param container The game container to initialize
 	 */
 	public void init(GameContainer container) throws SlickException {
 		intro = new IntroScene();
@@ -52,6 +52,8 @@ public class Game extends BasicGame {
 	
 	/**
 	 * Updates the game
+	 * @param container The game container to update
+	 * @param delta The update frequency
 	 */
 	public void update(GameContainer container, int delta) throws SlickException {
 		Input input = container.getInput();
@@ -100,6 +102,8 @@ public class Game extends BasicGame {
 	
 	/**
 	 * Renders the game
+	 * @param container The game container to render to
+	 * @param g	The graphics to render on
 	 */
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		if(!intro.hasEnded())
@@ -119,7 +123,7 @@ public class Game extends BasicGame {
 
 	/**
 	 * The main class, responsible for the applications initialization
-	 * @param args		The startup arguments
+	 * @param args The startup arguments
 	 * @throws SlickException
 	 */
 	public static void main(String[] args) throws SlickException {

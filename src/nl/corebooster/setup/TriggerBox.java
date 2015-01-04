@@ -22,12 +22,13 @@ public class TriggerBox {
 	
 	/**
 	 * Constructs a new trigger box with a specific type and value
-	 * @param type
-	 * @param value
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height
+	 * @param type The type of trigger, SCENESWITCH/MESSAGE
+	 * @param value The value of the trigger
+	 * @param x The initial x position of the trigger box
+	 * @param y The initial y position of the trigger box
+	 * @param width The width of the trigger box
+	 * @param height The height of the trigger box
+	 * @param boxMargin The margin of the trigger box
 	 */
 	public TriggerBox(TriggerType type, String value, int x, int y, int width, int height, int boxMargin)
 	{
@@ -40,7 +41,7 @@ public class TriggerBox {
 	
 	/**
 	 * Returns the type of the trigger
-	 * @return
+	 * @return The type of trigger, SCENESWITCH/MESSAGE
 	 */
 	public TriggerType getTriggerType()
 	{
@@ -49,7 +50,7 @@ public class TriggerBox {
 	
 	/**
 	 * Returns the shape of the trigger
-	 * @return
+	 * @return The rectangle shape of the collision box
 	 */
 	public Rectangle getShape() {
 		return box;
@@ -57,7 +58,7 @@ public class TriggerBox {
 	
 	/**
 	 * Returns the value of the trigger
-	 * @return
+	 * @return The value of the trigger
 	 */
 	public String getValue()
 	{
@@ -66,7 +67,7 @@ public class TriggerBox {
 	
 	/**
 	 * Returns true if the trigger box is already triggered
-	 * @return
+	 * @return Whether the trigger box is triggered or not, true/false
 	 */
 	public boolean isTriggered()
 	{
@@ -75,7 +76,7 @@ public class TriggerBox {
 	
 	/**
 	 * Sets the trigger type
-	 * @param type
+	 * @param type The type of trigger, SCENESWITCH/MESSAGE
 	 */
 	public void setTriggerType(TriggerType type)
 	{
@@ -84,7 +85,7 @@ public class TriggerBox {
 	
 	/**
 	 * Sets the value of the trigger
-	 * @param value
+	 * @param value The value of the trigger
 	 */
 	public void setValue(String value)
 	{
@@ -109,9 +110,9 @@ public class TriggerBox {
 	
 	/**
 	 * Draws the trigger box on the screen
-	 * @param g
-	 * @param x
-	 * @param y
+	 * @param g The graphics to draw the trigger box on
+	 * @param x The new x-position of the trigger box
+	 * @param y The new y-position of the trigger box
 	 */
 	public void drawBox(Graphics g, int x, int y) 
 	{
@@ -123,8 +124,8 @@ public class TriggerBox {
 	
 	/**
 	 * Returns true if the given shape is triggering this trigger box
-	 * @param boxToCheck
-	 * @return
+	 * @param boxToCheck The shape to check triggering with
+	 * @return Whether or not the two shapes collide and therefore trigger, true/false
 	 */
 	public boolean isTriggering(Rectangle boxToCheck) 
 	{

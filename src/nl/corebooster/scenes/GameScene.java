@@ -41,6 +41,9 @@ public class GameScene {
 	
 	/**
 	 * Initializes the scene
+	 * @param sceneName The name of the scene
+	 * @param playerX The players initial x-position
+	 * @param playerY The players initial y-position
 	 * @throws SlickException 
 	 */
 	public GameScene(String sceneName, int playerX, int playerY) throws SlickException
@@ -117,6 +120,7 @@ public class GameScene {
 	
 	/**
 	 * Returns the player object of the game scene
+	 * @return The scenes player
 	 */
 	public Player getPlayer()
 	{
@@ -134,6 +138,8 @@ public class GameScene {
 	
 	/**
 	 * Gets a sprite from the sprites
+	 * @param key The key of the sprite to get
+	 * @return The Sprite objects from the sprites LinkedHashMap
 	 */
 	public Sprite getSprite(String key)
 	{
@@ -142,6 +148,7 @@ public class GameScene {
 	
 	/**
 	 * Returns the name of the scene
+	 * @return The name of the scene
 	 */
 	public String getSceneName()
 	{
@@ -150,6 +157,7 @@ public class GameScene {
 	
 	/**
 	 * Returns the name of the next scene
+	 * @return The name of the next scene
 	 */
 	public String getNextScene()
 	{
@@ -158,7 +166,7 @@ public class GameScene {
 	
 	/**
 	 * Returns true if intro has ended
-	 * @return
+	 * @return Whether or not the intro scene has ended, true/false
 	 */
 	public boolean isActive()
 	{
@@ -167,6 +175,7 @@ public class GameScene {
 	
 	/**
 	 * Sets the name of the scene
+	 * @param sceneName The new scene name
 	 */
 	public void setSceneName(String sceneName)
 	{
@@ -175,6 +184,7 @@ public class GameScene {
 	
 	/**
 	 * Sets the name of the next scene
+	 * @param scene The name of the next scene
 	 */
 	public void setNextScene(String scene)
 	{
@@ -183,7 +193,7 @@ public class GameScene {
 	
 	/**
 	 * Returns true if currentScene has been rendered
-	 * @return
+	 * @return Whether or not the current scene has been rendered, true/false
 	 */
 	public boolean isRendered()
 	{
@@ -240,8 +250,6 @@ public class GameScene {
 	
 	/**
 	 * Plays the given music in the background
-	 * @param filename
-	 * @param volume
 	 * @throws SlickException
 	 */
 	public void playMusic() throws SlickException {
@@ -265,7 +273,7 @@ public class GameScene {
 
 	/**
 	 * Renders the scene
-	 * @param graphics
+	 * @param g The graphics to draw the scene on
 	 */
 	public void render(Graphics g) 
 	{
@@ -332,7 +340,7 @@ public class GameScene {
 	
 	/**
 	 * Handles user input
-	 * @param input
+	 * @param input The input key
 	 * @throws SlickException 
 	 */
 	public void keyHandler(Input input) throws SlickException

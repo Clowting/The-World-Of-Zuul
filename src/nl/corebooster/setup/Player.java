@@ -28,7 +28,7 @@ public class Player {
 	 * Constructs a player at a given position.
 	 * @param x The players x position
 	 * @param y The players y position
-	 * @throws SlickException
+	 * @throws SlickException Indicates a failure to initialise the display
 	 */
 	public Player(int x, int y) throws SlickException
 	{
@@ -128,7 +128,7 @@ public class Player {
 	/**
 	 * Rotates the player to the given angle
 	 * @param angle The player's new angle
-	 * @throws SlickException 
+	 * @throws SlickException Indicates a failure to initialise the display 
 	 */
 	public void rotatePlayer(int angle) throws SlickException
 	{
@@ -170,7 +170,7 @@ public class Player {
 	 * @param width The with of the sprite
 	 * @param height The height of the sprite
 	 * @return The spritesheet that has been made
-	 * @throws SlickException
+	 * @throws SlickException Indicates a failure to initialise the display
 	 */
 	public SpriteSheet getSpriteSheet(String folder, String filename, int width, int height) throws SlickException
 	{
@@ -241,7 +241,7 @@ public class Player {
 	
 	/**
 	 * Moves the player up
-	 * @throws SlickException
+	 * @throws SlickException Indicates a failure to initialise the display
 	 */
 	public void moveUp() throws SlickException
 	{
@@ -255,7 +255,7 @@ public class Player {
 	
 	/**
 	 * Moves the player down
-	 * @throws SlickException
+	 * @throws SlickException Indicates a failure to initialise the display
 	 */
 	public void moveDown() throws SlickException
 	{
@@ -269,7 +269,7 @@ public class Player {
 	
 	/**
 	 * Moves the player right
-	 * @throws SlickException
+	 * @throws SlickException Indicates a failure to initialise the display
 	 */
 	public void moveRight() throws SlickException
 	{
@@ -283,7 +283,7 @@ public class Player {
 	
 	/**
 	 * Moves the player left
-	 * @throws SlickException
+	 * @throws SlickException Indicates a failure to initialise the display
 	 */
 	public void moveLeft() throws SlickException
 	{

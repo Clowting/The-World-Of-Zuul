@@ -30,7 +30,7 @@ public class AnimatedSprite {
 	 * @param width The width of the animated sprite
 	 * @param height The height of the animated sprite
 	 * @param interval The animation interval
-	 * @throws SlickException
+	 * @throws SlickException Indicates a failure to initialise the display
 	 */
 	public AnimatedSprite(String folder, String filename, boolean isCollidable, int x, int y, int width, int height, int interval) throws SlickException
 	{
@@ -55,7 +55,7 @@ public class AnimatedSprite {
 	 * @param folder The folder where the spritesheet is located
 	 * @param filename The filename of the spritesheet
 	 * @param isCollidable Depends if you can collide with the animated sprite or not, true/false
-	 * @param triggerType The type of trigger called when collided, SCENESWITCH/MESSAGE
+	 * @param triggerType The type of trigger called when collided, SCENESWITCH/MESSAGE/ANIMATE
 	 * @param triggerValue The value of the trigger called when collided
 	 * @param triggerMargin The margin of the trigger box
 	 * @param x The initial x position of the animated sprite
@@ -63,7 +63,7 @@ public class AnimatedSprite {
 	 * @param width The width of the animated sprite
 	 * @param height The height of the animated sprite
 	 * @param interval The animation interval
-	 * @throws SlickException
+	 * @throws SlickException Indicates a failure to initialise the display
 	 */
 	public AnimatedSprite(String folder, String filename, boolean isCollidable, TriggerType triggerType, String triggerValue, int triggerMargin, int x, int y, int width, int height, int interval) throws SlickException
 	{
@@ -79,8 +79,20 @@ public class AnimatedSprite {
 		
 		this.triggerbox = new TriggerBox(triggerType, triggerValue, x, y, width, height, triggerMargin);
 		
+		if(triggerType == TriggerType.ANIMATE) {
+			stopAnimation();
+		}
+		
 		this.x = x;
 		this.y = y;
+	}
+	
+	/**
+	 * Get Animation
+	 * @return The Animation
+	 */
+	public Animation getAnimation() {
+		return spritesheetAnimation;
 	}
 	
 	/**
@@ -144,7 +156,7 @@ public class AnimatedSprite {
 	 * @param width The width of the animated sprite that can be created out of the spritesheet
 	 * @param height The height of the animated sprite that can be created out of the spritesheet
 	 * @return The newly created spritesheet
-	 * @throws SlickException
+	 * @throws SlickException Indicates a failure to initialise the display
 	 */
 	public SpriteSheet getSpriteSheet(String folder, String filename, int width, int height) throws SlickException
 	{
@@ -177,10 +189,35 @@ public class AnimatedSprite {
 	}
 	
 	/**
+	 * Starts the animation of the animated sprite
+	 */
+	public void startAnimation()
+	{
+		spritesheetAnimation.start();
+	}
+	
+	/**
 	 * Stops the animation of the animated sprite
 	 */
 	public void stopAnimation()
 	{
 		spritesheetAnimation.stop();
+	}
+	
+	/**
+	 * Checks if the animation is running
+	 * @return False when running, True when stopped
+	 */
+	public boolean isStopped() {
+		return spritesheetAnimation.isStopped();
+	}
+	
+	/**
+	 * Plays through animation cycle once
+	 */
+	public void playAnimationOnce() {
+		spritesheetAnimation.setPingPong(true);
+		spritesheetAnimation.stopAt(spritesheetAnimation.getFrameCount()-1);
+		spritesheetAnimation.start();
 	}
 }

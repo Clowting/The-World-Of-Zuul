@@ -18,7 +18,7 @@ public class Inventory {
 	
 	/**
 	 * Initializes a new inventory
-	 * @throws SlickException
+	 * @throws SlickException Indicates a failure to initialise the display
 	 */
 	public Inventory() throws SlickException
 	{

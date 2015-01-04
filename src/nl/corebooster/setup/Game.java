@@ -26,7 +26,7 @@ public class Game extends BasicGame {
 	
 	/**
 	 * Constructs the SetupClass
-	 * @param title		The title of the window
+	 * @param title The title of the window
 	 */
 	public Game(String title) {
 		super(title);
@@ -124,7 +124,7 @@ public class Game extends BasicGame {
 	/**
 	 * The main class, responsible for the applications initialization
 	 * @param args The startup arguments
-	 * @throws SlickException
+	 * @throws SlickException Indicates a failure to initialise the display
 	 */
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer app = new AppGameContainer(new Game("The World Of Zuul"));

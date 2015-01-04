@@ -20,7 +20,7 @@ public class StarBackground {
 	 * Initializes a StarBackground with the given screen size
 	 * @param screenWidth The width of the screen
 	 * @param screenHeight The height of the screen
-	 * @throws SlickException
+	 * @throws SlickException Indicates a failure to initialise the display
 	 */
 	public StarBackground(int screenWidth, int screenHeight) throws SlickException
 	{
@@ -36,7 +36,7 @@ public class StarBackground {
 	 * Generate an amount of stars
 	 * @param filename The filename of the sprite
 	 * @param amount The amount of sprites
-	 * @throws SlickException
+	 * @throws SlickException Indicates a failure to initialise the display
 	 */
 	private void addSprite(String filename, int amount) throws SlickException
 	{

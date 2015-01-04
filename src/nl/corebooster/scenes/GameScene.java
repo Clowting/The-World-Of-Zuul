@@ -44,7 +44,7 @@ public class GameScene {
 	 * @param sceneName The name of the scene
 	 * @param playerX The players initial x-position
 	 * @param playerY The players initial y-position
-	 * @throws SlickException 
+	 * @throws SlickException Indicates a failure to initialise the display Indicates a failure to initialise the display
 	 */
 	public GameScene(String sceneName, int playerX, int playerY) throws SlickException
 	{
@@ -106,7 +106,8 @@ public class GameScene {
 				background = new Sprite("img", "headquarters_background.png", false, 0, 0);
 				
 				sprites.put("cpanel", new AnimatedSprite("sprites", "cpanel.png", true, 185, 0, 685, 90, 200));
-				sprites.put("trapdoor", new AnimatedSprite("sprites", "trapdoor.png", false, 10, 10, 90, 90, 50));
+				//sprites.put("trapdoor_scenetrigger", new Sprite("img", "trapdoor_transparent.png", true, TriggerType.SCENESWITCH, "outside_headquarters", 1, 10, 10));
+				sprites.put("trapdoor", new AnimatedSprite("sprites", "trapdoor.png", false, TriggerType.ANIMATE, "trapdoor", 6, 10, 10, 90, 90, 50));
 				sprites.put("liquid_transporter", new AnimatedSprite("sprites", "liquid_transporter.png", true, 860, 210, 70, 210, 100));
 				sprites.put("radar", new AnimatedSprite("sprites", "radar.png", true, 425, 270, 95, 95, 150));
 				
@@ -250,7 +251,7 @@ public class GameScene {
 	
 	/**
 	 * Plays the given music in the background
-	 * @throws SlickException
+	 * @throws SlickException Indicates a failure to initialise the display
 	 */
 	public void playMusic() throws SlickException {
 		if(bgMusicName != null) {
@@ -341,7 +342,7 @@ public class GameScene {
 	/**
 	 * Handles user input
 	 * @param input The input key
-	 * @throws SlickException 
+	 * @throws SlickException Indicates a failure to initialise the display 
 	 */
 	public void keyHandler(Input input) throws SlickException
 	{
@@ -425,6 +426,17 @@ public class GameScene {
 			switch(currentTriggerBox.getTriggerType()) {
 				case SCENESWITCH:
 					nextScene = currentTriggerBox.getValue();
+					currentTriggerBox.resetTrigger();
+				break;	
+				case ANIMATE:
+					for(Object o : sprites.values()) {
+						if(o instanceof AnimatedSprite) {
+							AnimatedSprite as = (AnimatedSprite) o;
+							if(as.isStopped() && as.getTriggerBox().getTriggerType() == TriggerType.ANIMATE) {
+								as.playAnimationOnce();
+							}
+						}
+					}
 					currentTriggerBox.resetTrigger();
 				break;
 				default:

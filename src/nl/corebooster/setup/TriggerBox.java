@@ -11,7 +11,7 @@ import org.newdawn.slick.geom.Rectangle;
 public class TriggerBox {
 	
 	public enum TriggerType {
-		SCENESWITCH, MESSAGE
+		SCENESWITCH, MESSAGE, ANIMATE
 	}
 	
 	private TriggerType triggerType;
@@ -22,7 +22,7 @@ public class TriggerBox {
 	
 	/**
 	 * Constructs a new trigger box with a specific type and value
-	 * @param type The type of trigger, SCENESWITCH/MESSAGE
+	 * @param type The type of trigger, SCENESWITCH/MESSAGE/ANIMATE
 	 * @param value The value of the trigger
 	 * @param x The initial x position of the trigger box
 	 * @param y The initial y position of the trigger box
@@ -41,7 +41,7 @@ public class TriggerBox {
 	
 	/**
 	 * Returns the type of the trigger
-	 * @return The type of trigger, SCENESWITCH/MESSAGE
+	 * @return The type of trigger, SCENESWITCH/MESSAGE/ANIMATE
 	 */
 	public TriggerType getTriggerType()
 	{

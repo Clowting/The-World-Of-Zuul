@@ -105,10 +105,10 @@ public class GameScene {
 				
 				background = new Sprite("img", "headquarters_background.png", false, 0, 0);
 				
-				sprites.put("table", new Sprite("sprites", "table.png", true, 290, 170));
-				sprites.put("trapdoor", new Sprite("sprites", "trapdoor.png", false, 0, 0));
-				sprites.put("plant", new Sprite("sprites", "plant.png", true, 850, 10));
-				sprites.put("npc1", new Sprite("sprites", "npc_left.png", true, TriggerType.MESSAGE, "Thank you for playing our game!", 40, 896, 206));
+				sprites.put("cpanel", new AnimatedSprite("sprites", "cpanel.png", true, 185, 0, 685, 90, 200));
+				sprites.put("trapdoor", new AnimatedSprite("sprites", "trapdoor.png", false, 10, 10, 90, 90, 50));
+				sprites.put("liquid_transporter", new AnimatedSprite("sprites", "liquid_transporter.png", true, 860, 210, 70, 210, 100));
+				sprites.put("radar", new AnimatedSprite("sprites", "radar.png", true, 425, 270, 95, 95, 150));
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;

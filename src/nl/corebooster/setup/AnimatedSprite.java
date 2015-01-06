@@ -30,7 +30,7 @@ public class AnimatedSprite {
 	 * @param width The width of the animated sprite
 	 * @param height The height of the animated sprite
 	 * @param interval The animation interval
-	 * @throws SlickException Indicates a failure to initialise the display
+	 * @throws SlickException Indicates a failure to initialize the display
 	 */
 	public AnimatedSprite(String folder, String filename, boolean isCollidable, int x, int y, int width, int height, int interval) throws SlickException
 	{
@@ -63,7 +63,7 @@ public class AnimatedSprite {
 	 * @param width The width of the animated sprite
 	 * @param height The height of the animated sprite
 	 * @param interval The animation interval
-	 * @throws SlickException Indicates a failure to initialise the display
+	 * @throws SlickException Indicates a failure to initialize the display
 	 */
 	public AnimatedSprite(String folder, String filename, boolean isCollidable, TriggerType triggerType, String triggerValue, int triggerMargin, int x, int y, int width, int height, int interval) throws SlickException
 	{
@@ -156,7 +156,7 @@ public class AnimatedSprite {
 	 * @param width The width of the animated sprite that can be created out of the spritesheet
 	 * @param height The height of the animated sprite that can be created out of the spritesheet
 	 * @return The newly created spritesheet
-	 * @throws SlickException Indicates a failure to initialise the display
+	 * @throws SlickException Indicates a failure to initialize the display
 	 */
 	public SpriteSheet getSpriteSheet(String folder, String filename, int width, int height) throws SlickException
 	{

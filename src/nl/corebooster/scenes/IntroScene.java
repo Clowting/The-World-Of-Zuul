@@ -33,7 +33,7 @@ public class IntroScene {
 	
 	/**
 	 * Initializes the scene
-	 * @throws SlickException Indicates a failure to initialise the display 
+	 * @throws SlickException Indicates a failure to initialize the display 
 	 */
 	public IntroScene() throws SlickException
 	{

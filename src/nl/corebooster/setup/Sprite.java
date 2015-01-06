@@ -26,7 +26,7 @@ public class Sprite {
 	 * @param isCollidable Depends if you can collide with the sprite or not, true/false
 	 * @param x The initial x position of the sprite
 	 * @param y The initial y position of the sprite
-	 * @throws SlickException Indicates a failure to initialise the display 
+	 * @throws SlickException Indicates a failure to initialize the display 
 	 */
 	public Sprite(String folder, String filename, boolean isCollidable, int x, int y) throws SlickException
 	{
@@ -60,7 +60,7 @@ public class Sprite {
 	 * @param triggerMargin The margin of the trigger box
 	 * @param x The initial x position of the sprite
 	 * @param y The initial y position of the sprite
-	 * @throws SlickException Indicates a failure to initialise the display 
+	 * @throws SlickException Indicates a failure to initialize the display 
 	 */
 	public Sprite(String folder, String filename, boolean isCollidable, TriggerType triggerType, String triggerValue, int triggerMargin, int x, int y) throws SlickException
 	{
@@ -206,7 +206,7 @@ public class Sprite {
 	 * @param folder The folder where the sprite is located
 	 * @param filename The filename of the sprite
 	 * @return The newly created image
-	 * @throws SlickException Indicates a failure to initialise the display 
+	 * @throws SlickException Indicates a failure to initialize the display 
 	 */
 	private Image getImage(String folder, String filename) throws SlickException
 	{

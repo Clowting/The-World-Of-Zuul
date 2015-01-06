@@ -44,7 +44,7 @@ public class GameScene {
 	 * @param sceneName The name of the scene
 	 * @param playerX The players initial x-position
 	 * @param playerY The players initial y-position
-	 * @throws SlickException Indicates a failure to initialise the display Indicates a failure to initialise the display
+	 * @throws SlickException Indicates a failure to initialize the display Indicates a failure to initialize the display
 	 */
 	public GameScene(String sceneName, int playerX, int playerY) throws SlickException
 	{
@@ -251,7 +251,7 @@ public class GameScene {
 	
 	/**
 	 * Plays the given music in the background
-	 * @throws SlickException Indicates a failure to initialise the display
+	 * @throws SlickException Indicates a failure to initialize the display
 	 */
 	public void playMusic() throws SlickException {
 		if(bgMusicName != null) {
@@ -342,7 +342,7 @@ public class GameScene {
 	/**
 	 * Handles user input
 	 * @param input The input key
-	 * @throws SlickException Indicates a failure to initialise the display 
+	 * @throws SlickException Indicates a failure to initialize the display 
 	 */
 	public void keyHandler(Input input) throws SlickException
 	{

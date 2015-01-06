@@ -14,23 +14,23 @@ public class Inventory {
 
 	private Sprite background;
 	private static final int maxItemCount = 4;
-	private ArrayList<Sprite> items;
+	private ArrayList<Item> items;
 	
 	/**
 	 * Initializes a new inventory
-	 * @throws SlickException Indicates a failure to initialise the display
+	 * @throws SlickException Indicates a failure to initialize the display
 	 */
 	public Inventory() throws SlickException
 	{
 		background = new Sprite("img", "hud.png", false, 0, 480);
-		items = new ArrayList<Sprite>();
+		items = new ArrayList<Item>();
 	}
 	
 	/**
 	 * Returns the ArrayList with items in the inventory
 	 * @return The ArrayList with items
 	 */
-	public ArrayList<Sprite> getItems()
+	public ArrayList<Item> getItems()
 	{
 		return items;
 	}
@@ -40,16 +40,16 @@ public class Inventory {
 	 * @param index The index of the item to return
 	 * @return The sprite of the item
 	 */
-	public Sprite getItem(int index)
+	public Item getItem(int index)
 	{
 		return items.get(index);
 	}
 	
 	/**
 	 * Adds an item to the items ArrayList
-	 * @param item The Sprite of the item to be added
+	 * @param item The item to be added
 	 */
-	public void addItem(Sprite item)
+	public void addItem(Item item)
 	{
 		if(items.size() < maxItemCount) {
 			items.add(item);
@@ -68,9 +68,10 @@ public class Inventory {
 		// Draw items
 		int offsetLeft = 700;
 		
-		for(Sprite item: items) {
-			item.setX(offsetLeft);
-			item.drawSprite(g);
+		for(Item item: items) {
+			Sprite sprite = item.getSprite();
+			sprite.setX(offsetLeft);
+			sprite.drawSprite(g);
 			
 			offsetLeft += 40;
 		}

@@ -35,8 +35,17 @@ public class Game extends BasicGame {
 	}
 	
 	/**
+	 * Returns the inventory
+	 * @return The inventory of the game
+	 */
+	public Inventory getInventory() {
+		return inventory;
+	}
+	
+	/**
 	 * Initializes the game
 	 * @param container The game container to initialize
+	 * @throws SlickException Indicates a failure to initialize the display
 	 */
 	public void init(GameContainer container) throws SlickException {
 		intro = new IntroScene();
@@ -54,6 +63,7 @@ public class Game extends BasicGame {
 	 * Updates the game
 	 * @param container The game container to update
 	 * @param delta The update frequency
+	 * @throws SlickException Indicates a failure to initialize the display
 	 */
 	public void update(GameContainer container, int delta) throws SlickException {
 		Input input = container.getInput();
@@ -124,7 +134,7 @@ public class Game extends BasicGame {
 	/**
 	 * The main class, responsible for the applications initialization
 	 * @param args The startup arguments
-	 * @throws SlickException Indicates a failure to initialise the display
+	 * @throws SlickException Indicates a failure to initialize the display
 	 */
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer app = new AppGameContainer(new Game("The World Of Zuul"));

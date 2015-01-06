@@ -35,14 +35,6 @@ public class Game extends BasicGame {
 	}
 	
 	/**
-	 * Returns the inventory
-	 * @return The inventory of the game
-	 */
-	public Inventory getInventory() {
-		return inventory;
-	}
-	
-	/**
 	 * Initializes the game
 	 * @param container The game container to initialize
 	 * @throws SlickException Indicates a failure to initialize the display

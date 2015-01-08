@@ -21,7 +21,6 @@ public class Game extends BasicGame {
 	
 	private IntroScene intro;
 	private GameScene currentScene;
-	private Inventory inventory;
 	private HashMap<String, GameScene> scenes;
 	
 	/**
@@ -41,7 +40,6 @@ public class Game extends BasicGame {
 	 */
 	public void init(GameContainer container) throws SlickException {
 		intro = new IntroScene();
-		inventory = new Inventory();
 		
 		scenes.put("ice", new GameScene("ice", 480, 270));
 		scenes.put("outside_headquarters", new GameScene("outside_headquarters", 15, 260));
@@ -91,6 +89,10 @@ public class Game extends BasicGame {
 					int currentPlayerRotation = currentScene.getPlayer().getRotation();
 					scene.getPlayer().rotatePlayer(currentPlayerRotation);
 					
+					// Give the same inventory to the new scene
+					Inventory currentInventory = currentScene.getInventory();
+					scene.setInventory(currentInventory);
+					
 					currentScene.stopAllSounds();
 					currentScene.setUnrendered();
 					currentScene.resetNextScene();
@@ -117,7 +119,6 @@ public class Game extends BasicGame {
 		else
 		{
 			currentScene.render(g);
-			inventory.render(g);
 			//g.drawString("Current scene: " + currentScene.getSceneName(), 10, 30);
 			
 		}

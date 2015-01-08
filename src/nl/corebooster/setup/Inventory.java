@@ -2,6 +2,7 @@ package nl.corebooster.setup;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
@@ -13,6 +14,7 @@ import org.newdawn.slick.SlickException;
 public class Inventory {
 
 	private Sprite background;
+	private String currentMessage;
 	private static final int maxItemCount = 4;
 	private ArrayList<Item> items;
 	
@@ -22,8 +24,18 @@ public class Inventory {
 	 */
 	public Inventory() throws SlickException
 	{
-		background = new Sprite("img", "hud.png", false, 0, 480);
+		background = new Sprite("img", "inventory.png", false, 0, 480);
+		currentMessage = "Thanks for playing our game!";
 		items = new ArrayList<Item>();
+	}
+	
+	/**
+	 * Returns the current message displayed in the inventory bar
+	 * @return The current message
+	 */
+	public String getCurrentMessage()
+	{
+		return currentMessage;
 	}
 	
 	/**
@@ -33,6 +45,15 @@ public class Inventory {
 	public ArrayList<Item> getItems()
 	{
 		return items;
+	}
+	
+	/**
+	 * Change the current message displayed in the inventory bar
+	 * @param message The new message
+	 */
+	public void setCurrentMessage(String message)
+	{
+		currentMessage = message;
 	}
 	
 	/**
@@ -62,8 +83,12 @@ public class Inventory {
 	 */
 	public void render(Graphics g)
 	{
-		// Draw background of HUD
+		// Draw background
 		background.drawSprite(g);
+		
+		// Draw message
+		g.setColor(new Color(0, 0, 0));
+		g.drawString(currentMessage, 10, 500);
 		
 		// Draw items
 		int offsetLeft = 700;

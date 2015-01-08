@@ -3,12 +3,12 @@ package nl.corebooster.scenes;
 import java.util.LinkedHashMap;
 
 import nl.corebooster.setup.AnimatedSprite;
+import nl.corebooster.setup.Inventory;
 import nl.corebooster.setup.Player;
 import nl.corebooster.setup.Sprite;
 import nl.corebooster.setup.TriggerBox;
 import nl.corebooster.setup.TriggerBox.TriggerType;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
@@ -28,7 +28,7 @@ public class GameScene {
 	
 	private Sprite background;
 	private Player player;
-	private String latestMessage;
+	private Inventory inventory;
 	private Sprite overlay;
 	
 	private String sceneName;
@@ -51,7 +51,7 @@ public class GameScene {
 		// Initialize objects
 		sprites = new LinkedHashMap<String, Object>();
 		player = new Player(playerX, playerY);
-		latestMessage = null;
+		inventory = new Inventory();
 		
 		// Black overlay for fade in and fade out
 		overlay = new Sprite("img", "overlay.png", false, 0, 0);
@@ -76,6 +76,15 @@ public class GameScene {
 	public Player getPlayer()
 	{
 		return player;
+	}
+	
+	/**
+	 * Returns the inventory from the game scene
+	 * @return The inventory
+	 */
+	public Inventory getInventory()
+	{
+		return inventory;
 	}
 	
 	/**
@@ -122,6 +131,15 @@ public class GameScene {
 	public boolean isActive()
 	{
 		return isActive;
+	}
+	
+	/**
+	 * Replaces the inventory with the given inventory
+	 * @param inventory The new inventory
+	 */
+	public void setInventory(Inventory inventory)
+	{
+		this.inventory = inventory;
 	}
 	
 	/**
@@ -320,28 +338,11 @@ public class GameScene {
 		// Draw the player
 		player.drawSprite(g);
 		
-		// Draw message
-		displayMessage(g, latestMessage);
+		// Draw the inventory
+		inventory.render(g);
 		
 		// Draw the overlay
 		overlay.drawSprite(g);
-	}
-	
-	/**
-	 * 
-	 * @param g The graphics to render on
-	 * @param message The message to display on the screen
-	 * @throws SlickException Indicates a failure to initialize the display 
-	 */
-	private void displayMessage(Graphics g, String message) throws SlickException
-	{
-		Sprite messageBox = new Sprite("img", "message_box.png", false, 4, 484);
-		messageBox.drawSprite(g);
-		
-		if(message != null) {
-			g.setColor(new Color(0, 0, 0));
-			g.drawString(message, 10, 500);
-		}
 	}
 	
 	/**
@@ -435,7 +436,7 @@ public class GameScene {
 				break;
 				
 				case MESSAGE:
-					latestMessage = currentTriggerBox.getValue();
+					inventory.setCurrentMessage(currentTriggerBox.getValue());
 				break;
 				
 				case ANIMATE:

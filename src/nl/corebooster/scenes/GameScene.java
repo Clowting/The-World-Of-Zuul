@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import nl.corebooster.setup.AnimatedSprite;
 import nl.corebooster.setup.Inventory;
 import nl.corebooster.setup.Item;
+import nl.corebooster.setup.Item.ItemType;
 import nl.corebooster.setup.Player;
 import nl.corebooster.setup.Sprite;
 import nl.corebooster.setup.TriggerBox;
@@ -229,7 +230,9 @@ public class GameScene {
 				sprites.put("landingpad", new AnimatedSprite("landingpad", "sprites", "landingpad.png", true, TriggerType.MESSAGE, "This is a test message", 10, 50, 80, 384, 384, 1000));
 				sprites.put("spaceship", new Sprite("spaceship", "sprites", "spaceship_big.png", false, 104, 132));
 				sprites.put("trigger_right", new Sprite("trigger_right", "img", "vertical_line_transparent.png", true, TriggerType.SCENESWITCH, "outside_headquarters", 1, 960, 0));
-	
+				
+				items.put("key_hq", new Item("key_hq", "Key to the HQ", ItemType.KEY, "key_hq_icon.png", "key_hq.png", 700, 80));
+				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
 	
@@ -261,6 +264,7 @@ public class GameScene {
 				sprites.put("trapdoor", new AnimatedSprite("trapdoor", "sprites", "trapdoor.png", false, TriggerType.ANIMATE, "trapdoor", 6, 10, 10, 90, 90, 50));
 				sprites.put("liquid_transporter", new AnimatedSprite("liquid_transporter", "sprites", "liquid_transporter.png", true, 860, 210, 70, 210, 100));
 				sprites.put("radar", new AnimatedSprite("radar", "sprites", "radar.png", true, 425, 270, 95, 95, 150));
+				sprites.put("npc_1", new Sprite("npc_1", "sprites", "npc_red_up.png", true, TriggerType.MESSAGE, "You touch my tralala!", 10, 440, 430));
 	
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
@@ -445,8 +449,19 @@ public class GameScene {
 	 */
 	public void triggerHandler() 
 	{
-		TriggerBox currentTriggerBox = player.getCurrentTriggerBox(sprites);
+		TriggerBox currentTriggerBoxSprites = player.getCurrentTriggerBox(sprites);
+		TriggerBox currentTriggerBoxItems = player.getCurrentItemTriggerBox(items);
 		
+		triggerBoxHandler(currentTriggerBoxSprites);
+		triggerBoxHandler(currentTriggerBoxItems);
+	}
+	
+	/**
+	 * Handles all the types of trigger boxes
+	 * @param currentTriggerBox The trigger box to check
+	 */
+	private void triggerBoxHandler(TriggerBox currentTriggerBox)
+	{
 		if(currentTriggerBox != null && currentTriggerBox.isTriggered() == false) {
 			
 			switch(currentTriggerBox.getTriggerType()) {
@@ -478,8 +493,10 @@ public class GameScene {
 					
 					String itemName = currentTriggerBox.getObjectName();
 					Item item = items.get(itemName);
+					items.remove(itemName);
 					
 					inventory.addItem(item);
+					inventory.setCurrentMessage(currentTriggerBox.getValue());
 					
 				break;
 				

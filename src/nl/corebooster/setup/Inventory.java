@@ -89,6 +89,7 @@ public class Inventory {
 		// Draw message
 		g.setColor(new Color(0, 0, 0));
 		g.drawString(currentMessage, 10, 500);
+		g.setColor(new Color(255, 255, 255));
 		
 		// Draw items
 		int offsetLeft = 721;

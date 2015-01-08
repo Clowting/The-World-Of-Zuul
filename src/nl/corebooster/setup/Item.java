@@ -1,5 +1,9 @@
 package nl.corebooster.setup;
 
+import nl.corebooster.setup.TriggerBox.TriggerType;
+
+import org.newdawn.slick.SlickException;
+
 /**
  * The Item class describes an inventory item in the game
  * @author Raymon de Looff, Thijs Clowting, Richard Weug
@@ -11,31 +15,35 @@ public class Item {
 		KEY, SUPPLY
 	}
 	
-	private String itemName;
+	private String keyValue;
 	private ItemType itemType;
 	private Sprite itemIcon;
 	private Sprite sprite;
 	
 	/**
 	 * Constructs an item
+	 * @param keyValue The key of the item
 	 * @param itemName The name of the item
 	 * @param itemType The type of the item
-	 * @param itemIcon The icon of the item
-	 * @param sprite The sprite of the item in-game
+	 * @param itemIconName The name of the item it's icon
+	 * @param spriteName The name of the item it's sprite
+	 * @param x The initial x position of the sprite
+	 * @param y The initial y position of the sprite
+	 * @throws SlickException Indicates a failure to initialize the display Indicates a failure to initialize the display
 	 */
-	public Item(String itemName, ItemType itemType, Sprite itemIcon, Sprite sprite) {
-		this.itemName = itemName;
+	public Item(String keyValue, String itemName, ItemType itemType, String itemIconName, String spriteName, int x, int y) throws SlickException {
+		this.keyValue = keyValue;
 		this.itemType = itemType;
-		this.itemIcon = itemIcon;
-		this.sprite = sprite;
+		itemIcon = new Sprite(keyValue, "items", itemIconName, false, 0, 484);
+		sprite = new Sprite(keyValue, "items", spriteName, false, TriggerType.ITEM, "You picked up a " + itemName, 5, x, y);
 	}
 	
 	/**
-	 * Returns the name of the item
-	 * @return The name of the item
+	 * Returns the key of the item
+	 * @return The key of the item
 	 */
-	public String getItemName() {
-		return itemName;
+	public String getKeyValue() {
+		return keyValue;
 	}
 	
 	/**

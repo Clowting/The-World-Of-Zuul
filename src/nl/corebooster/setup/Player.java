@@ -42,7 +42,7 @@ public class Player {
 		
 		angle = 0;
 		
-		footstep = new Sound("data/soundeffects/FootstepPenis.ogg");
+		footstep = new Sound("data/soundeffects/FootstepIce.ogg");
 	}
 	
 	/**
@@ -382,6 +382,29 @@ public class Player {
 					}
 				}
 			}
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Returns the TriggerBox when a player is touching a trigger box of an item, null if not triggering
+	 * @param items The list of items to check triggers with
+	 * @return The trigger box that is triggered
+	 */
+	public TriggerBox getCurrentItemTriggerBox(LinkedHashMap<String, Item> items) {
+		for(Item i : items.values()) {
+			TriggerBox itemTriggerBox = i.getSprite().getTriggerBox();
+			
+			if(itemTriggerBox != null) {
+				boolean isTriggering = itemTriggerBox.isTriggering(collisionbox.getShape());
+				
+				if(isTriggering) {
+					return itemTriggerBox;
+				}
+			}
+			
+
 		}
 		
 		return null;

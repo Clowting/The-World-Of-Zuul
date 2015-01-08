@@ -439,7 +439,7 @@ public class Player {
 	 * Plays footstep sound
 	 */
 	public void playFootstepSound() {
-		footstep.loop(1f, 0.2f);
+		footstep.loop(1f, 0.1f);
 	}
 	
 	/**

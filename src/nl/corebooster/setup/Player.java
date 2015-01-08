@@ -42,7 +42,7 @@ public class Player {
 		
 		angle = 0;
 		
-		footstep = new Sound("data/soundeffects/FootstepIce.ogg");
+		footstep = new Sound("data/soundeffects/FootstepPenis.ogg");
 	}
 	
 	/**
@@ -416,7 +416,7 @@ public class Player {
 	 * Plays footstep sound
 	 */
 	public void playFootstepSound() {
-		footstep.loop(1f, 0.1f);
+		footstep.loop(1f, 0.2f);
 	}
 	
 	/**

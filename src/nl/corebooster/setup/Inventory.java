@@ -24,7 +24,7 @@ public class Inventory {
 	 */
 	public Inventory() throws SlickException
 	{
-		background = new Sprite("img", "inventory.png", false, 0, 480);
+		background = new Sprite("inventory", "img", "inventory.png", false, 0, 480);
 		currentMessage = "Thanks for playing our game!";
 		items = new ArrayList<Item>();
 	}
@@ -91,14 +91,14 @@ public class Inventory {
 		g.drawString(currentMessage, 10, 500);
 		
 		// Draw items
-		int offsetLeft = 700;
+		int offsetLeft = 721;
 		
 		for(Item item: items) {
-			Sprite sprite = item.getSprite();
+			Sprite sprite = item.getItemIcon();
 			sprite.setX(offsetLeft);
 			sprite.drawSprite(g);
 			
-			offsetLeft += 40;
+			offsetLeft += 61;
 		}
 	}
 	

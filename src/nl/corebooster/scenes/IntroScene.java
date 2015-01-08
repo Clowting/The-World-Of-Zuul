@@ -42,21 +42,21 @@ public class IntroScene {
 		sceneEnded = false;
 		
 		// Set background
-		background = new Sprite("img", "intro_background.png", false, 0, -2160);
+		background = new Sprite("background", "img", "intro_background.png", false, 0, -2160);
 		
 		// Set title and 'press space to start'
-		Sprite title = new Sprite("img", "title.png", false, 153, 50);
+		Sprite title = new Sprite("title", "img", "title.png", false, 153, 50);
 		sprites.put("title", title);
 		
-		AnimatedSprite start = new AnimatedSprite("sprites", "press_space.png", false, 166, 470, 627, 29, 200);
+		AnimatedSprite start = new AnimatedSprite("start", "sprites", "press_space.png", false, 166, 470, 627, 29, 200);
 		sprites.put("start", start);
 		
 		// Make sprite objects
-		Sprite spaceship = new Sprite("sprites", "spaceship.png", false, 416, 210);
+		Sprite spaceship = new Sprite("spaceship", "sprites", "spaceship.png", false, 416, 210);
 		sprites.put("spaceship", spaceship);
 		
 		// Black overlay for fade in and fade out
-		overlay = new Sprite("img", "overlay.png", false, 0, 0);
+		overlay = new Sprite("overlay", "img", "overlay.png", false, 0, 0);
 		
 		// Stars playing background music
 		bgMusic = new Music("data/music/IntroSong.ogg");

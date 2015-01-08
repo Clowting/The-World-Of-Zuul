@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 
 import nl.corebooster.setup.AnimatedSprite;
 import nl.corebooster.setup.Inventory;
+import nl.corebooster.setup.Item;
 import nl.corebooster.setup.Player;
 import nl.corebooster.setup.Sprite;
 import nl.corebooster.setup.TriggerBox;
@@ -22,6 +23,7 @@ import org.newdawn.slick.SlickException;
 public class GameScene {
 	
 	private LinkedHashMap<String, Object> sprites;
+	private LinkedHashMap<String, Item> items;
 	
 	private static final int screenWidth = 960;
 	private static final int screenHeight = 540;
@@ -50,11 +52,12 @@ public class GameScene {
 	{
 		// Initialize objects
 		sprites = new LinkedHashMap<String, Object>();
+		items = new LinkedHashMap<String, Item>();
 		player = new Player(playerX, playerY);
 		inventory = new Inventory();
 		
 		// Black overlay for fade in and fade out
-		overlay = new Sprite("img", "overlay.png", false, 0, 0);
+		overlay = new Sprite("overlay", "img", "overlay.png", false, 0, 0);
 		overlay.getImage().setAlpha(0);
 		
 		this.sceneName = sceneName;
@@ -220,12 +223,12 @@ public class GameScene {
 			// "Ice"-scene: first scene after the intro
 			case "ice":
 	
-				background = new Sprite("img", "background1.png", false, 0, 0);
+				background = new Sprite("background", "img", "background1.png", false, 0, 0);
 	
-				sprites.put("ice_cliff", new Sprite("sprites", "ice_cliff.png", true, 0, 0));
-				sprites.put("landingpad", new AnimatedSprite("sprites", "landingpad.png", true, TriggerType.MESSAGE, "This is a test message", 10, 50, 80, 384, 384, 1000));
-				sprites.put("spaceship", new Sprite("sprites", "spaceship_big.png", false, 104, 132));
-				sprites.put("trigger_right", new Sprite("img", "vertical_line_transparent.png", true, TriggerType.SCENESWITCH, "outside_headquarters", 1, 960, 0));
+				sprites.put("ice_cliff", new Sprite("ice_cliff", "sprites", "ice_cliff.png", true, 0, 0));
+				sprites.put("landingpad", new AnimatedSprite("landingpad", "sprites", "landingpad.png", true, TriggerType.MESSAGE, "This is a test message", 10, 50, 80, 384, 384, 1000));
+				sprites.put("spaceship", new Sprite("spaceship", "sprites", "spaceship_big.png", false, 104, 132));
+				sprites.put("trigger_right", new Sprite("trigger_right", "img", "vertical_line_transparent.png", true, TriggerType.SCENESWITCH, "outside_headquarters", 1, 960, 0));
 	
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
@@ -235,13 +238,13 @@ public class GameScene {
 			// "Outside headquarters"-scene
 			case "outside_headquarters":
 	
-				background = new Sprite("img", "background2.png", false, 0, 0);
+				background = new Sprite("background", "img", "background2.png", false, 0, 0);
 	
-				sprites.put("bush", new Sprite("sprites", "bush.png", false, 50, 75));
-				sprites.put("headquarters", new Sprite("sprites", "headquarters.png", true, 600, 0));
-				sprites.put("headquarters_entrance_light", new Sprite("sprites", "headquarters_entrance_light.png", false, 440, 160));
-				sprites.put("headquarters_entrance", new Sprite("sprites", "headquarters_entrance.png", false, TriggerType.SCENESWITCH, "headquarters", 1, 500, 160));
-				sprites.put("trigger_left", new Sprite("img", "vertical_line_transparent.png", true, TriggerType.SCENESWITCH, "ice", 1, 0, 0));
+				sprites.put("bush", new Sprite("bush", "sprites", "bush.png", false, 50, 75));
+				sprites.put("headquarters", new Sprite("headquarters", "sprites", "headquarters.png", true, 600, 0));
+				sprites.put("headquarters_entrance_light", new Sprite("headquarters_entrance_light", "sprites", "headquarters_entrance_light.png", false, 440, 160));
+				sprites.put("headquarters_entrance", new Sprite("headquarters_entrance", "sprites", "headquarters_entrance.png", false, TriggerType.SCENESWITCH, "headquarters", 1, 500, 160));
+				sprites.put("trigger_left", new Sprite("trigger_left", "img", "vertical_line_transparent.png", true, TriggerType.SCENESWITCH, "ice", 1, 0, 0));
 	
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
@@ -251,13 +254,13 @@ public class GameScene {
 			// "Inside headquarters"-scene
 			case "headquarters":
 	
-				background = new Sprite("img", "headquarters_background.png", false, 0, 0);
+				background = new Sprite("background", "img", "headquarters_background.png", false, 0, 0);
 	
-				sprites.put("cpanel", new AnimatedSprite("sprites", "cpanel.png", true, 185, 0, 685, 90, 200));
+				sprites.put("cpanel", new AnimatedSprite("cpanel", "sprites", "cpanel.png", true, 185, 0, 685, 90, 200));
 				//sprites.put("trapdoor_scenetrigger", new Sprite("img", "trapdoor_transparent.png", true, TriggerType.SCENESWITCH, "outside_headquarters", 1, 10, 10));
-				sprites.put("trapdoor", new AnimatedSprite("sprites", "trapdoor.png", false, TriggerType.ANIMATE, "trapdoor", 6, 10, 10, 90, 90, 50));
-				sprites.put("liquid_transporter", new AnimatedSprite("sprites", "liquid_transporter.png", true, 860, 210, 70, 210, 100));
-				sprites.put("radar", new AnimatedSprite("sprites", "radar.png", true, 425, 270, 95, 95, 150));
+				sprites.put("trapdoor", new AnimatedSprite("trapdoor", "sprites", "trapdoor.png", false, TriggerType.ANIMATE, "trapdoor", 6, 10, 10, 90, 90, 50));
+				sprites.put("liquid_transporter", new AnimatedSprite("liquid_transporter", "sprites", "liquid_transporter.png", true, 860, 210, 70, 210, 100));
+				sprites.put("radar", new AnimatedSprite("radar", "sprites", "radar.png", true, 425, 270, 95, 95, 150));
 	
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
@@ -306,17 +309,24 @@ public class GameScene {
 	public void render(Graphics g) throws SlickException
 	{
 		// Draws collision boxes
-		for(Object o : sprites.values()) {
-			if(o instanceof Sprite) {
-				Sprite s = (Sprite) o;
+		for(Object object : sprites.values()) {
+			if(object instanceof Sprite) {
+				Sprite sprite = (Sprite) object;
 				
-				s.drawBoxes(g);
+				sprite.drawBoxes(g);
 			}
-			else if(o instanceof AnimatedSprite) {
-				AnimatedSprite as = (AnimatedSprite) o;
+			else if(object instanceof AnimatedSprite) {
+				AnimatedSprite animatedSprite = (AnimatedSprite) object;
 				
-				as.drawBoxes(g);
+				animatedSprite.drawBoxes(g);
 			}
+		}
+		
+		// Draw item collision boxes
+		for(Item item : items.values()) {
+			Sprite sprite = item.getSprite();
+			
+			sprite.drawBoxes(g);
 		}
 		
 		// Draws the player collision box and background
@@ -324,16 +334,25 @@ public class GameScene {
 		background.drawSprite(g);
 		
 		// Draws the sprites.
-		for(Object o : sprites.values()) {
-			if(o instanceof Sprite) {
-				Sprite s = (Sprite) o;
-				s.drawSprite(g);
+		for(Object object : sprites.values()) {
+			if(object instanceof Sprite) {
+				Sprite sprite = (Sprite) object;
+				
+				sprite.drawSprite(g);
 			}
-			else if(o instanceof AnimatedSprite) {
-				AnimatedSprite as = (AnimatedSprite) o;
-				as.drawSprite(g);
+			else if(object instanceof AnimatedSprite) {
+				AnimatedSprite animatedSprite = (AnimatedSprite) object;
+				
+				animatedSprite.drawSprite(g);
 			}
 		}
+		
+		// Draw items
+		for(Item item : items.values()) {
+			Sprite sprite = item.getSprite();
+			
+			sprite.drawSprite(g);
+		}		
 		
 		// Draw the player
 		player.drawSprite(g);
@@ -429,31 +448,45 @@ public class GameScene {
 		TriggerBox currentTriggerBox = player.getCurrentTriggerBox(sprites);
 		
 		if(currentTriggerBox != null && currentTriggerBox.isTriggered() == false) {
+			
 			switch(currentTriggerBox.getTriggerType()) {
 				case SCENESWITCH:
+					
 					nextScene = currentTriggerBox.getValue();
 					currentTriggerBox.resetTrigger();
+					
 				break;
 				
 				case MESSAGE:
+					
 					inventory.setCurrentMessage(currentTriggerBox.getValue());
+					
 				break;
 				
 				case ANIMATE:
-					for(Object o : sprites.values()) {
-						if(o instanceof AnimatedSprite) {
-							AnimatedSprite as = (AnimatedSprite) o;
-							if(as.isStopped() && as.getTriggerBox().getTriggerType() == TriggerType.ANIMATE) {
-								as.playAnimationOnce();
-							}
-						}
-					}
+					
+					String spriteName = currentTriggerBox.getObjectName();
+					AnimatedSprite animatedSprite = (AnimatedSprite) sprites.get(spriteName);
+					
+					animatedSprite.playAnimationOnce();
+					
 					currentTriggerBox.resetTrigger();
+					
+				break;
+				
+				case ITEM:
+					
+					String itemName = currentTriggerBox.getObjectName();
+					Item item = items.get(itemName);
+					
+					inventory.addItem(item);
+					
 				break;
 				
 				default:
 					// Do nothing
 				break;
+				
 			}
 		}
 	}

@@ -13,6 +13,7 @@ import org.newdawn.slick.SlickException;
  */
 public class Sprite {
 	
+	private String spriteName;
 	private CollisionBox collisionbox;
 	private TriggerBox triggerbox;
 	private Image image;
@@ -28,8 +29,9 @@ public class Sprite {
 	 * @param y The initial y position of the sprite
 	 * @throws SlickException Indicates a failure to initialize the display 
 	 */
-	public Sprite(String folder, String filename, boolean isCollidable, int x, int y) throws SlickException
+	public Sprite(String spriteName, String folder, String filename, boolean isCollidable, int x, int y) throws SlickException
 	{
+		this.spriteName = spriteName;
 		this.image = getImage(folder, filename);
 		
 		maxXReached = false;
@@ -62,8 +64,9 @@ public class Sprite {
 	 * @param y The initial y position of the sprite
 	 * @throws SlickException Indicates a failure to initialize the display 
 	 */
-	public Sprite(String folder, String filename, boolean isCollidable, TriggerType triggerType, String triggerValue, int triggerMargin, int x, int y) throws SlickException
+	public Sprite(String spriteName, String folder, String filename, boolean isCollidable, TriggerType triggerType, String triggerValue, int triggerMargin, int x, int y) throws SlickException
 	{
+		this.spriteName = spriteName;
 		this.image = getImage(folder, filename);
 		
 		maxXReached = false;
@@ -76,12 +79,21 @@ public class Sprite {
 			collisionbox = null;
 		}
 		
-		this.triggerbox = new TriggerBox(triggerType, triggerValue, x, y, image.getWidth(), image.getHeight(), triggerMargin);
+		this.triggerbox = new TriggerBox(spriteName, triggerType, triggerValue, x, y, image.getWidth(), image.getHeight(), triggerMargin);
 		
 		this.x = x;
 		this.y = y;
 		this.newX = x;
 		this.newY = y;
+	}
+	
+	/**
+	 * Returns the name of the sprite
+	 * @return The name of the sprite
+	 */
+	public String getSpriteName()
+	{
+		return spriteName;
 	}
 
 	/**
@@ -163,6 +175,15 @@ public class Sprite {
 	public int getNewY()
 	{
 		return newY;
+	}
+	
+	/**
+	 * Sets a new name for the sprite
+	 * @param spriteName The new name
+	 */
+	public void setSpriteName(String spriteName)
+	{
+		this.spriteName = spriteName;
 	}
 	
 	/**

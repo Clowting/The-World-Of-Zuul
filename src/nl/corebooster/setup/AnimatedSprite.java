@@ -14,6 +14,7 @@ import org.newdawn.slick.SpriteSheet;
  */
 public class AnimatedSprite {
 
+	private String spriteName;
 	private CollisionBox collisionbox;
 	private TriggerBox triggerbox;
 	private SpriteSheet spritesheet;
@@ -32,8 +33,9 @@ public class AnimatedSprite {
 	 * @param interval The animation interval
 	 * @throws SlickException Indicates a failure to initialize the display
 	 */
-	public AnimatedSprite(String folder, String filename, boolean isCollidable, int x, int y, int width, int height, int interval) throws SlickException
+	public AnimatedSprite(String spriteName, String folder, String filename, boolean isCollidable, int x, int y, int width, int height, int interval) throws SlickException
 	{
+		this.spriteName = spriteName;
 		this.spritesheet = getSpriteSheet(folder, filename, width, height);
 		spritesheetAnimation = new Animation(spritesheet, interval);
 		
@@ -65,8 +67,9 @@ public class AnimatedSprite {
 	 * @param interval The animation interval
 	 * @throws SlickException Indicates a failure to initialize the display
 	 */
-	public AnimatedSprite(String folder, String filename, boolean isCollidable, TriggerType triggerType, String triggerValue, int triggerMargin, int x, int y, int width, int height, int interval) throws SlickException
+	public AnimatedSprite(String spriteName, String folder, String filename, boolean isCollidable, TriggerType triggerType, String triggerValue, int triggerMargin, int x, int y, int width, int height, int interval) throws SlickException
 	{
+		this.spriteName = spriteName;
 		this.spritesheet = getSpriteSheet(folder, filename, width, height);
 		spritesheetAnimation = new Animation(spritesheet, interval);
 		
@@ -77,7 +80,7 @@ public class AnimatedSprite {
 			collisionbox = null;
 		}
 		
-		this.triggerbox = new TriggerBox(triggerType, triggerValue, x, y, width, height, triggerMargin);
+		this.triggerbox = new TriggerBox(spriteName, triggerType, triggerValue, x, y, width, height, triggerMargin);
 		
 		if(triggerType == TriggerType.ANIMATE) {
 			stopAnimation();
@@ -85,6 +88,15 @@ public class AnimatedSprite {
 		
 		this.x = x;
 		this.y = y;
+	}
+	
+	/**
+	 * Returns the name of the sprite
+	 * @return The name of the sprite
+	 */
+	public String getSpriteName()
+	{
+		return spriteName;
 	}
 	
 	/**
@@ -129,6 +141,15 @@ public class AnimatedSprite {
 	public int getY()
 	{
 		return y;
+	}
+	
+	/**
+	 * Sets a new name for the sprite
+	 * @param spriteName The new name
+	 */
+	public void setSpriteName(String spriteName)
+	{
+		this.spriteName = spriteName;
 	}
 	
 	/**

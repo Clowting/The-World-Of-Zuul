@@ -11,9 +11,10 @@ import org.newdawn.slick.geom.Rectangle;
 public class TriggerBox {
 	
 	public enum TriggerType {
-		SCENESWITCH, MESSAGE, ANIMATE
+		SCENESWITCH, MESSAGE, ANIMATE, ITEM
 	}
 	
+	private String objectName;
 	private TriggerType triggerType;
 	private Rectangle box;
 	private int boxMargin = 1;
@@ -30,13 +31,23 @@ public class TriggerBox {
 	 * @param height The height of the trigger box
 	 * @param boxMargin The margin of the trigger box
 	 */
-	public TriggerBox(TriggerType type, String value, int x, int y, int width, int height, int boxMargin)
+	public TriggerBox(String objectName, TriggerType type, String value, int x, int y, int width, int height, int boxMargin)
 	{
-		triggerType = type;
+		this.objectName = objectName;
+		this.triggerType = type;
 		this.boxMargin = boxMargin;
-		box = new Rectangle((x - boxMargin), (y - boxMargin), (width + boxMargin * 2), (height + boxMargin * 2));
+		this.box = new Rectangle((x - boxMargin), (y - boxMargin), (width + boxMargin * 2), (height + boxMargin * 2));
 		this.value = value;
-		isTriggered = false;
+		this.isTriggered = false;
+	}
+	
+	/**
+	 * Returns the name of the parent object of the trigger box
+	 * @return The name of the parent object
+	 */
+	public String getObjectName()
+	{
+		return objectName;
 	}
 	
 	/**
@@ -72,6 +83,15 @@ public class TriggerBox {
 	public boolean isTriggered()
 	{
 		return isTriggered;
+	}
+	
+	/**
+	 * Sets a new parent object name for the trigger box
+	 * @param objectName The new parent object name
+	 */
+	public void setObjectName(String objectName)
+	{
+		this.objectName = objectName;
 	}
 	
 	/**

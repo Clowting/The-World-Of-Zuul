@@ -29,7 +29,7 @@ public class StarBackground {
 		this.screenWidth = screenWidth;
 		this.screenHeight = screenHeight;
 		
-		addSprite("star.png", 50);
+		addSprite("star", "star.png", 50);
 	}
 	
 	/**
@@ -38,7 +38,7 @@ public class StarBackground {
 	 * @param amount The amount of sprites
 	 * @throws SlickException Indicates a failure to initialize the display
 	 */
-	private void addSprite(String filename, int amount) throws SlickException
+	private void addSprite(String spriteName, String filename, int amount) throws SlickException
 	{
 		Random rand = new Random();
 		
@@ -46,7 +46,7 @@ public class StarBackground {
 			int x = rand.nextInt(screenWidth);
 			int y = rand.nextInt(screenHeight);
 			
-			Sprite sprite = new Sprite("sprites", filename, false, x, y);
+			Sprite sprite = new Sprite(spriteName, "sprites", filename, false, x, y);
 			stars.add(sprite);
 		}
 	}

@@ -375,9 +375,6 @@ public class GameScene {
 	 */
 	public void keyHandler(Input input) throws SlickException
 	{
-		// Calls the inventory key handler
-		inventoryKeyHandler(input);
-		
 		// Checks if the player is colliding with a sprite
 		boolean isColliding = player.isCollidingWith(sprites);
 		
@@ -445,6 +442,9 @@ public class GameScene {
 				player.setY(player.getY() - 1);
 			}
 		}
+		
+		// Calls the inventory key handler
+		inventoryKeyHandler(input);
 	}
 	
 	/**
@@ -471,8 +471,14 @@ public class GameScene {
 	private void dropItem(int index) {
 		if(inventory.itemExists(index)) {
 			Item currentItem = inventory.getItem(index);
-			String currentItemName =  currentItem.getKeyValue();
+			String currentItemName = currentItem.getKeyValue();
 			inventory.deleteItem(index);
+			
+			int x = player.getX() + 74;
+			int y = player.getY();
+			
+			currentItem.getSprite().setX(x);
+			currentItem.getSprite().setY(y);
 			items.put(currentItemName, currentItem);
 		}
 	}

@@ -73,7 +73,7 @@ public class Inventory {
 	 * @return If the item exists or not, true/false
 	 */
 	public boolean itemExists(int index) {
-		if(items.get(index) != null) {
+		if(index < items.size()) {
 			return true;
 		} else {
 			return false;

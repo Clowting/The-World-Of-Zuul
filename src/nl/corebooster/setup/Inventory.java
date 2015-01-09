@@ -1,6 +1,7 @@
 package nl.corebooster.setup;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -114,6 +115,23 @@ public class Inventory {
 	{
 		if(items.size() < maxItemCount) {
 			items.add(item);
+		}
+	}
+	
+	/**
+	 * Removes the item from the inventory with the given key value
+	 * @param keyValue The key value of the item
+	 */
+	public void removeItem(String keyValue)
+	{
+		Iterator<Item> iterator = items.iterator();
+				
+		while(iterator.hasNext()) {
+			Item item = iterator.next();
+			
+			if(keyValue.equals(item.getKeyValue())) {
+				iterator.remove();
+			}
 		}
 	}
 	

@@ -497,6 +497,8 @@ public class GameScene {
 	{
 		if(currentTriggerBox != null && currentTriggerBox.isTriggered() == false) {
 			
+			String itemName = currentTriggerBox.getObjectName();
+			
 			switch(currentTriggerBox.getTriggerType()) {
 				case SCENESWITCH:
 					
@@ -507,16 +509,18 @@ public class GameScene {
 				
 				case LOCKEDSCENESWITCH:
 					 
-					 String keyName = currentTriggerBox.getObjectName() + "_key";
+					String keyName = itemName + "_key";
 					 
-					 if(inventory.hasItem(keyName) || currentTriggerBox.isTriggered()) {
-						 nextScene = currentTriggerBox.getValue();
-					 
-					 
-					 }
-					 else {
-						 inventory.setCurrentMessage("You don't have the required key for this room!");
-					 }
+					if(inventory.hasItem(keyName) || currentTriggerBox.isTriggered()) {
+						nextScene = currentTriggerBox.getValue();
+						currentTriggerBox.setTriggered();
+						 
+						// Remove key from inventory
+						inventory.removeItem(keyName);
+					}
+					else {
+						inventory.setCurrentMessage("You don't have the required key for this room!");
+					}
 					 
 					 
 					 break;
@@ -529,8 +533,7 @@ public class GameScene {
 				
 				case ANIMATE:
 					
-					String spriteName = currentTriggerBox.getObjectName();
-					AnimatedSprite animatedSprite = (AnimatedSprite) sprites.get(spriteName);
+					AnimatedSprite animatedSprite = (AnimatedSprite) sprites.get(itemName);
 					
 					animatedSprite.playAnimationOnce();
 					
@@ -540,7 +543,6 @@ public class GameScene {
 				
 				case ITEM:
 					
-					String itemName = currentTriggerBox.getObjectName();
 					Item item = items.get(itemName);
 					items.remove(itemName);
 					

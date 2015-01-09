@@ -67,6 +67,46 @@ public class Inventory {
 	}
 	
 	/**
+	 * Checks if an item exists in the inventory
+	 * @param index The index of the item to check for
+	 * @return If the item exists or not, true/false
+	 */
+	public boolean itemExists(int index) {
+		if(items.get(index) != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Delete an item out of the items ArrayList on a specific index
+	 * @param index The index of the item to be deleted
+	 */
+	public void deleteItem(int index)
+	{
+		if(getItem(index) != null) {
+			items.remove(index);
+		}
+	}
+	
+	/**
+	 * Returns true if the inventory contains a specific item
+	 * @param keyName The name of the item
+	 * @return True if the item is in the inventory, false if not
+	 */
+	 public boolean hasItem(String keyName)
+	 {
+	 for(Item item: items) {
+		 if(keyName.equals(item.getKeyValue())) {
+			 return true;
+		 }
+	 }
+	 
+	 return false;
+	 }
+	
+	/**
 	 * Adds an item to the items ArrayList
 	 * @param item The item to be added
 	 */

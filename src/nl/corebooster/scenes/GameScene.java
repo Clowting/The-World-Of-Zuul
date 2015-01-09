@@ -231,7 +231,7 @@ public class GameScene {
 				sprites.put("spaceship", new Sprite("spaceship", "sprites", "spaceship_big.png", false, 104, 132));
 				sprites.put("trigger_right", new Sprite("trigger_right", "img", "vertical_line_transparent.png", true, TriggerType.SCENESWITCH, "outside_headquarters", 1, 960, 0));
 				
-				items.put("key_hq", new Item("key_hq", "Key to the HQ", ItemType.KEY, "key_hq_icon.png", "key_hq.png", 700, 80));
+				items.put("headquarters_entrance_key", new Item("headquarters_entrance_key", "Key to the HQ", ItemType.KEY, "key_hq_icon.png", "key_hq.png", 700, 80));
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
@@ -246,7 +246,7 @@ public class GameScene {
 				sprites.put("bush", new Sprite("bush", "sprites", "bush.png", false, 50, 75));
 				sprites.put("headquarters", new Sprite("headquarters", "sprites", "headquarters.png", true, 600, 0));
 				sprites.put("headquarters_entrance_light", new Sprite("headquarters_entrance_light", "sprites", "headquarters_entrance_light.png", false, 440, 160));
-				sprites.put("headquarters_entrance", new Sprite("headquarters_entrance", "sprites", "headquarters_entrance.png", false, TriggerType.SCENESWITCH, "headquarters", 1, 500, 160));
+				sprites.put("headquarters_entrance", new Sprite("headquarters_entrance", "sprites", "headquarters_entrance.png", true, TriggerType.LOCKEDSCENESWITCH, "headquarters", 5, 500, 160));
 				sprites.put("trigger_left", new Sprite("trigger_left", "img", "vertical_line_transparent.png", true, TriggerType.SCENESWITCH, "ice", 1, 0, 0));
 	
 				bgMusicName = "GameSong01.ogg";
@@ -375,6 +375,9 @@ public class GameScene {
 	 */
 	public void keyHandler(Input input) throws SlickException
 	{
+		// Calls the inventory key handler
+		inventoryKeyHandler(input);
+		
 		// Checks if the player is colliding with a sprite
 		boolean isColliding = player.isCollidingWith(sprites);
 		
@@ -445,6 +448,36 @@ public class GameScene {
 	}
 	
 	/**
+	 * Handles the inventory keys
+	 * @param input The input key
+	 */
+	private void inventoryKeyHandler(Input input)
+	{
+		if(input.isKeyDown(Input.KEY_1)) {
+			dropItem(0);
+		} else if(input.isKeyDown(Input.KEY_2)) {
+			dropItem(1);
+		} else if(input.isKeyDown(Input.KEY_3)) {
+			dropItem(2);
+		} else if(input.isKeyDown(Input.KEY_4)) {
+			dropItem(3);
+		}
+	}
+	
+	/**
+	 * Drops an item with a specific index
+	 * @param index The index of the item to be dropped
+	 */
+	private void dropItem(int index) {
+		if(inventory.itemExists(index)) {
+			Item currentItem = inventory.getItem(index);
+			String currentItemName =  currentItem.getKeyValue();
+			inventory.deleteItem(index);
+			items.put(currentItemName, currentItem);
+		}
+	}
+	
+	/**
 	 * Checks if the player is triggering an event
 	 */
 	public void triggerHandler() 
@@ -471,6 +504,22 @@ public class GameScene {
 					currentTriggerBox.resetTrigger();
 					
 				break;
+				
+				case LOCKEDSCENESWITCH:
+					 
+					 String keyName = currentTriggerBox.getObjectName() + "_key";
+					 
+					 if(inventory.hasItem(keyName) || currentTriggerBox.isTriggered()) {
+						 nextScene = currentTriggerBox.getValue();
+					 
+					 
+					 }
+					 else {
+						 inventory.setCurrentMessage("You don't have the required key for this room!");
+					 }
+					 
+					 
+					 break;
 				
 				case MESSAGE:
 					

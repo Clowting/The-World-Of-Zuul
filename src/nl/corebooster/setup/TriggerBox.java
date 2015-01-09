@@ -11,7 +11,7 @@ import org.newdawn.slick.geom.Rectangle;
 public class TriggerBox {
 	
 	public enum TriggerType {
-		SCENESWITCH, MESSAGE, ANIMATE, ITEM
+		SCENESWITCH, LOCKEDSCENESWITCH, MESSAGE, ANIMATE, ITEM
 	}
 	
 	private String objectName;

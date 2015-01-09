@@ -248,7 +248,9 @@ public class GameScene {
 				sprites.put("headquarters_entrance_light", new Sprite("headquarters_entrance_light", "sprites", "headquarters_entrance_light.png", false, 440, 160));
 				sprites.put("headquarters_entrance", new Sprite("headquarters_entrance", "sprites", "headquarters_entrance.png", true, TriggerType.LOCKEDSCENESWITCH, "headquarters", 5, 500, 160));
 				sprites.put("trigger_left", new Sprite("trigger_left", "img", "vertical_line_transparent.png", true, TriggerType.SCENESWITCH, "ice", 1, 0, 0));
-	
+				
+				items.put("cake", new Item("cake", "Very Tasty Spacecake", ItemType.SUPPLY, "cake_icon.png", "cake.png", 200, 50));
+				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
 	
@@ -263,8 +265,8 @@ public class GameScene {
 				//sprites.put("trapdoor_scenetrigger", new Sprite("img", "trapdoor_transparent.png", true, TriggerType.SCENESWITCH, "outside_headquarters", 1, 10, 10));
 				sprites.put("trapdoor", new AnimatedSprite("trapdoor", "sprites", "trapdoor.png", false, TriggerType.ANIMATE, "trapdoor", 6, 10, 10, 90, 90, 50));
 				sprites.put("liquid_transporter", new AnimatedSprite("liquid_transporter", "sprites", "liquid_transporter.png", true, 860, 210, 70, 210, 100));
-				sprites.put("radar", new AnimatedSprite("radar", "sprites", "radar.png", true, 425, 270, 95, 95, 150));
-				sprites.put("npc_1", new Sprite("npc_1", "sprites", "npc_red_up.png", true, TriggerType.MESSAGE, "You touch my tralala!", 10, 440, 430));
+				sprites.put("radar", new AnimatedSprite("radar", "sprites", "radar.png", true, 425, 240, 95, 95, 150));
+				sprites.put("npc_1", new Sprite("npc_1", "sprites", "npc_red_up.png", true, TriggerType.MESSAGE, "You touch my tralala!", 10, 438, 430));
 	
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
@@ -474,8 +476,21 @@ public class GameScene {
 			String currentItemName = currentItem.getKeyValue();
 			inventory.deleteItem(index);
 			
-			int x = player.getX() + 74;
+			int x = player.getX();
 			int y = player.getY();
+			int rotation = player.getRotation();
+			int itemWidth = currentItem.getSprite().getImage().getWidth();
+			int itemOffset = 75;
+			
+			if(rotation == 0) {
+				y -= itemOffset;
+			} else if(rotation == 90) {
+				x += itemOffset;
+			} else if(rotation == 180) {
+				y += itemOffset;
+			} else if(rotation == 270) {
+				x -= (itemOffset - itemWidth);
+			}
 			
 			currentItem.getSprite().setX(x);
 			currentItem.getSprite().setY(y);

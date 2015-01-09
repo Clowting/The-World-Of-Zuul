@@ -16,6 +16,7 @@ public class Item {
 	}
 	
 	private String keyValue;
+	private String itemName;
 	private ItemType itemType;
 	private Sprite itemIcon;
 	private Sprite sprite;
@@ -31,8 +32,10 @@ public class Item {
 	 * @param y The initial y position of the sprite
 	 * @throws SlickException Indicates a failure to initialize the display Indicates a failure to initialize the display
 	 */
-	public Item(String keyValue, String itemName, ItemType itemType, String itemIconName, String spriteName, int x, int y) throws SlickException {
+	public Item(String keyValue, String itemName, ItemType itemType, String itemIconName, String spriteName, int x, int y) throws SlickException 
+	{
 		this.keyValue = keyValue;
+		this.itemName = itemName;
 		this.itemType = itemType;
 		itemIcon = new Sprite(keyValue, "items", itemIconName, false, 0, 484);
 		sprite = new Sprite(keyValue, "items", spriteName, false, TriggerType.ITEM, "You picked up a " + itemName, 5, x, y);
@@ -42,15 +45,26 @@ public class Item {
 	 * Returns the key of the item
 	 * @return The key of the item
 	 */
-	public String getKeyValue() {
+	public String getKeyValue() 
+	{
 		return keyValue;
+	}
+	
+	/**
+	 * Retuns the name of the item
+	 * @return The name of the item
+	 */
+	public String getItemName()
+	{
+		return itemName;
 	}
 	
 	/**
 	 * Returns the type of the item
 	 * @return The type of the item
 	 */
-	public ItemType getItemType() {
+	public ItemType getItemType() 
+	{
 		return itemType;
 	}
 	
@@ -58,7 +72,8 @@ public class Item {
 	 * Returns the icon of the item
 	 * @return The icon of the item
 	 */
-	public Sprite getItemIcon() {
+	public Sprite getItemIcon() 
+	{
 		return itemIcon;
 	}
 	
@@ -66,7 +81,8 @@ public class Item {
 	 * Returns the sprite of the item
 	 * @return The sprite of the item
 	 */
-	public Sprite getSprite() {
+	public Sprite getSprite() 
+	{
 		return sprite;
 	}
 	

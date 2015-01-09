@@ -456,13 +456,13 @@ public class GameScene {
 	private void inventoryKeyHandler(Input input)
 	{
 		if(input.isKeyDown(Input.KEY_1)) {
-			dropItem(0);
+			inventory.setSelectedSlot(0);
 		} else if(input.isKeyDown(Input.KEY_2)) {
-			dropItem(1);
+			inventory.setSelectedSlot(1);
 		} else if(input.isKeyDown(Input.KEY_3)) {
-			dropItem(2);
+			inventory.setSelectedSlot(2);
 		} else if(input.isKeyDown(Input.KEY_4)) {
-			dropItem(3);
+			inventory.setSelectedSlot(3);
 		}
 	}
 	
@@ -532,7 +532,7 @@ public class GameScene {
 					 
 					String keyName = itemName + "_key";
 					 
-					if(inventory.hasItem(keyName) || currentTriggerBox.isTriggered()) {
+					if(inventory.hasItemSelected(keyName) || currentTriggerBox.isTriggered()) {
 						nextScene = currentTriggerBox.getValue();
 						currentTriggerBox.setTriggered();
 						 
@@ -540,7 +540,14 @@ public class GameScene {
 						inventory.removeItem(keyName);
 					}
 					else {
-						inventory.setCurrentMessage("You don't have the required key for this room!");
+						Item selectedItem = inventory.getSelectedItem();
+						
+						if(selectedItem != null) {
+							inventory.setCurrentMessage("You can't open this door with a " + selectedItem.getItemName() + "!");
+						}
+						else {
+							inventory.setCurrentMessage("You don't have the required key for this door!");
+						}
 					}
 					 
 					 

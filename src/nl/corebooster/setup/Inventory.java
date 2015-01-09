@@ -17,6 +17,7 @@ public class Inventory {
 	private Sprite background;
 	private String currentMessage;
 	private static final int maxItemCount = 4;
+	private int selectedSlot;
 	private ArrayList<Item> items;
 	
 	/**
@@ -25,8 +26,9 @@ public class Inventory {
 	 */
 	public Inventory() throws SlickException
 	{
-		background = new Sprite("inventory", "img", "inventory.png", false, 0, 480);
+		background = new Sprite("inventory", "img", "inventory.png", false, 0, 465);
 		currentMessage = "Thanks for playing our game!";
+		selectedSlot = 0;
 		items = new ArrayList<Item>();
 	}
 	
@@ -37,6 +39,15 @@ public class Inventory {
 	public String getCurrentMessage()
 	{
 		return currentMessage;
+	}
+	
+	/**
+	 * Returns the current selected slot
+	 * @return The number of the selected slot
+	 */
+	public int getSelectedSlot()
+	{
+		return selectedSlot;
 	}
 	
 	/**
@@ -58,13 +69,36 @@ public class Inventory {
 	}
 	
 	/**
+	 * Sets the selected slot in the inventory
+	 * @param selectedSlot The number of the selected slot
+	 */
+	public void setSelectedSlot(int selectedSlot)
+	{
+		this.selectedSlot = selectedSlot;
+	}
+	
+	/**
 	 * Gets an item out of the items ArrayList on a specific index
 	 * @param index The index of the item to return
-	 * @return The sprite of the item
+	 * @return The item
 	 */
 	public Item getItem(int index)
 	{
 		return items.get(index);
+	}
+	
+	/**
+	 * Returns the current selected item in the inventory
+	 * @return The item
+	 */
+	public Item getSelectedItem()
+	{
+		if(itemExists(selectedSlot)) {
+			return items.get(selectedSlot);
+		}
+		else {
+			return null;
+		}
 	}
 	
 	/**
@@ -81,30 +115,25 @@ public class Inventory {
 	}
 	
 	/**
-	 * Delete an item out of the items ArrayList on a specific index
-	 * @param index The index of the item to be deleted
-	 */
-	public void deleteItem(int index)
-	{
-		if(getItem(index) != null) {
-			items.remove(index);
-		}
-	}
-	
-	/**
 	 * Returns true if the inventory contains a specific item
 	 * @param keyName The name of the item
 	 * @return True if the item is in the inventory, false if not
 	 */
-	 public boolean hasItem(String keyName)
+	 public boolean hasItemSelected(String keyName)
 	 {
-	 for(Item item: items) {
-		 if(keyName.equals(item.getKeyValue())) {
-			 return true;
+		 if(itemExists(selectedSlot)) {
+			 Item selectedItem = items.get(selectedSlot);
+			 
+			 if(keyName.equals(selectedItem.getKeyValue())) {
+				 return true;
+			 }
+			 else {
+				 return false;
+			 }
 		 }
-	 }
-	 
-	 return false;
+		 else {
+			 return false;
+		 }
 	 }
 	
 	/**
@@ -115,6 +144,17 @@ public class Inventory {
 	{
 		if(items.size() < maxItemCount) {
 			items.add(item);
+		}
+	}
+	
+	/**
+	 * Delete an item out of the items ArrayList on a specific index
+	 * @param index The index of the item to be deleted
+	 */
+	public void deleteItem(int index)
+	{
+		if(getItem(index) != null) {
+			items.remove(index);
 		}
 	}
 	
@@ -138,8 +178,9 @@ public class Inventory {
 	/**
 	 * Renders the inventory items
 	 * @param g	The graphics to render the inventory items on
+	 * @throws SlickException Indicates a failure to initialize the display
 	 */
-	public void render(Graphics g)
+	public void render(Graphics g) throws SlickException
 	{
 		// Draw background
 		background.drawSprite(g);
@@ -148,6 +189,11 @@ public class Inventory {
 		g.setColor(new Color(0, 0, 0));
 		g.drawString(currentMessage, 10, 500);
 		g.setColor(new Color(255, 255, 255));
+		
+		// Draw selected slot
+		int slotOffsetLeft = 718 + (selectedSlot * 61);
+		Sprite selectedSlot = new Sprite("selectedSlot", "img", "selected_slot.png", false, slotOffsetLeft, 481);
+		selectedSlot.drawSprite(g);
 		
 		// Draw items
 		int offsetLeft = 721;

@@ -3,7 +3,6 @@ package nl.corebooster.setup;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
@@ -88,33 +87,6 @@ public class Inventory {
 	}
 	
 	/**
-	 * Returns the current selected item in the inventory
-	 * @return The item
-	 */
-	public Item getSelectedItem()
-	{
-		if(itemExists(selectedSlot)) {
-			return items.get(selectedSlot);
-		}
-		else {
-			return null;
-		}
-	}
-	
-	/**
-	 * Checks if an item exists in the inventory
-	 * @param index The index of the item to check for
-	 * @return If the item exists or not, true/false
-	 */
-	public boolean itemExists(int index) {
-		if(index < items.size()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	/**
 	 * Returns true if the inventory contains a specific item
 	 * @param keyName The name of the item
 	 * @return True if the item is in the inventory, false if not
@@ -137,6 +109,43 @@ public class Inventory {
 	 }
 	
 	/**
+	 * Returns the current selected item in the inventory
+	 * @return The item
+	 */
+	public Item getSelectedItem()
+	{
+		if(itemExists(selectedSlot)) {
+			return items.get(selectedSlot);
+		}
+		else {
+			return null;
+		}
+	}
+	
+	/**
+	 * Removes the selected item from the inventory
+	 */
+	public void deleteSelectedItem()
+	{
+		if(itemExists(selectedSlot)) {
+			items.remove(selectedSlot);
+		}
+	}
+	
+	/**
+	 * Checks if an item exists in the inventory
+	 * @param index The index of the item to check for
+	 * @return If the item exists or not, true/false
+	 */
+	public boolean itemExists(int index) {
+		if(index < items.size()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
 	 * Adds an item to the items ArrayList
 	 * @param item The item to be added
 	 */
@@ -144,6 +153,9 @@ public class Inventory {
 	{
 		if(items.size() < maxItemCount) {
 			items.add(item);
+		}
+		else {
+			setCurrentMessage("You can't pick up more than " + maxItemCount + " items!");
 		}
 	}
 	
@@ -162,7 +174,7 @@ public class Inventory {
 	 * Removes the item from the inventory with the given key value
 	 * @param keyValue The key value of the item
 	 */
-	public void removeItem(String keyValue)
+	public void deleteItem(String keyValue)
 	{
 		Iterator<Item> iterator = items.iterator();
 				
@@ -186,9 +198,7 @@ public class Inventory {
 		background.drawSprite(g);
 		
 		// Draw message
-		g.setColor(new Color(0, 0, 0));
-		g.drawString(currentMessage, 10, 500);
-		g.setColor(new Color(255, 255, 255));
+		g.drawString(currentMessage, 20, 500);
 		
 		// Draw selected slot
 		int slotOffsetLeft = 718 + (selectedSlot * 61);

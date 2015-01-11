@@ -43,7 +43,8 @@ public class Game extends BasicGame {
 		
 		scenes.put("ice", new GameScene("ice", 480, 270));
 		scenes.put("outside_headquarters", new GameScene("outside_headquarters", 15, 260));
-		scenes.put("headquarters", new GameScene("headquarters", 15, 260));
+		scenes.put("headquarters", new GameScene("headquarters", 75, 270));
+		scenes.put("drill", new GameScene("drill", 448, 15));
 		
 		currentScene = scenes.get("ice");
 		currentScene.setActive();

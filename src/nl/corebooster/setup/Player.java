@@ -63,6 +63,15 @@ public class Player {
 	}
 	
 	/**
+	 * Returns the size of the player
+	 * @return The size of the player
+	 */
+	public int getPlayerSize()
+	{
+		return playerSize;
+	}
+	
+	/**
 	 * Returns the X-position
 	 * @return The players x position
 	 */

@@ -225,11 +225,12 @@ public class GameScene {
 			case "ice":
 	
 				background = new Sprite("background", "img", "background1.png", false, 0, 0);
+				
+				sprites.put("switch_right", new Sprite("switch_right", "img", "vertical_line_transparent.png", true, TriggerType.SCENESWITCH, "outside_headquarters", 1, 960, 0));
 	
 				sprites.put("ice_cliff", new Sprite("ice_cliff", "sprites", "ice_cliff.png", true, 0, 0));
 				sprites.put("landingpad", new AnimatedSprite("landingpad", "sprites", "landingpad.png", true, TriggerType.MESSAGE, "This is a test message", 10, 50, 80, 384, 384, 1000));
 				sprites.put("spaceship", new Sprite("spaceship", "sprites", "spaceship_big.png", false, 104, 132));
-				sprites.put("trigger_right", new Sprite("trigger_right", "img", "vertical_line_transparent.png", true, TriggerType.SCENESWITCH, "outside_headquarters", 1, 960, 0));
 				
 				items.put("headquarters_entrance_key", new Item("headquarters_entrance_key", "Key to the HQ", ItemType.KEY, "key_hq_icon.png", "key_hq.png", 700, 80));
 				
@@ -243,11 +244,13 @@ public class GameScene {
 	
 				background = new Sprite("background", "img", "background2.png", false, 0, 0);
 	
-				sprites.put("bush", new Sprite("bush", "sprites", "bush.png", false, 50, 75));
+				sprites.put("switch_left", new Sprite("switch_left", "img", "vertical_line_transparent.png", true, TriggerType.SCENESWITCH, "ice", 1, 0, 0));
+				sprites.put("switch_bottom", new Sprite("switch_bottom", "img", "horizontal_line_transparent.png", true, TriggerType.SCENESWITCH, "drill", 1, 0, 540));
+				
+				sprites.put("bush", new Sprite("bush", "sprites", "bush.png", true, 50, 75));
 				sprites.put("headquarters", new Sprite("headquarters", "sprites", "headquarters.png", true, 600, 0));
 				sprites.put("headquarters_entrance_light", new Sprite("headquarters_entrance_light", "sprites", "headquarters_entrance_light.png", false, 440, 160));
-				sprites.put("headquarters_entrance", new Sprite("headquarters_entrance", "sprites", "headquarters_entrance.png", true, TriggerType.LOCKEDSCENESWITCH, "headquarters", 5, 500, 160));
-				sprites.put("trigger_left", new Sprite("trigger_left", "img", "vertical_line_transparent.png", true, TriggerType.SCENESWITCH, "ice", 1, 0, 0));
+				sprites.put("headquarters_entrance", new Sprite("headquarters_entrance", "sprites", "headquarters_entrance.png", true, TriggerType.LOCKEDSCENESWITCH, "headquarters", 0, 500, 160));
 				
 				items.put("cake", new Item("cake", "Very Tasty Spacecake", ItemType.SUPPLY, "cake_icon.png", "cake.png", 200, 50));
 				
@@ -261,6 +264,7 @@ public class GameScene {
 	
 				background = new Sprite("background", "img", "headquarters_background.png", false, 0, 0);
 	
+				sprites.put("headquarters_exit", new Sprite("headquarters_exit", "sprites", "headquarters_exit.png", true, TriggerType.SCENESWITCH, "outside_headquarters", 0, 0, 160));
 				sprites.put("cpanel", new AnimatedSprite("cpanel", "sprites", "cpanel.png", true, 185, 0, 685, 90, 200));
 				//sprites.put("trapdoor_scenetrigger", new Sprite("img", "trapdoor_transparent.png", true, TriggerType.SCENESWITCH, "outside_headquarters", 1, 10, 10));
 				sprites.put("trapdoor", new AnimatedSprite("trapdoor", "sprites", "trapdoor.png", false, TriggerType.ANIMATE, "trapdoor", 6, 10, 10, 90, 90, 50));
@@ -271,6 +275,26 @@ public class GameScene {
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
 	
+			break;
+			
+			// "Drill"-scene
+			case "drill":
+				
+				background = new Sprite("background", "img", "background3.png", false, 0, 0);
+				
+				sprites.put("switch_bottom", new Sprite("switch_top", "img", "horizontal_line_transparent.png", true, TriggerType.SCENESWITCH, "outside_headquarters", 1, 0, 0));
+				
+				sprites.put("middlecore", new AnimatedSprite("middlecore", "sprites", "middlecore.png", true, 352, 238, 64, 64, 500));
+				sprites.put("conveyer_1", new AnimatedSprite("conveyer_1", "sprites", "conveyer.png", true, 416, 238, 64, 64, 250));
+				sprites.put("conveyer_2", new AnimatedSprite("conveyer_2", "sprites", "conveyer.png", true, 480, 238, 64, 64, 250));
+				sprites.put("conveyer_3", new AnimatedSprite("conveyer_3", "sprites", "conveyer.png", true, 544, 238, 64, 64, 250));
+				sprites.put("rocks", new AnimatedSprite("rocks", "sprites", "rocks.png", false, 416, 238, 192, 64, 250));
+				sprites.put("rocks_2", new AnimatedSprite("rocks", "sprites", "rocks_2.png", false, 416, 238, 192, 64, 250));
+				sprites.put("burner", new AnimatedSprite("burner", "sprites", "burner.png", true, 608, 238, 64, 64, 100));
+				
+				bgMusicName = "GameSong01.ogg";
+				bgMusicVolume = 0.05f;
+				
 			break;
 		}
 		
@@ -306,7 +330,258 @@ public class GameScene {
 		
 		player.stopFootstepSound();
 	}
-
+	
+	/**
+	 * Handles user input
+	 * @param input The input key
+	 * @throws SlickException Indicates a failure to initialize the display 
+	 */
+	public void keyHandler(Input input) throws SlickException
+	{
+		// Checks if the player is colliding with a sprite
+		boolean isColliding = player.isCollidingWith(sprites);
+		
+		if(!isColliding) {
+			// Move player
+			if(input.isKeyDown(Input.KEY_LEFT)) {
+				if(player.canMoveLeft(0)) {
+					player.moveLeft();
+				}
+				
+				if(!player.isFootstepSoundPlaying()) {
+					player.stopFootstepSound();
+					player.playFootstepSound();
+				}
+			}
+			
+			else if(input.isKeyDown(Input.KEY_RIGHT)) {
+				if(player.canMoveRight(screenWidth)) {
+					player.moveRight();
+				}
+				
+				if(!player.isFootstepSoundPlaying()) {
+					player.stopFootstepSound();
+					player.playFootstepSound();
+				}
+			}
+			
+			else if(input.isKeyDown(Input.KEY_UP)) {
+				if(player.canMoveUp(0)) {
+					player.moveUp();
+				}
+				
+				if(!player.isFootstepSoundPlaying()) {
+					player.stopFootstepSound();
+					player.playFootstepSound();
+				}
+			}
+			
+			else if(input.isKeyDown(Input.KEY_DOWN)) {
+				if(player.canMoveDown(screenHeight)) {
+					player.moveDown();
+				}
+				
+				if(!player.isFootstepSoundPlaying()) {
+					player.stopFootstepSound();
+					player.playFootstepSound();
+				}
+			}
+			
+			else {
+				player.stopAnimation();
+				player.stopFootstepSound();
+			}
+			
+			// Calls the inventory key handler
+			// Only called when player is not colliding with a sprite
+			inventoryKeyHandler(input);
+		} 
+		else {
+			if(player.getRotation() == 270) {
+				player.setX(player.getX() + 1);
+			} 
+			else if(player.getRotation() == 90) {
+				player.setX(player.getX() - 1);
+			} 
+			else if(player.getRotation() == 0) {
+				player.setY(player.getY() + 1);
+			} 
+			else if(player.getRotation() == 180) {
+				player.setY(player.getY() - 1);
+			}
+		}
+	}
+	
+	/**
+	 * Handles the inventory keys
+	 * @param input The input key
+	 */
+	private void inventoryKeyHandler(Input input)
+	{
+		if(input.isKeyDown(Input.KEY_1)) {
+			inventory.setSelectedSlot(0);
+		} 
+		else if(input.isKeyDown(Input.KEY_2)) {
+			inventory.setSelectedSlot(1);
+		} 
+		else if(input.isKeyDown(Input.KEY_3)) {
+			inventory.setSelectedSlot(2);
+		} 
+		else if(input.isKeyDown(Input.KEY_4)) {
+			inventory.setSelectedSlot(3);
+		}
+		
+		if(input.isKeyPressed(Input.KEY_D)) {
+			dropItem();
+		}
+	}
+	
+	/**
+	 * Drops the selected item
+	 */
+	private void dropItem() {
+		Item selectedItem = inventory.getSelectedItem();
+		
+		if(selectedItem != null) {
+			// Player info and drop distance
+			int x = player.getX();
+			int y = player.getY();
+			int playerSize = player.getPlayerSize();
+			int rotation = player.getRotation();
+			int dropDistance = 20;
+			
+			System.out.println("Player X: " + x);
+			System.out.println("Player Y: " + y);
+			
+			// Item info
+			String selectedItemName = selectedItem.getKeyValue();
+			int itemWidth = selectedItem.getItemWidth();
+			int itemHeight = selectedItem.getItemHeight();
+			
+			// Calculate the drop position
+			switch(rotation) {
+				case 0:
+					y -= (itemHeight + dropDistance);
+				break;
+				
+				case 90:
+					x += (playerSize + dropDistance);
+				break;
+				
+				case 180:
+					y += (playerSize + dropDistance);
+				break;
+				
+				case 270:
+					x -= (dropDistance + itemWidth);
+				break;
+			}
+			
+			System.out.println("Item X: " + x);
+			System.out.println("Item Y: " + y);
+			
+			// Update item position
+			if(x > 0 && y > 0 && x < screenWidth && y < screenHeight) {
+				inventory.deleteSelectedItem();
+				selectedItem.moveItem(x, y);
+				items.put(selectedItemName, selectedItem);
+			}
+			else {
+				inventory.setCurrentMessage("Can't drop this item here!");
+			}
+		}
+	}
+	
+	/**
+	 * Checks if the player is triggering an event
+	 */
+	public void triggerHandler() 
+	{
+		TriggerBox currentTriggerBoxSprites = player.getCurrentTriggerBox(sprites);
+		TriggerBox currentTriggerBoxItems = player.getCurrentItemTriggerBox(items);
+		
+		triggerBoxHandler(currentTriggerBoxSprites);
+		triggerBoxHandler(currentTriggerBoxItems);
+	}
+	
+	/**
+	 * Handles all the types of trigger boxes
+	 * @param currentTriggerBox The trigger box to check
+	 */
+	private void triggerBoxHandler(TriggerBox currentTriggerBox)
+	{
+		if(currentTriggerBox != null) {
+			
+			String itemName = currentTriggerBox.getObjectName();
+			
+			switch(currentTriggerBox.getTriggerType()) {
+				case SCENESWITCH:
+					
+					nextScene = currentTriggerBox.getValue();
+					currentTriggerBox.resetTrigger();
+					
+				break;
+				
+				case LOCKEDSCENESWITCH:
+					 
+					String keyName = itemName + "_key";
+					 
+					if(inventory.hasItemSelected(keyName) || currentTriggerBox.isTriggered()) {
+						nextScene = currentTriggerBox.getValue();
+						currentTriggerBox.setTriggered();
+						 
+						// Remove key from inventory
+						inventory.deleteItem(keyName);
+					}
+					else {
+						Item selectedItem = inventory.getSelectedItem();
+						
+						if(selectedItem != null) {
+							inventory.setCurrentMessage("You can't open this door with a " + selectedItem.getItemName() + "!");
+						}
+						else {
+							inventory.setCurrentMessage("You don't have the required key for this door!");
+						}
+					}
+					 
+					 
+					 break;
+				
+				case MESSAGE:
+					
+					inventory.setCurrentMessage(currentTriggerBox.getValue());
+					
+				break;
+				
+				case ANIMATE:
+					
+					AnimatedSprite animatedSprite = (AnimatedSprite) sprites.get(itemName);
+					
+					animatedSprite.playAnimationOnce();
+					
+					currentTriggerBox.resetTrigger();
+					
+				break;
+				
+				case ITEM:
+					
+					currentTriggerBox.setTriggered();
+					Item item = items.get(itemName);
+					items.remove(itemName);
+					
+					inventory.addItem(item);
+					inventory.setCurrentMessage(currentTriggerBox.getValue());
+					
+				break;
+				
+				default:
+					// Do nothing
+				break;
+				
+			}
+		}
+	}
+	
 	/**
 	 * Renders the scene
 	 * @param g The graphics to draw the scene on
@@ -368,223 +643,6 @@ public class GameScene {
 		
 		// Draw the overlay
 		overlay.drawSprite(g);
-	}
-	
-	/**
-	 * Handles user input
-	 * @param input The input key
-	 * @throws SlickException Indicates a failure to initialize the display 
-	 */
-	public void keyHandler(Input input) throws SlickException
-	{
-		// Checks if the player is colliding with a sprite
-		boolean isColliding = player.isCollidingWith(sprites);
-		
-		if(!isColliding) {
-			if(input.isKeyDown(Input.KEY_LEFT)) {
-				if(player.canMoveLeft(0)) {
-					player.moveLeft();
-				}
-				
-				if(!player.isFootstepSoundPlaying()) {
-					player.stopFootstepSound();
-					player.playFootstepSound();
-				}
-			}
-			
-			else if(input.isKeyDown(Input.KEY_RIGHT)) {
-				if(player.canMoveRight(screenWidth)) {
-					player.moveRight();
-				}
-				
-				if(!player.isFootstepSoundPlaying()) {
-					player.stopFootstepSound();
-					player.playFootstepSound();
-				}
-			}
-			
-			else if(input.isKeyDown(Input.KEY_UP)) {
-				if(player.canMoveUp(0)) {
-					player.moveUp();
-				}
-				
-				if(!player.isFootstepSoundPlaying()) {
-					player.stopFootstepSound();
-					player.playFootstepSound();
-				}
-			}
-			
-			else if(input.isKeyDown(Input.KEY_DOWN)) {
-				if(player.canMoveDown(screenHeight)) {
-					player.moveDown();
-				}
-				
-				if(!player.isFootstepSoundPlaying()) {
-					player.stopFootstepSound();
-					player.playFootstepSound();
-				}
-			}
-			
-			else {
-				player.stopAnimation();
-				player.stopFootstepSound();
-			}
-		} 
-		else {
-			if(player.getRotation() == 270) {
-				player.setX(player.getX() + 1);
-			} 
-			else if(player.getRotation() == 90) {
-				player.setX(player.getX() - 1);
-			} 
-			else if(player.getRotation() == 0) {
-				player.setY(player.getY() + 1);
-			} 
-			else if(player.getRotation() == 180) {
-				player.setY(player.getY() - 1);
-			}
-		}
-		
-		// Calls the inventory key handler
-		inventoryKeyHandler(input);
-	}
-	
-	/**
-	 * Handles the inventory keys
-	 * @param input The input key
-	 */
-	private void inventoryKeyHandler(Input input)
-	{
-		if(input.isKeyDown(Input.KEY_1)) {
-			inventory.setSelectedSlot(0);
-		} else if(input.isKeyDown(Input.KEY_2)) {
-			inventory.setSelectedSlot(1);
-		} else if(input.isKeyDown(Input.KEY_3)) {
-			inventory.setSelectedSlot(2);
-		} else if(input.isKeyDown(Input.KEY_4)) {
-			inventory.setSelectedSlot(3);
-		}
-	}
-	
-	/**
-	 * Drops an item with a specific index
-	 * @param index The index of the item to be dropped
-	 */
-	private void dropItem(int index) {
-		if(inventory.itemExists(index)) {
-			Item currentItem = inventory.getItem(index);
-			String currentItemName = currentItem.getKeyValue();
-			inventory.deleteItem(index);
-			
-			int x = player.getX();
-			int y = player.getY();
-			int rotation = player.getRotation();
-			int itemWidth = currentItem.getSprite().getImage().getWidth();
-			int itemOffset = 75;
-			
-			if(rotation == 0) {
-				y -= itemOffset;
-			} else if(rotation == 90) {
-				x += itemOffset;
-			} else if(rotation == 180) {
-				y += itemOffset;
-			} else if(rotation == 270) {
-				x -= (itemOffset - itemWidth);
-			}
-			
-			currentItem.getSprite().setX(x);
-			currentItem.getSprite().setY(y);
-			items.put(currentItemName, currentItem);
-		}
-	}
-	
-	/**
-	 * Checks if the player is triggering an event
-	 */
-	public void triggerHandler() 
-	{
-		TriggerBox currentTriggerBoxSprites = player.getCurrentTriggerBox(sprites);
-		TriggerBox currentTriggerBoxItems = player.getCurrentItemTriggerBox(items);
-		
-		triggerBoxHandler(currentTriggerBoxSprites);
-		triggerBoxHandler(currentTriggerBoxItems);
-	}
-	
-	/**
-	 * Handles all the types of trigger boxes
-	 * @param currentTriggerBox The trigger box to check
-	 */
-	private void triggerBoxHandler(TriggerBox currentTriggerBox)
-	{
-		if(currentTriggerBox != null && currentTriggerBox.isTriggered() == false) {
-			
-			String itemName = currentTriggerBox.getObjectName();
-			
-			switch(currentTriggerBox.getTriggerType()) {
-				case SCENESWITCH:
-					
-					nextScene = currentTriggerBox.getValue();
-					currentTriggerBox.resetTrigger();
-					
-				break;
-				
-				case LOCKEDSCENESWITCH:
-					 
-					String keyName = itemName + "_key";
-					 
-					if(inventory.hasItemSelected(keyName) || currentTriggerBox.isTriggered()) {
-						nextScene = currentTriggerBox.getValue();
-						currentTriggerBox.setTriggered();
-						 
-						// Remove key from inventory
-						inventory.removeItem(keyName);
-					}
-					else {
-						Item selectedItem = inventory.getSelectedItem();
-						
-						if(selectedItem != null) {
-							inventory.setCurrentMessage("You can't open this door with a " + selectedItem.getItemName() + "!");
-						}
-						else {
-							inventory.setCurrentMessage("You don't have the required key for this door!");
-						}
-					}
-					 
-					 
-					 break;
-				
-				case MESSAGE:
-					
-					inventory.setCurrentMessage(currentTriggerBox.getValue());
-					
-				break;
-				
-				case ANIMATE:
-					
-					AnimatedSprite animatedSprite = (AnimatedSprite) sprites.get(itemName);
-					
-					animatedSprite.playAnimationOnce();
-					
-					currentTriggerBox.resetTrigger();
-					
-				break;
-				
-				case ITEM:
-					
-					Item item = items.get(itemName);
-					items.remove(itemName);
-					
-					inventory.addItem(item);
-					inventory.setCurrentMessage(currentTriggerBox.getValue());
-					
-				break;
-				
-				default:
-					// Do nothing
-				break;
-				
-			}
-		}
 	}
 	
 }

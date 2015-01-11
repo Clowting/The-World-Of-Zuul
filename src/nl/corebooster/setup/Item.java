@@ -38,7 +38,7 @@ public class Item {
 		this.itemName = itemName;
 		this.itemType = itemType;
 		itemIcon = new Sprite(keyValue, "items", itemIconName, false, 0, 484);
-		sprite = new Sprite(keyValue, "items", spriteName, false, TriggerType.ITEM, "You picked up a " + itemName, 5, x, y);
+		sprite = new Sprite(keyValue, "items", spriteName, false, TriggerType.ITEM, "You picked up a " + itemName, 0, x, y);
 	}
 	
 	/**
@@ -86,5 +86,33 @@ public class Item {
 		return sprite;
 	}
 	
+	/**
+	 * Returns the width of the item
+	 * @return The width of the item
+	 */
+	public int getItemWidth()
+	{
+		return sprite.getImage().getWidth();
+	}
+	
+	/**
+	 * Returns the height of the item
+	 * @return The height of the item
+	 */
+	public int getItemHeight()
+	{
+		return sprite.getImage().getHeight();
+	}
+	
+	/**
+	 * Moves the item to the given X and Y position on the map
+	 * @param x The new X-coordinate for the item
+	 * @param y The new Y-coordinate for the item
+	 */
+	public void moveItem(int x, int y)
+	{
+		sprite.setX(x);
+		sprite.setY(y);
+	}
 	
 }

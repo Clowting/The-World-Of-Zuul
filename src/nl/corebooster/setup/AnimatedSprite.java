@@ -21,7 +21,7 @@ public class AnimatedSprite {
 	private SpriteSheet spritesheet;
 	private Animation spritesheetAnimation;
 	private int x, y;
-	private float alpha;
+	private int alpha;
 	
 	/**
 	 * Constructs a new animated sprite from a spritesheet
@@ -52,7 +52,7 @@ public class AnimatedSprite {
 		
 		this.x = x;
 		this.y = y;
-		this.alpha = 1f;
+		alpha = 255;
 	}
 	
 	/**
@@ -92,6 +92,7 @@ public class AnimatedSprite {
 		
 		this.x = x;
 		this.y = y;
+		alpha = 255;
 	}
 	
 	/**
@@ -187,7 +188,7 @@ public class AnimatedSprite {
 	 * Updates the alpha of the sprite to the given alpha float value
 	 * @param alpha The new alpha value
 	 */
-	public void setAlpha(float alpha)
+	public void setAlpha(int alpha)
 	{
 		//if(alpha >= 0 && alpha <= 1) {
 			this.alpha = alpha;
@@ -216,8 +217,8 @@ public class AnimatedSprite {
 	 */
 	public void drawSprite(Graphics g)
 	{		
-		Color alphaFilter = new Color(255, 255, 255);
-		alphaFilter.a = alpha;
+		Color alphaFilter = new Color(255, 255, 255, alpha);
+		//alphaFilter.a = alpha;
 			
 		g.drawAnimation(spritesheetAnimation, x, y, alphaFilter);
 	}

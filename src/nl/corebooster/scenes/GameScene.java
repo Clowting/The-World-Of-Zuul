@@ -58,7 +58,7 @@ public class GameScene {
 		
 		// Rainbow overlay
 		overlay = new AnimatedSprite("overlay", "sprites", "spacecake_effect.png", false, 0, 0, 960, 540, 50);
-		overlay.setAlpha(0f);
+		overlay.setAlpha(0);
 		overlay.stopAnimation();
 		
 		this.sceneName = sceneName;
@@ -509,10 +509,10 @@ public class GameScene {
 					
 					if(overlay.isStopped()) {
 						overlay.startAnimation();
-						overlay.setAlpha(1f);
+						overlay.setAlpha(255);
 					}
 					else {
-						overlay.setAlpha(0f);
+						overlay.setAlpha(0);
 						overlay.stopAnimation();
 					}
 					

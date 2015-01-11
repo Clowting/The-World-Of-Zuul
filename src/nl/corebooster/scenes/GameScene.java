@@ -58,6 +58,8 @@ public class GameScene {
 		
 		// Rainbow overlay
 		overlay = new AnimatedSprite("overlay", "sprites", "spacecake_effect.png", false, 0, 0, 960, 540, 50);
+		overlay.setAlpha(0f);
+		overlay.stopAnimation();
 		
 		this.sceneName = sceneName;
 		nextScene = null;
@@ -224,7 +226,7 @@ public class GameScene {
 	
 				background = new Sprite("background", "img", "background1.png", false, 0, 0);
 				
-				sprites.put("switch_right", new Sprite("switch_right", "img", "vertical_line_transparent.png", true, TriggerType.SCENESWITCH, 90, "outside_headquarters", 1, 960, 0));
+				sprites.put("switch_right", new Sprite("switch_right", "img", "vertical_line_transparent.png", false, TriggerType.SCENESWITCH, 90, "outside_headquarters", 0, 959, 0));
 	
 				sprites.put("ice_cliff", new Sprite("ice_cliff", "sprites", "ice_cliff.png", true, 0, 0));
 				sprites.put("landingpad", new AnimatedSprite("landingpad", "sprites", "landingpad.png", true, TriggerType.MESSAGE, -1, "This is a test message", 10, 50, 80, 384, 384, 1000));
@@ -242,8 +244,8 @@ public class GameScene {
 	
 				background = new Sprite("background", "img", "background2.png", false, 0, 0);
 	
-				sprites.put("switch_left", new Sprite("switch_left", "img", "vertical_line_transparent.png", true, TriggerType.SCENESWITCH, 270, "ice", 1, 0, 0));
-				sprites.put("switch_bottom", new Sprite("switch_bottom", "img", "horizontal_line_transparent.png", true, TriggerType.SCENESWITCH, 180, "drill", 1, 0, 540));
+				sprites.put("switch_left", new Sprite("switch_left", "img", "vertical_line_transparent.png", false, TriggerType.SCENESWITCH, 270, "ice", 0, 0, 0));
+				sprites.put("switch_bottom", new Sprite("switch_bottom", "img", "horizontal_line_transparent.png", false, TriggerType.SCENESWITCH, 180, "drill", 0, 0, 539));
 				
 				sprites.put("bush", new Sprite("bush", "sprites", "bush.png", true, 50, 75));
 				sprites.put("headquarters", new Sprite("headquarters", "sprites", "headquarters.png", true, 600, 0));
@@ -280,7 +282,7 @@ public class GameScene {
 				
 				background = new Sprite("background", "img", "background3.png", false, 0, 0);
 				
-				sprites.put("switch_top", new Sprite("switch_top", "img", "horizontal_line_transparent.png", true, TriggerType.SCENESWITCH, 0, "outside_headquarters", 1, 0, 0));
+				sprites.put("switch_top", new Sprite("switch_top", "img", "horizontal_line_transparent.png", false, TriggerType.SCENESWITCH, 0, "outside_headquarters", 0, 0, 1));
 				
 				sprites.put("middlecore", new AnimatedSprite("middlecore", "sprites", "middlecore.png", true, 352, 238, 64, 64, 500));
 				sprites.put("conveyer_1", new AnimatedSprite("conveyer_1", "sprites", "conveyer.png", true, 416, 238, 64, 64, 250));
@@ -505,16 +507,15 @@ public class GameScene {
 			
 				case SPACECAKE:
 					
-					
-					
-					long start = System.currentTimeMillis();
-					long end = start + 5*1000; // 5 seconds * 1000 ms/sec
-					while(System.currentTimeMillis() <= end)
-					{
-					    if(System.currentTimeMillis() == end) {
-					    	
-					    }
+					if(overlay.isStopped()) {
+						overlay.startAnimation();
+						overlay.setAlpha(1f);
 					}
+					else {
+						overlay.setAlpha(0f);
+						overlay.stopAnimation();
+					}
+					
 					
 				break;
 			
@@ -682,7 +683,9 @@ public class GameScene {
 		inventory.render(g);
 		
 		// Draw the overlay
-		overlay.drawSprite(g);
+		if(overlay != null) {
+			overlay.drawSprite(g);
+		}
 	}
 	
 }

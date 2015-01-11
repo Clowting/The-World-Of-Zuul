@@ -3,6 +3,7 @@ package nl.corebooster.setup;
 import nl.corebooster.setup.TriggerBox.TriggerType;
 
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
@@ -20,6 +21,7 @@ public class AnimatedSprite {
 	private SpriteSheet spritesheet;
 	private Animation spritesheetAnimation;
 	private int x, y;
+	private float alpha;
 	
 	/**
 	 * Constructs a new animated sprite from a spritesheet
@@ -50,6 +52,7 @@ public class AnimatedSprite {
 		
 		this.x = x;
 		this.y = y;
+		this.alpha = 1f;
 	}
 	
 	/**
@@ -145,6 +148,15 @@ public class AnimatedSprite {
 	}
 	
 	/**
+	 * Returns the alpha value of the animation
+	 * @return The alpha value
+	 */
+	public float getAlpha()
+	{
+		return alpha;
+	}
+	
+	/**
 	 * Sets a new name for the sprite
 	 * @param spriteName The new name
 	 */
@@ -172,6 +184,17 @@ public class AnimatedSprite {
 	}
 	
 	/**
+	 * Updates the alpha of the sprite to the given alpha float value
+	 * @param alpha The new alpha value
+	 */
+	public void setAlpha(float alpha)
+	{
+		//if(alpha >= 0 && alpha <= 1) {
+			this.alpha = alpha;
+		//}
+	}
+	
+	/**
 	 * Gets a spritesheet image from the given location
 	 * @param folder The folder where the spritesheet is located
 	 * @param filename The filename of the spritesheet
@@ -192,8 +215,11 @@ public class AnimatedSprite {
 	 * @param g The graphics to draw the animated sprite on
 	 */
 	public void drawSprite(Graphics g)
-	{
-		g.drawAnimation(spritesheetAnimation, x, y);
+	{		
+		Color alphaFilter = new Color(255, 255, 255);
+		alphaFilter.a = alpha;
+			
+		g.drawAnimation(spritesheetAnimation, x, y, alphaFilter);
 	}
 	
 	/**

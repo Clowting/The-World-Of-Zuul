@@ -58,6 +58,7 @@ public class AnimatedSprite {
 	 * @param filename The filename of the spritesheet
 	 * @param isCollidable Depends if you can collide with the animated sprite or not, true/false
 	 * @param triggerType The type of trigger called when collided, SCENESWITCH/MESSAGE/ANIMATE
+	 * @param triggerDirection The direction the player has to approach from for the trigger to work
 	 * @param triggerValue The value of the trigger called when collided
 	 * @param triggerMargin The margin of the trigger box
 	 * @param x The initial x position of the animated sprite

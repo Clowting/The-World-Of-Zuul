@@ -1,8 +1,6 @@
 package nl.corebooster.scenes;
 
 import java.util.LinkedHashMap;
-import java.util.Timer;
-
 import nl.corebooster.setup.AnimatedSprite;
 import nl.corebooster.setup.Inventory;
 import nl.corebooster.setup.Item;
@@ -33,7 +31,7 @@ public class GameScene {
 	private Sprite background;
 	private Player player;
 	private Inventory inventory;
-	private Sprite overlay;
+	private AnimatedSprite overlay;
 	
 	private String sceneName;
 	private String nextScene;
@@ -58,9 +56,8 @@ public class GameScene {
 		player = new Player(playerX, playerY);
 		inventory = new Inventory();
 		
-		// Black overlay for fade in and fade out
-		overlay = new Sprite("overlay", "img", "overlay.png", false, 0, 0);
-		overlay.getImage().setAlpha(0);
+		// Rainbow overlay
+		overlay = new AnimatedSprite("overlay", "sprites", "spacecake_effect.png", false, 0, 0, 960, 540, 50);
 		
 		this.sceneName = sceneName;
 		nextScene = null;
@@ -96,7 +93,7 @@ public class GameScene {
 	 * Returns the overlay
 	 * @return The sprite object of the overlay
 	 */
-	public Sprite getOverlay()
+	public AnimatedSprite getOverlay()
 	{
 		return overlay;
 	}
@@ -503,18 +500,21 @@ public class GameScene {
 		Item selectedItem = inventory.getSelectedItem();
 		
 		if(selectedItem != null) {
-			
-			Timer timer = new Timer();
 		
 			switch(selectedItem.getItemType()) {
 			
 				case SPACECAKE:
 					
-					System.out.println("DUS JIJ DENKT...");
 					
 					
-					
-					System.out.println("DIT IS FISSA!");
+					long start = System.currentTimeMillis();
+					long end = start + 5*1000; // 5 seconds * 1000 ms/sec
+					while(System.currentTimeMillis() <= end)
+					{
+					    if(System.currentTimeMillis() == end) {
+					    	
+					    }
+					}
 					
 				break;
 			

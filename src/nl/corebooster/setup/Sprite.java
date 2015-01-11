@@ -64,7 +64,7 @@ public class Sprite {
 	 * @param y The initial y position of the sprite
 	 * @throws SlickException Indicates a failure to initialize the display 
 	 */
-	public Sprite(String spriteName, String folder, String filename, boolean isCollidable, TriggerType triggerType, String triggerValue, int triggerMargin, int x, int y) throws SlickException
+	public Sprite(String spriteName, String folder, String filename, boolean isCollidable, TriggerType triggerType, int triggerDirection, String triggerValue, int triggerMargin, int x, int y) throws SlickException
 	{
 		this.spriteName = spriteName;
 		this.image = getImage(folder, filename);
@@ -79,7 +79,7 @@ public class Sprite {
 			collisionbox = null;
 		}
 		
-		this.triggerbox = new TriggerBox(spriteName, triggerType, triggerValue, x, y, image.getWidth(), image.getHeight(), triggerMargin);
+		this.triggerbox = new TriggerBox(spriteName, triggerType, triggerDirection, triggerValue, x, y, image.getWidth(), image.getHeight(), triggerMargin);
 		
 		this.x = x;
 		this.y = y;

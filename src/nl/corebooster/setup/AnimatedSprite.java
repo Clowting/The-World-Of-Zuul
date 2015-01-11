@@ -67,7 +67,7 @@ public class AnimatedSprite {
 	 * @param interval The animation interval
 	 * @throws SlickException Indicates a failure to initialize the display
 	 */
-	public AnimatedSprite(String spriteName, String folder, String filename, boolean isCollidable, TriggerType triggerType, String triggerValue, int triggerMargin, int x, int y, int width, int height, int interval) throws SlickException
+	public AnimatedSprite(String spriteName, String folder, String filename, boolean isCollidable, TriggerType triggerType, int triggerDirection, String triggerValue, int triggerMargin, int x, int y, int width, int height, int interval) throws SlickException
 	{
 		this.spriteName = spriteName;
 		this.spritesheet = getSpriteSheet(folder, filename, width, height);
@@ -80,7 +80,7 @@ public class AnimatedSprite {
 			collisionbox = null;
 		}
 		
-		this.triggerbox = new TriggerBox(spriteName, triggerType, triggerValue, x, y, width, height, triggerMargin);
+		this.triggerbox = new TriggerBox(spriteName, triggerType, triggerDirection, triggerValue, x, y, width, height, triggerMargin);
 		
 		if(triggerType == TriggerType.ANIMATE) {
 			stopAnimation();

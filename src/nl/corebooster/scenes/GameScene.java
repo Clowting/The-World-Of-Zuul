@@ -1,6 +1,7 @@
 package nl.corebooster.scenes;
 
 import java.util.LinkedHashMap;
+import java.util.Timer;
 
 import nl.corebooster.setup.AnimatedSprite;
 import nl.corebooster.setup.Inventory;
@@ -226,10 +227,10 @@ public class GameScene {
 	
 				background = new Sprite("background", "img", "background1.png", false, 0, 0);
 				
-				sprites.put("switch_right", new Sprite("switch_right", "img", "vertical_line_transparent.png", true, TriggerType.SCENESWITCH, "outside_headquarters", 1, 960, 0));
+				sprites.put("switch_right", new Sprite("switch_right", "img", "vertical_line_transparent.png", true, TriggerType.SCENESWITCH, 90, "outside_headquarters", 1, 960, 0));
 	
 				sprites.put("ice_cliff", new Sprite("ice_cliff", "sprites", "ice_cliff.png", true, 0, 0));
-				sprites.put("landingpad", new AnimatedSprite("landingpad", "sprites", "landingpad.png", true, TriggerType.MESSAGE, "This is a test message", 10, 50, 80, 384, 384, 1000));
+				sprites.put("landingpad", new AnimatedSprite("landingpad", "sprites", "landingpad.png", true, TriggerType.MESSAGE, -1, "This is a test message", 10, 50, 80, 384, 384, 1000));
 				sprites.put("spaceship", new Sprite("spaceship", "sprites", "spaceship_big.png", false, 104, 132));
 				
 				items.put("headquarters_entrance_key", new Item("headquarters_entrance_key", "Key to the HQ", ItemType.KEY, "key_hq_icon.png", "key_hq.png", 700, 80));
@@ -244,15 +245,15 @@ public class GameScene {
 	
 				background = new Sprite("background", "img", "background2.png", false, 0, 0);
 	
-				sprites.put("switch_left", new Sprite("switch_left", "img", "vertical_line_transparent.png", true, TriggerType.SCENESWITCH, "ice", 1, 0, 0));
-				sprites.put("switch_bottom", new Sprite("switch_bottom", "img", "horizontal_line_transparent.png", true, TriggerType.SCENESWITCH, "drill", 1, 0, 540));
+				sprites.put("switch_left", new Sprite("switch_left", "img", "vertical_line_transparent.png", true, TriggerType.SCENESWITCH, 270, "ice", 1, 0, 0));
+				sprites.put("switch_bottom", new Sprite("switch_bottom", "img", "horizontal_line_transparent.png", true, TriggerType.SCENESWITCH, 180, "drill", 1, 0, 540));
 				
 				sprites.put("bush", new Sprite("bush", "sprites", "bush.png", true, 50, 75));
 				sprites.put("headquarters", new Sprite("headquarters", "sprites", "headquarters.png", true, 600, 0));
 				sprites.put("headquarters_entrance_light", new Sprite("headquarters_entrance_light", "sprites", "headquarters_entrance_light.png", false, 440, 160));
-				sprites.put("headquarters_entrance", new Sprite("headquarters_entrance", "sprites", "headquarters_entrance.png", true, TriggerType.LOCKEDSCENESWITCH, "headquarters", 0, 500, 160));
+				sprites.put("headquarters_entrance", new Sprite("headquarters_entrance", "sprites", "headquarters_entrance.png", true, TriggerType.LOCKEDSCENESWITCH, 90, "headquarters", 0, 500, 160));
 				
-				items.put("cake", new Item("cake", "Very Tasty Spacecake", ItemType.SUPPLY, "cake_icon.png", "cake.png", 200, 50));
+				items.put("cake", new Item("cake", "Very Tasty Spacecake", ItemType.SPACECAKE, "cake_icon.png", "cake.png", 200, 50));
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
@@ -264,13 +265,13 @@ public class GameScene {
 	
 				background = new Sprite("background", "img", "headquarters_background.png", false, 0, 0);
 	
-				sprites.put("headquarters_exit", new Sprite("headquarters_exit", "sprites", "headquarters_exit.png", true, TriggerType.SCENESWITCH, "outside_headquarters", 0, 0, 160));
+				sprites.put("headquarters_exit", new Sprite("headquarters_exit", "sprites", "headquarters_exit.png", true, TriggerType.SCENESWITCH, 270, "outside_headquarters", 0, 0, 160));
 				sprites.put("cpanel", new AnimatedSprite("cpanel", "sprites", "cpanel.png", true, 185, 0, 685, 90, 200));
 				//sprites.put("trapdoor_scenetrigger", new Sprite("img", "trapdoor_transparent.png", true, TriggerType.SCENESWITCH, "outside_headquarters", 1, 10, 10));
-				sprites.put("trapdoor", new AnimatedSprite("trapdoor", "sprites", "trapdoor.png", false, TriggerType.ANIMATE, "trapdoor", 6, 10, 10, 90, 90, 50));
+				sprites.put("trapdoor", new AnimatedSprite("trapdoor", "sprites", "trapdoor.png", false, TriggerType.ANIMATE, -1, "trapdoor", 6, 10, 10, 90, 90, 50));
 				sprites.put("liquid_transporter", new AnimatedSprite("liquid_transporter", "sprites", "liquid_transporter.png", true, 860, 210, 70, 210, 100));
 				sprites.put("radar", new AnimatedSprite("radar", "sprites", "radar.png", true, 425, 240, 95, 95, 150));
-				sprites.put("npc_1", new Sprite("npc_1", "sprites", "npc_red_up.png", true, TriggerType.MESSAGE, "You touch my tralala!", 10, 438, 430));
+				sprites.put("npc_1", new Sprite("npc_1", "sprites", "npc_red_up.png", true, TriggerType.MESSAGE, -1, "You touch my tralala!", 10, 438, 430));
 	
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
@@ -282,7 +283,7 @@ public class GameScene {
 				
 				background = new Sprite("background", "img", "background3.png", false, 0, 0);
 				
-				sprites.put("switch_bottom", new Sprite("switch_top", "img", "horizontal_line_transparent.png", true, TriggerType.SCENESWITCH, "outside_headquarters", 1, 0, 0));
+				sprites.put("switch_top", new Sprite("switch_top", "img", "horizontal_line_transparent.png", true, TriggerType.SCENESWITCH, 0, "outside_headquarters", 1, 0, 0));
 				
 				sprites.put("middlecore", new AnimatedSprite("middlecore", "sprites", "middlecore.png", true, 352, 238, 64, 64, 500));
 				sprites.put("conveyer_1", new AnimatedSprite("conveyer_1", "sprites", "conveyer.png", true, 416, 238, 64, 64, 250));
@@ -433,6 +434,8 @@ public class GameScene {
 		
 		if(input.isKeyPressed(Input.KEY_D)) {
 			dropItem();
+		} else if(input.isKeyPressed(Input.KEY_SPACE)) {
+			useItem();
 		}
 	}
 	
@@ -493,6 +496,38 @@ public class GameScene {
 	}
 	
 	/**
+	 * Allows you to use an item
+	 */
+	private void useItem()
+	{
+		Item selectedItem = inventory.getSelectedItem();
+		
+		if(selectedItem != null) {
+			
+			Timer timer = new Timer();
+		
+			switch(selectedItem.getItemType()) {
+			
+				case SPACECAKE:
+					
+					System.out.println("DUS JIJ DENKT...");
+					
+					
+					
+					System.out.println("DIT IS FISSA!");
+					
+				break;
+			
+				default:
+					
+				break;
+				
+			}
+		}
+		
+	}
+	
+	/**
 	 * Checks if the player is triggering an event
 	 */
 	public void triggerHandler() 
@@ -517,30 +552,35 @@ public class GameScene {
 			switch(currentTriggerBox.getTriggerType()) {
 				case SCENESWITCH:
 					
-					nextScene = currentTriggerBox.getValue();
-					currentTriggerBox.resetTrigger();
+					if(player.getRotation() == currentTriggerBox.getTriggerDirection()) {
+						nextScene = currentTriggerBox.getValue();
+						currentTriggerBox.resetTrigger();
+					}
+					
 					
 				break;
 				
 				case LOCKEDSCENESWITCH:
-					 
-					String keyName = itemName + "_key";
-					 
-					if(inventory.hasItemSelected(keyName) || currentTriggerBox.isTriggered()) {
-						nextScene = currentTriggerBox.getValue();
-						currentTriggerBox.setTriggered();
+					
+					if(player.getRotation() == currentTriggerBox.getTriggerDirection()) {
+						String keyName = itemName + "_key";
 						 
-						// Remove key from inventory
-						inventory.deleteItem(keyName);
-					}
-					else {
-						Item selectedItem = inventory.getSelectedItem();
-						
-						if(selectedItem != null) {
-							inventory.setCurrentMessage("You can't open this door with a " + selectedItem.getItemName() + "!");
+						if(inventory.hasItemSelected(keyName) || currentTriggerBox.isTriggered()) {
+							nextScene = currentTriggerBox.getValue();
+							currentTriggerBox.setTriggered();
+							 
+							// Remove key from inventory
+							inventory.deleteItem(keyName);
 						}
 						else {
-							inventory.setCurrentMessage("You don't have the required key for this door!");
+							Item selectedItem = inventory.getSelectedItem();
+							
+							if(selectedItem != null) {
+								inventory.setCurrentMessage("You can't open this door with a " + selectedItem.getItemName() + "!");
+							}
+							else {
+								inventory.setCurrentMessage("You don't have the required key for this door!");
+							}
 						}
 					}
 					 

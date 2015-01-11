@@ -16,6 +16,7 @@ public class TriggerBox {
 	
 	private String objectName;
 	private TriggerType triggerType;
+	private int triggerDirection;
 	private Rectangle box;
 	private int boxMargin = 1;
 	private String value;
@@ -23,7 +24,9 @@ public class TriggerBox {
 	
 	/**
 	 * Constructs a new trigger box with a specific type and value
-	 * @param type The type of trigger, SCENESWITCH/MESSAGE/ANIMATE
+	 * @param objectName Name of the corresponding object
+	 * @param type The type of trigger, SCENESWITCH/LOCKEDSCENESWITCH/MESSAGE/ANIMATE/ITEM
+	 * @param triggerDirection The direction the player has to approach from for the trigger to work
 	 * @param value The value of the trigger
 	 * @param x The initial x position of the trigger box
 	 * @param y The initial y position of the trigger box
@@ -31,7 +34,7 @@ public class TriggerBox {
 	 * @param height The height of the trigger box
 	 * @param boxMargin The margin of the trigger box
 	 */
-	public TriggerBox(String objectName, TriggerType type, String value, int x, int y, int width, int height, int boxMargin)
+	public TriggerBox(String objectName, TriggerType type, int triggerDirection, String value, int x, int y, int width, int height, int boxMargin)
 	{
 		this.objectName = objectName;
 		this.triggerType = type;
@@ -39,6 +42,12 @@ public class TriggerBox {
 		this.box = new Rectangle((x - boxMargin), (y - boxMargin), (width + boxMargin * 2), (height + boxMargin * 2));
 		this.value = value;
 		this.isTriggered = false;
+		
+		if(triggerType == TriggerType.SCENESWITCH || triggerType == TriggerType.LOCKEDSCENESWITCH) {
+			this.triggerDirection = triggerDirection;
+		} else {
+			this.triggerDirection = -1;
+		}
 	}
 	
 	/**
@@ -57,6 +66,15 @@ public class TriggerBox {
 	public TriggerType getTriggerType()
 	{
 		return triggerType;
+	}
+	
+	/**
+	 * Returns the trigger direction
+	 * @return The direction the player has to approach from for the trigger to work
+	 */
+	public int getTriggerDirection()
+	{
+		return triggerDirection;
 	}
 	
 	/**

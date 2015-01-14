@@ -1,6 +1,8 @@
 package nl.corebooster.scenes;
 
 import java.util.LinkedHashMap;
+import java.util.Random;
+
 import nl.corebooster.setup.AnimatedSprite;
 import nl.corebooster.setup.Inventory;
 import nl.corebooster.setup.Item;
@@ -283,14 +285,29 @@ public class GameScene {
 				
 				background = new Sprite("background", "img", "basement.png", false, 0, 0);
 				
-				sprites.put("shelf", new Sprite("shelf", "sprites", "shelf.png", true, 20, 0));
-				sprites.put("shelf2", new Sprite("shelf2", "sprites", "shelf.png", true, 116, 0));
-				sprites.put("shelf3", new Sprite("shelf3", "sprites", "shelf_items.png", true, 212, 0));
-				sprites.put("barrels", new Sprite("barrels", "sprites", "barrels.png", true, 308, 0));
-				sprites.put("boxes", new Sprite("boxes", "sprites", "boxes.png", true, 864, 0));
+				int[][] coordinates = new int[][] {
+						
+						{96,60},
+						{96,156}
+						
+				};
+				
+				for(int i = 0; i < coordinates.length; i++) {
+					
+				}
+				
+				sprites.put("shelf1", new Sprite("shelf1", "sprites", "shelf.png", true, 96, 60));
+				sprites.put("shelf_items1", new Sprite("shelf_items1", "sprites", "shelf_items.png", true, 192, 60));
+				sprites.put("barrels1", new Sprite("barrels1", "sprites", "barrels.png", true, 96, 156));
+				sprites.put("boxes1", new Sprite("boxes1", "sprites", "boxes.png", true, 192, 156));
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
+				
+				// Maze overlay
+				overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
+				overlay.setAlpha(255);
+				overlayFollowsPlayer = true;
 				
 			break;
 			
@@ -317,22 +334,6 @@ public class GameScene {
 				
 			break;
 			
-			// "Maze"-scene
-			case "maze":
-				
-				background = new Sprite("background", "img", "background3.png", false, 0, 0);
-				
-				
-				
-				bgMusicName = "GameSong01.ogg";
-				bgMusicVolume = 0.05f;
-				
-				// Maze overlay
-				overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
-				overlay.setAlpha(255);
-				overlayFollowsPlayer = true;
-				
-			break;
 		}
 		
 		bgMusic = new Music("data/music/" + bgMusicName);
@@ -702,6 +703,29 @@ public class GameScene {
 				
 			}
 		}
+	}
+	
+	/**
+	 * Returns a pseudo-random number between min and max, inclusive.
+	 * The difference between min and max can be at most
+	 * <code>Integer.MAX_VALUE - 1</code>.
+	 *
+	 * @param min Minimum value
+	 * @param max Maximum value.  Must be greater than min.
+	 * @return Integer between min and max, inclusive.
+	 * @see java.util.Random#nextInt(int)
+	 */
+	private static int randInt(int min, int max) {
+
+	    // NOTE: Usually this should be a field rather than a method
+	    // variable so that it is not re-seeded every call.
+	    Random rand = new Random();
+
+	    // nextInt is normally exclusive of the top value,
+	    // so add 1 to make it inclusive
+	    int randomNum = rand.nextInt((max - min) + 1) + min;
+
+	    return randomNum;
 	}
 	
 	/**

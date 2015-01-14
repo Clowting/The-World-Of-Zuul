@@ -282,15 +282,15 @@ public class GameScene {
 				
 				background = new Sprite("background", "img", "background3.png", false, 0, 0);
 				
-				sprites.put("switch_top", new Sprite("switch_top", "img", "horizontal_line_transparent.png", false, TriggerType.SCENESWITCH, 0, "outside_headquarters", 0, 0, 1));
+				sprites.put("switch_top", new Sprite("switch_top", "img", "horizontal_line_transparent.png", false, TriggerType.SCENESWITCH, 0, "outside_headquarters", 0, 0, 0));
 				
-				sprites.put("middlecore", new AnimatedSprite("middlecore", "sprites", "middlecore.png", true, 352, 238, 64, 64, 500));
-				sprites.put("conveyer_1", new AnimatedSprite("conveyer_1", "sprites", "conveyer.png", true, 416, 238, 64, 64, 250));
-				sprites.put("conveyer_2", new AnimatedSprite("conveyer_2", "sprites", "conveyer.png", true, 480, 238, 64, 64, 250));
-				sprites.put("conveyer_3", new AnimatedSprite("conveyer_3", "sprites", "conveyer.png", true, 544, 238, 64, 64, 250));
-				sprites.put("rocks", new AnimatedSprite("rocks", "sprites", "rocks.png", false, 416, 238, 192, 64, 250));
-				sprites.put("rocks_2", new AnimatedSprite("rocks", "sprites", "rocks_2.png", false, 416, 238, 192, 64, 250));
-				sprites.put("burner", new AnimatedSprite("burner", "sprites", "burner.png", true, 608, 238, 64, 64, 100));
+				sprites.put("middlecore", new AnimatedSprite("middlecore", "sprites", "middlecore.png", true, 352, 240, 64, 64, 500));
+				sprites.put("conveyer_1", new AnimatedSprite("conveyer_1", "sprites", "conveyer.png", true, 416, 240, 64, 64, 250));
+				sprites.put("conveyer_2", new AnimatedSprite("conveyer_2", "sprites", "conveyer.png", true, 480, 240, 64, 64, 250));
+				sprites.put("conveyer_3", new AnimatedSprite("conveyer_3", "sprites", "conveyer.png", true, 544, 240, 64, 64, 250));
+				sprites.put("rocks", new AnimatedSprite("rocks", "sprites", "rocks.png", false, 416, 240, 192, 64, 250));
+				sprites.put("rocks_2", new AnimatedSprite("rocks", "sprites", "rocks_2.png", false, 416, 240, 192, 64, 250));
+				sprites.put("burner", new AnimatedSprite("burner", "sprites", "burner.png", true, 608, 240, 64, 64, 100));
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;

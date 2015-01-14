@@ -20,7 +20,7 @@ public class AnimatedSprite {
 	private TriggerBox triggerbox;
 	private SpriteSheet spritesheet;
 	private Animation spritesheetAnimation;
-	private int x, y;
+	private int x, y, width, height;
 	private int alpha;
 	
 	/**
@@ -52,6 +52,8 @@ public class AnimatedSprite {
 		
 		this.x = x;
 		this.y = y;
+		this.width = width;
+		this.height = height;
 		alpha = 255;
 	}
 	
@@ -86,7 +88,7 @@ public class AnimatedSprite {
 		
 		this.triggerbox = new TriggerBox(spriteName, triggerType, triggerDirection, triggerValue, x, y, width, height, triggerMargin);
 		
-		if(triggerType == TriggerType.ANIMATE) {
+		if(triggerType == TriggerType.TRAPDOOR) {
 			stopAnimation();
 		}
 		
@@ -149,6 +151,24 @@ public class AnimatedSprite {
 	}
 	
 	/**
+	 * Returns the width of the sprite
+	 * @return The width of the sprite
+	 */
+	public int getWidth()
+	{
+		return width;
+	}
+	
+	/**
+	 * Returns the height of the sprite
+	 * @return The height of the sprite
+	 */
+	public int getHeight()
+	{
+		return height;
+	}
+	
+	/**
 	 * Returns the alpha value of the animation
 	 * @return The alpha value
 	 */
@@ -190,9 +210,9 @@ public class AnimatedSprite {
 	 */
 	public void setAlpha(int alpha)
 	{
-		//if(alpha >= 0 && alpha <= 1) {
+		if(alpha >= 0 && alpha <= 255) {
 			this.alpha = alpha;
-		//}
+		}
 	}
 	
 	/**
@@ -218,7 +238,6 @@ public class AnimatedSprite {
 	public void drawSprite(Graphics g)
 	{		
 		Color alphaFilter = new Color(255, 255, 255, alpha);
-		//alphaFilter.a = alpha;
 			
 		g.drawAnimation(spritesheetAnimation, x, y, alphaFilter);
 	}
@@ -254,6 +273,14 @@ public class AnimatedSprite {
 	}
 	
 	/**
+	 * Resets the animation to the first frame
+	 */
+	public void resetAnimation()
+	{
+		spritesheetAnimation.setCurrentFrame(0);
+	}
+	
+	/**
 	 * Checks if the animation is running
 	 * @return False when running, True when stopped
 	 */
@@ -266,7 +293,7 @@ public class AnimatedSprite {
 	 */
 	public void playAnimationOnce() {
 		spritesheetAnimation.setPingPong(true);
-		spritesheetAnimation.stopAt(spritesheetAnimation.getFrameCount()-1);
+		spritesheetAnimation.stopAt(spritesheetAnimation.getFrameCount() - 1);
 		spritesheetAnimation.start();
 	}
 }

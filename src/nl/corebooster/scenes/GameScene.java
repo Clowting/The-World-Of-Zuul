@@ -32,6 +32,7 @@ public class GameScene {
 	private Player player;
 	private Inventory inventory;
 	private AnimatedSprite overlay;
+	private boolean overlayFollowsPlayer;
 	
 	private String sceneName;
 	private String nextScene;
@@ -60,6 +61,7 @@ public class GameScene {
 		overlay = new AnimatedSprite("overlay", "sprites", "spacecake_effect.png", false, 0, 0, 960, 540, 50);
 		overlay.setAlpha(0);
 		overlay.stopAnimation();
+		overlayFollowsPlayer = false;
 		
 		this.sceneName = sceneName;
 		nextScene = null;
@@ -265,16 +267,31 @@ public class GameScene {
 				background = new Sprite("background", "img", "headquarters_background.png", false, 0, 0);
 	
 				sprites.put("headquarters_exit", new Sprite("headquarters_exit", "sprites", "headquarters_exit.png", true, TriggerType.SCENESWITCH, 270, "outside_headquarters", 0, 0, 160));
-				sprites.put("cpanel", new AnimatedSprite("cpanel", "sprites", "cpanel.png", true, 185, 0, 685, 90, 200));
-				//sprites.put("trapdoor_scenetrigger", new Sprite("img", "trapdoor_transparent.png", true, TriggerType.SCENESWITCH, "outside_headquarters", 1, 10, 10));
-				sprites.put("trapdoor", new AnimatedSprite("trapdoor", "sprites", "trapdoor.png", false, TriggerType.ANIMATE, -1, "trapdoor", 6, 10, 10, 90, 90, 50));
+				sprites.put("cpanel", new AnimatedSprite("cpanel", "sprites", "cpanel.png", true, 50, 0, 685, 90, 200));
+				sprites.put("trapdoor", new AnimatedSprite("trapdoor", "sprites", "trapdoor.png", false, TriggerType.TRAPDOOR, 360, "basement", 5, 860, 10, 90, 90, 50));
 				sprites.put("liquid_transporter", new AnimatedSprite("liquid_transporter", "sprites", "liquid_transporter.png", true, 860, 210, 70, 210, 100));
 				sprites.put("radar", new AnimatedSprite("radar", "sprites", "radar.png", true, 425, 240, 95, 95, 150));
-				sprites.put("npc_1", new Sprite("npc_1", "sprites", "npc_red_up.png", true, TriggerType.MESSAGE, -1, "Welcome! I'm glad you're here.\nWe have a problem at the construction site. Do you mind taking a look?", 10, 438, 430));
+				sprites.put("npc_officer", new Sprite("npc_officer", "sprites", "npc_red_up.png", true, TriggerType.MESSAGE, -1, "Welcome! I'm glad you're here.\nWe have a problem at the construction site. Do you mind taking a look?", 10, 438, 430));
 	
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
 	
+			break;
+			
+			// "Basement"-scene
+			case "basement":
+				
+				background = new Sprite("background", "img", "basement.png", false, 0, 0);
+				
+				sprites.put("shelf", new Sprite("shelf", "sprites", "shelf.png", true, 20, 0));
+				sprites.put("shelf2", new Sprite("shelf2", "sprites", "shelf.png", true, 116, 0));
+				sprites.put("shelf3", new Sprite("shelf3", "sprites", "shelf_items.png", true, 212, 0));
+				sprites.put("barrels", new Sprite("barrels", "sprites", "barrels.png", true, 308, 0));
+				sprites.put("boxes", new Sprite("boxes", "sprites", "boxes.png", true, 864, 0));
+				
+				bgMusicName = "GameSong01.ogg";
+				bgMusicVolume = 0.05f;
+				
 			break;
 			
 			// "Drill"-scene
@@ -292,12 +309,28 @@ public class GameScene {
 				sprites.put("rocks_2", new AnimatedSprite("rocks", "sprites", "rocks_2.png", false, 416, 240, 192, 64, 250));
 				sprites.put("burner", new AnimatedSprite("burner", "sprites", "burner.png", true, 608, 240, 64, 64, 100));
 				
-				sprites.put("npc_1", new Sprite("npc_1", "sprites", "npc_red_up.png", true, TriggerType.MESSAGE, -1, "Good to see you here. The drill has stopped working!\nCan you ask around to see what parts the workers need?", 10, 438, 430));
-				sprites.put("npc_2", new Sprite("npc_2", "sprites", "npc_yellow_left.png", true, TriggerType.MESSAGE, -1, "Niks", 10, 900, 240));
+				sprites.put("npc_officer", new Sprite("npc_officer", "sprites", "npc_red_up.png", true, TriggerType.MESSAGE, -1, "Good to see you here. The drill has stopped working!\nCan you ask around to see what parts the workers need?", 10, 438, 430));
+				sprites.put("npc_1", new Sprite("npc_1", "sprites", "npc_yellow_left.png", true, TriggerType.LOCKEDMESSAGE, -1, "Niks", 10, 900, 240));
+				
+				bgMusicName = "GameSong01.ogg";
+				bgMusicVolume = 0.05f;
+				
+			break;
+			
+			// "Maze"-scene
+			case "maze":
+				
+				background = new Sprite("background", "img", "background3.png", false, 0, 0);
+				
 				
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
+				
+				// Maze overlay
+				overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
+				overlay.setAlpha(255);
+				overlayFollowsPlayer = true;
 				
 			break;
 		}
@@ -306,11 +339,27 @@ public class GameScene {
 	}
 		
 	/**
-	 * Animates all elements in the scene
+	 * Let the overlay follow the player position
 	 */
-	public void animate()
+	public void overlayFollowPlayer()
 	{
-		// Call methods on objects to animate
+		// Overlay size
+		int overlayWidth = overlay.getWidth();
+		int overlayHeight = overlay.getHeight();
+		int overlayCenterX = overlayWidth / 2;
+		int overlayCenterY = overlayHeight / 2;
+		
+		// Player info
+		int playerX = player.getX();
+		int playerY = player.getY();
+		int playerSize = player.getPlayerSize();
+		
+		// Calculate overlay X and Y-position
+		int x = -overlayCenterX + playerX + (playerSize / 2);
+		int y = -overlayCenterY + playerY + (playerSize / 2);
+		
+		overlay.setX(x);
+		overlay.setY(y);
 	}
 	
 	/**
@@ -437,7 +486,8 @@ public class GameScene {
 		
 		if(input.isKeyPressed(Input.KEY_D)) {
 			dropItem();
-		} else if(input.isKeyPressed(Input.KEY_SPACE)) {
+		} 
+		else if(input.isKeyPressed(Input.KEY_SPACE)) {
 			useItem();
 		}
 	}
@@ -556,11 +606,10 @@ public class GameScene {
 			switch(currentTriggerBox.getTriggerType()) {
 				case SCENESWITCH:
 					
-					if(player.getRotation() == currentTriggerBox.getTriggerDirection()) {
+					if(player.getRotation() == currentTriggerBox.getTriggerDirection() || currentTriggerBox.getTriggerDirection() == 360) {
 						nextScene = currentTriggerBox.getValue();
 						currentTriggerBox.resetTrigger();
 					}
-					
 					
 				break;
 				
@@ -595,15 +644,44 @@ public class GameScene {
 					
 					inventory.setCurrentMessage(currentTriggerBox.getValue());
 					
+					currentTriggerBox.setTriggered();
+					
 				break;
 				
-				case ANIMATE:
+				case LOCKEDMESSAGE:
+					
+					Sprite npc_officer = (Sprite) sprites.get("npc_officer");
+					
+					if(npc_officer != null) {
+						TriggerBox npc_officer_triggerbox = npc_officer.getTriggerBox();
+						
+						if(npc_officer_triggerbox.isTriggered()) {
+							inventory.setCurrentMessage(currentTriggerBox.getValue());
+						}
+						else {
+							inventory.setCurrentMessage("Talk to the officer first! If you don't know who he is, it's the guy with the red suit.");
+						}
+					}
+					
+				break;
+				
+				case TRAPDOOR:
 					
 					AnimatedSprite animatedSprite = (AnimatedSprite) sprites.get(itemName);
 					
-					animatedSprite.playAnimationOnce();
-					
-					currentTriggerBox.resetTrigger();
+					if(!currentTriggerBox.isTriggered()) {
+						animatedSprite.playAnimationOnce();
+					}
+					else {
+						if(animatedSprite.isStopped()) {
+							nextScene = currentTriggerBox.getValue();
+							
+							animatedSprite.resetAnimation();
+							currentTriggerBox.resetTrigger();
+						}
+					}
+						
+					currentTriggerBox.setTriggered();
 					
 				break;
 				
@@ -633,6 +711,12 @@ public class GameScene {
 	 */
 	public void render(Graphics g) throws SlickException
 	{
+		// If the overlay needs to follow the player
+		// Call the next method
+		if(overlayFollowsPlayer) {
+			overlayFollowPlayer();
+		}
+		
 		// Draws collision boxes
 		for(Object object : sprites.values()) {
 			if(object instanceof Sprite) {
@@ -682,13 +766,13 @@ public class GameScene {
 		// Draw the player
 		player.drawSprite(g);
 		
-		// Draw the inventory
-		inventory.render(g);
-		
 		// Draw the overlay
 		if(overlay != null) {
 			overlay.drawSprite(g);
 		}
+		
+		// Draw the inventory
+		inventory.render(g);
 	}
 	
 }

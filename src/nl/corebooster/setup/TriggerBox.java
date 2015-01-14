@@ -11,7 +11,7 @@ import org.newdawn.slick.geom.Rectangle;
 public class TriggerBox {
 	
 	public enum TriggerType {
-		SCENESWITCH, LOCKEDSCENESWITCH, MESSAGE, ANIMATE, ITEM
+		SCENESWITCH, LOCKEDSCENESWITCH, MESSAGE, LOCKEDMESSAGE, TRAPDOOR, ITEM
 	}
 	
 	private String objectName;
@@ -42,12 +42,7 @@ public class TriggerBox {
 		this.box = new Rectangle((x - boxMargin), (y - boxMargin), (width + boxMargin * 2), (height + boxMargin * 2));
 		this.value = value;
 		this.isTriggered = false;
-		
-		if(triggerType == TriggerType.SCENESWITCH || triggerType == TriggerType.LOCKEDSCENESWITCH) {
-			this.triggerDirection = triggerDirection;
-		} else {
-			this.triggerDirection = -1;
-		}
+		this.triggerDirection = triggerDirection;
 	}
 	
 	/**
@@ -61,7 +56,7 @@ public class TriggerBox {
 	
 	/**
 	 * Returns the type of the trigger
-	 * @return The type of trigger, SCENESWITCH/MESSAGE/ANIMATE
+	 * @return The type of trigger
 	 */
 	public TriggerType getTriggerType()
 	{
@@ -114,7 +109,7 @@ public class TriggerBox {
 	
 	/**
 	 * Sets the trigger type
-	 * @param type The type of trigger, SCENESWITCH/MESSAGE
+	 * @param type The type of trigger
 	 */
 	public void setTriggerType(TriggerType type)
 	{

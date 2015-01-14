@@ -44,7 +44,9 @@ public class Game extends BasicGame {
 		scenes.put("ice", new GameScene("ice", 480, 270));
 		scenes.put("outside_headquarters", new GameScene("outside_headquarters", 15, 260));
 		scenes.put("headquarters", new GameScene("headquarters", 75, 270));
+		scenes.put("basement", new GameScene("basement", 448, 15));
 		scenes.put("drill", new GameScene("drill", 448, 15));
+		scenes.put("maze", new GameScene("maze", 448, 15));
 		
 		currentScene = scenes.get("ice");
 		currentScene.setActive();
@@ -132,7 +134,7 @@ public class Game extends BasicGame {
 	 */
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer app = new AppGameContainer(new Game("The World Of Zuul"));
-		int updateInterval = 20;
+		int updateInterval = 50;
 		
 		app.setDisplayMode(960, 540, false);
 		//app.setIcon("data/img/icon.png");

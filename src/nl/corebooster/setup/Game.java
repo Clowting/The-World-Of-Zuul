@@ -44,8 +44,10 @@ public class Game extends BasicGame {
 		scenes.put("ice", new GameScene("ice", 480, 270));
 		scenes.put("outside_headquarters", new GameScene("outside_headquarters", 15, 260));
 		scenes.put("headquarters", new GameScene("headquarters", 75, 270));
-		scenes.put("basement_1", new GameScene("basement_1", 304, 15));
+		scenes.put("basement_1", new GameScene("basement_1", 304, 75));
 		scenes.put("basement_2", new GameScene("basement_2", 304, 15));
+		scenes.put("basement_3", new GameScene("basement_3", 304, 15));
+		scenes.put("basement_4", new GameScene("basement_4", 304, 15));
 		scenes.put("drill", new GameScene("drill", 448, 15));
 		
 		currentScene = scenes.get("ice");
@@ -122,7 +124,7 @@ public class Game extends BasicGame {
 		else
 		{
 			currentScene.render(g);
-			//g.drawString("Current scene: " + currentScene.getSceneName(), 10, 30);
+			g.drawString("Current scene: " + currentScene.getSceneName(), 10, 30);
 			
 		}
 	}

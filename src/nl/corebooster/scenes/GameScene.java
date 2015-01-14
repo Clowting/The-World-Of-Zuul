@@ -219,17 +219,10 @@ public class GameScene {
 	
 	/**
 	 * Initialize a game scene based on the name, with a given music file and volume
-	 * @throws SlickException 
+	 * @throws SlickException Indicates a failure to initialize the display Indicates a failure to initialize the display
 	 */
 	private void initializeScene(String sceneName) throws SlickException
-	{
-		String[] mazeSprites = new String[] {
-				"shelf.png",
-				"shelf_items.png",
-				"barrels.png",
-				"boxes.png"
-		};
-		
+	{	
 		// A switch for making different scenes
 		switch(sceneName) {
 			// "Ice"-scene: first scene after the intro
@@ -319,21 +312,14 @@ public class GameScene {
 						
 				};
 				
-				for(int i = 0; i < coordinates.length; i++) {
-					int x = coordinates[i][0];
-					int y = coordinates[i][1];
-					int mazeSpritesCount = mazeSprites.length;
-					
-					int randomIndex = randInt(0, mazeSpritesCount - 1);
-					
-					String randomSpriteName = mazeSprites[randomIndex];
-					String spriteName = randomSpriteName + i;
-					
-					Sprite mazeSprite = new Sprite(spriteName, "sprites", randomSpriteName, true, x, y);
-					
-					sprites.put(spriteName, mazeSprite);
-					
-				}
+				initializeMaze(coordinates);
+				
+				sprites.put("wall_top_left", new Sprite("wall_top_left", "sprites", "wall_top_left.png", true, 0, 0));
+				sprites.put("wall_left", new Sprite("wall_left", "sprites", "wall_left.png", true, 0, 60));
+				
+				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_5x96.png", true, TriggerType.SCENESWITCH, 90, "basement_2", 0, 955, 60));
+				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.SCENESWITCH, 180, "basement_3", 0, 288, 535));
+				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_96x5.png", true, TriggerType.SCENESWITCH, 180, "basement_3", 0, 768, 535));
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
@@ -377,28 +363,124 @@ public class GameScene {
 
 				};
 
-				for(int i = 0; i < coordinates.length; i++) {
-					int x = coordinates[i][0];
-					int y = coordinates[i][1];
-					int mazeSpritesCount = mazeSprites.length;
-
-					int randomIndex = randInt(0, mazeSpritesCount - 1);
-					//Sprite randomSprite = mazeSprites[randomIndex];
-					//randomSprite.setX(x);
-					//randomSprite.setY(y);
-
-					//sprites.put("maze_sprite" + i, randomSprite);
-				}
+				initializeMaze(coordinates);
+				
+				sprites.put("wall_top_right", new Sprite("wall_top_right", "sprites", "wall_top_right.png", true, 0, 0));
+				sprites.put("wall_right", new Sprite("wall_right", "sprites", "wall_right.png", true, 864, 60));
+				
+				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_5x96.png", true, TriggerType.SCENESWITCH, 270, "basement_1", 0, 0, 60));
+				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.SCENESWITCH, 180, "basement_4", 0, 192, 535));
+				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_96x5.png", true, TriggerType.SCENESWITCH, 180, "basement_4", 0, 672, 535));
 
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
 
 				// Maze overlay
 				/*overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
-							overlay.setAlpha(255);
-							overlayFollowsPlayer = true;*/
+				overlay.setAlpha(255);
+				overlayFollowsPlayer = true;*/
 
-				break;
+			break;
+			
+			// "Basement 3"-scene
+			case "basement_3":
+
+				background = new Sprite("background", "img", "basement.png", false, 0, 0);
+
+				coordinates = new int[][] {
+
+						{96, 0},
+						{192, 0},
+						{384, 0},
+						{480, 0},
+						{576, 0},
+						{672, 0},
+						{864, 0},
+						{480, 96},
+						{672, 96},
+						{864, 96},
+						{96, 192},
+						{288, 192},
+						{672, 192},
+						{864, 192},
+						{96, 288},
+						{288, 288},
+						{480, 288},
+						{672, 288},
+						{288, 384},
+						{576, 384},
+						{864, 384}
+
+				};
+
+				initializeMaze(coordinates);
+
+				sprites.put("wall_bottom_left", new Sprite("wall_bottom_left", "sprites", "wall_bottom_left.png", true, 0, 480));
+				sprites.put("wall_left", new Sprite("wall_left", "sprites", "wall_left.png", true, 0, 0));
+				
+				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_96x5.png", true, TriggerType.SCENESWITCH, 0, "basement_1", 0, 288, 0));
+				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.SCENESWITCH, 0, "basement_4", 0, 768, 0));
+				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_5x96.png", true, TriggerType.SCENESWITCH, 90, "basement_4", 0, 955, 288));
+
+				bgMusicName = "GameSong01.ogg";
+				bgMusicVolume = 0.05f;
+
+				// Maze overlay
+				/*overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
+				overlay.setAlpha(255);
+				overlayFollowsPlayer = true;*/
+
+			break;
+			
+			// "Basement 4"-scene
+			case "basement_4":
+
+				background = new Sprite("background", "img", "basement.png", false, 0, 0);
+
+				coordinates = new int[][] {
+
+						{0, 0},
+						{96, 0},
+						{288, 0},
+						{384, 0},
+						{480, 0},
+						{576, 0},
+						{768, 0},
+						{0, 96},
+						{576, 96},
+						{0, 192},
+						{96, 192},
+						{192, 192},
+						{288, 192},
+						{384, 192},
+						{672, 192},
+						{480, 288},
+						{576, 288},
+						{672, 288},
+						{0, 384},
+						{96, 384},
+						{288, 384}
+
+				};
+
+				initializeMaze(coordinates);
+
+				sprites.put("wall_bottom_right", new Sprite("wall_bottom_right", "sprites", "wall_bottom_right.png", true, 0, 480));
+				sprites.put("wall_right", new Sprite("wall_right", "sprites", "wall_right.png", true, 864, 0));
+
+				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_96x5.png", true, TriggerType.SCENESWITCH, 0, "basement_2", 0, 192, 0));
+				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.SCENESWITCH, 0, "basement_2", 0, 672, 0));
+				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_5x96.png", true, TriggerType.SCENESWITCH, 90, "basement_3", 0, 0, 288));
+
+				bgMusicName = "GameSong01.ogg";
+				bgMusicVolume = 0.05f;
+
+				// Maze overlay
+				/*overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
+				overlay.setAlpha(255);
+				overlayFollowsPlayer = true;*/
+
+			break;
 			
 			// "Drill"-scene
 			case "drill":
@@ -426,6 +508,38 @@ public class GameScene {
 		}
 		
 		bgMusic = new Music("data/music/" + bgMusicName);
+	}
+	
+	/**
+	 * Initialize a maze scene with the given coordinates
+	 * @param coordinates An array of coordinates
+	 * @throws SlickException Indicates a failure to initialize the display Indicates a failure to initialize the display
+	 */
+	private void initializeMaze(int[][] coordinates) throws SlickException
+	{
+		// Maze objects
+		String[] mazeSprites = new String[] {
+				"shelf.png",
+				"shelf_items.png",
+				"barrels.png",
+				"boxes.png"
+		};
+		
+		// For each coordinate
+		for(int i = 0; i < coordinates.length; i++) {
+			int x = coordinates[i][0];
+			int y = coordinates[i][1];
+			int mazeSpritesCount = mazeSprites.length;
+			
+			int randomIndex = randInt(0, mazeSpritesCount - 1);
+			
+			String randomSpriteName = mazeSprites[randomIndex];
+			String spriteName = randomSpriteName + i;
+			
+			Sprite mazeSprite = new Sprite(spriteName, "sprites", randomSpriteName, true, x, y);
+			
+			sprites.put(spriteName, mazeSprite);
+		}
 	}
 		
 	/**

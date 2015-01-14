@@ -198,7 +198,7 @@ public class Inventory {
 		background.drawSprite(g);
 		
 		// Draw message
-		g.drawString(currentMessage, 20, 500);
+		g.drawString(currentMessage, 20, 490);
 		
 		// Draw selected slot
 		int slotOffsetLeft = 718 + (selectedSlot * 61);

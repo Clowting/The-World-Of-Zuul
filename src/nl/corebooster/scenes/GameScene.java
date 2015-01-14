@@ -223,6 +223,13 @@ public class GameScene {
 	 */
 	private void initializeScene(String sceneName) throws SlickException
 	{
+		String[] mazeSprites = new String[] {
+				"shelf.png",
+				"shelf_items.png",
+				"barrels.png",
+				"boxes.png"
+		};
+		
 		// A switch for making different scenes
 		switch(sceneName) {
 			// "Ice"-scene: first scene after the intro
@@ -270,7 +277,7 @@ public class GameScene {
 	
 				sprites.put("headquarters_exit", new Sprite("headquarters_exit", "sprites", "headquarters_exit.png", true, TriggerType.SCENESWITCH, 270, "outside_headquarters", 0, 0, 160));
 				sprites.put("cpanel", new AnimatedSprite("cpanel", "sprites", "cpanel.png", true, 50, 0, 685, 90, 200));
-				sprites.put("trapdoor", new AnimatedSprite("trapdoor", "sprites", "trapdoor.png", false, TriggerType.TRAPDOOR, 360, "basement", 5, 860, 10, 90, 90, 50));
+				sprites.put("trapdoor", new AnimatedSprite("trapdoor", "sprites", "trapdoor.png", false, TriggerType.TRAPDOOR, 360, "basement_1", 5, 860, 10, 90, 90, 50));
 				sprites.put("liquid_transporter", new AnimatedSprite("liquid_transporter", "sprites", "liquid_transporter.png", true, 860, 210, 70, 210, 100));
 				sprites.put("radar", new AnimatedSprite("radar", "sprites", "radar.png", true, 425, 240, 95, 95, 150));
 				sprites.put("npc_officer", new Sprite("npc_officer", "sprites", "npc_red_up.png", true, TriggerType.MESSAGE, -1, "Welcome! I'm glad you're here.\nWe have a problem at the construction site. Do you mind taking a look?", 10, 438, 430));
@@ -280,36 +287,118 @@ public class GameScene {
 	
 			break;
 			
-			// "Basement"-scene
-			case "basement":
+			// "Basement 1"-scene
+			case "basement_1":
 				
 				background = new Sprite("background", "img", "basement.png", false, 0, 0);
 				
 				int[][] coordinates = new int[][] {
 						
-						{96,60},
-						{96,156}
+						{96, 60},
+						{192, 60},
+						{384, 60},
+						{480, 60},
+						{672, 60},
+						{192, 156},
+						{480, 156},
+						{672, 156},
+						{864, 156},
+						{192, 252},
+						{288, 252},
+						{480, 252},
+						{672, 252},
+						{864, 252},
+						{864, 348},
+						{96, 444},
+						{192, 444},
+						{384, 444},
+						{480, 444},
+						{576, 444},
+						{672, 444},
+						{864, 444}
 						
 				};
 				
 				for(int i = 0; i < coordinates.length; i++) {
+					int x = coordinates[i][0];
+					int y = coordinates[i][1];
+					int mazeSpritesCount = mazeSprites.length;
+					
+					int randomIndex = randInt(0, mazeSpritesCount - 1);
+					
+					String randomSpriteName = mazeSprites[randomIndex];
+					String spriteName = randomSpriteName + i;
+					
+					Sprite mazeSprite = new Sprite(spriteName, "sprites", randomSpriteName, true, x, y);
+					
+					sprites.put(spriteName, mazeSprite);
 					
 				}
-				
-				sprites.put("shelf1", new Sprite("shelf1", "sprites", "shelf.png", true, 96, 60));
-				sprites.put("shelf_items1", new Sprite("shelf_items1", "sprites", "shelf_items.png", true, 192, 60));
-				sprites.put("barrels1", new Sprite("barrels1", "sprites", "barrels.png", true, 96, 156));
-				sprites.put("boxes1", new Sprite("boxes1", "sprites", "boxes.png", true, 192, 156));
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
 				
 				// Maze overlay
-				overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
+				/*overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
 				overlay.setAlpha(255);
-				overlayFollowsPlayer = true;
+				overlayFollowsPlayer = true;*/
 				
 			break;
+			
+			// "Basement 2"-scene
+			case "basement_2":
+
+				background = new Sprite("background", "img", "basement.png", false, 0, 0);
+
+				coordinates = new int[][] {
+
+						{288, 60},
+						{480, 60},
+						{768, 60},
+						{0, 156},
+						{96, 156},
+						{288, 156},
+						{672, 156},
+						{0, 252},
+						{480, 252},
+						{576, 252},
+						{672, 252},
+						{0, 348},
+						{96, 348},
+						{288, 348},
+						{576, 348},
+						{0, 444},
+						{96, 444},
+						{288, 444},
+						{384, 444},
+						{480, 444},
+						{576, 444},
+						{768, 444}
+
+				};
+
+				for(int i = 0; i < coordinates.length; i++) {
+					int x = coordinates[i][0];
+					int y = coordinates[i][1];
+					int mazeSpritesCount = mazeSprites.length;
+
+					int randomIndex = randInt(0, mazeSpritesCount - 1);
+					//Sprite randomSprite = mazeSprites[randomIndex];
+					//randomSprite.setX(x);
+					//randomSprite.setY(y);
+
+					//sprites.put("maze_sprite" + i, randomSprite);
+				}
+
+				bgMusicName = "GameSong01.ogg";
+				bgMusicVolume = 0.05f;
+
+				// Maze overlay
+				/*overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
+							overlay.setAlpha(255);
+							overlayFollowsPlayer = true;*/
+
+				break;
 			
 			// "Drill"-scene
 			case "drill":

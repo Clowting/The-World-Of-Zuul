@@ -383,7 +383,7 @@ public class GameScene {
 				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 180, "basement_4", 0, 192, 535));
 				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 180, "basement_4", 0, 672, 535));
 
-				sprites.put("teleporter", new AnimatedSprite("teleporter", "sprites", "teleporter.png", false, TriggerType.SCENESWITCH, 360, "outside_headquarters", 0, 768, 15, 96, 96, 100));
+				sprites.put("teleporter", new AnimatedSprite("teleporter", "sprites", "teleporter.png", true, TriggerType.SCENESWITCH, 360, "outside_headquarters", 0, 768, 156, 96, 96, 100));
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;

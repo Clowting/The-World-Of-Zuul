@@ -74,6 +74,16 @@ public class Game extends BasicGame {
 			{
 				currentScene.playMusic();
 				currentScene.setRendered();
+				
+				// Checks if the next player is colliding	
+				int[] alternateCoordinates = currentScene.getAlternateCoordinates();
+				
+				if(alternateCoordinates != null) {
+					Player currentPlayer = currentScene.getPlayer();
+					currentPlayer.setX(alternateCoordinates[0]);
+					currentPlayer.setY(alternateCoordinates[1]);
+				}
+				
 			}
 			
 			if(currentScene.getNextScene() != null) {
@@ -155,16 +165,6 @@ public class Game extends BasicGame {
 					nextPlayer.setX(x);
 					nextPlayer.setY(y);
 					
-					// Checks if the next player is colliding
-					System.out.println(scene.isPlayerColliding());
-					
-					if(scene.isPlayerColliding()) {
-						int[] alternateCoordinates = currentScene.getAlternateCoordinates();
-						
-						nextPlayer.setX(alternateCoordinates[0]);
-						nextPlayer.setY(alternateCoordinates[1]);
-					}
-					
 					// Give the same inventory to the new scene
 					Inventory currentInventory = currentScene.getInventory();
 					scene.setInventory(currentInventory);
@@ -207,7 +207,7 @@ public class Game extends BasicGame {
 	 */
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer app = new AppGameContainer(new Game("Blue Abyss"));
-		int updateInterval = 20;
+		int updateInterval = 50;
 		
 		app.setDisplayMode(960, 540, false);
 		//app.setIcon("data/img/icon.png");

@@ -18,6 +18,7 @@ public class Player {
 	private CollisionBox collisionbox;
 	private SpriteSheet spritesheet;
 	private Animation spritesheetAnimation;
+	private static TriggerBox latestTriggerBox;
 	private int x, y;
 	private static final int movementSpeed = 5;
 	private int angle;
@@ -34,6 +35,7 @@ public class Player {
 	{
 		this.spritesheet = getSpriteSheet("sprites", "player_up.png", playerSize, playerSize);
 		spritesheetAnimation = new Animation(spritesheet, 100);
+		latestTriggerBox = null;
 		
 		collisionbox = new CollisionBox(x, y, playerSize, playerSize);
 		
@@ -60,6 +62,22 @@ public class Player {
 	public SpriteSheet getSpriteSheet()
 	{
 		return spritesheet;
+	}
+	
+	/**
+	 * Returns the latest trigger box
+	 * @return The latest trigger box
+	 */
+	public TriggerBox getLatestTriggerBox() {
+		return latestTriggerBox;
+	}
+	
+	/**
+	 * Sets the latest trigger box
+	 * @param latestTriggerBox The latest trigger box
+	 */
+	public void setLatestTriggerBox(TriggerBox latestTriggerBox) {
+		Player.latestTriggerBox = latestTriggerBox;
 	}
 	
 	/**

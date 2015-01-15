@@ -46,7 +46,7 @@ public class TriggerBox {
 		this.isTriggered = false;
 		this.triggerDirection = triggerDirection;
 		this.alternateX = alternateX;
-		this.alternateX = alternateY;
+		this.alternateY = alternateY;
 	}
 	
 	/**

@@ -45,7 +45,7 @@ public class IntroScene {
 		background = new Sprite("background", "img", "intro_background.png", false, 0, -2160);
 		
 		// Set title and 'press space to start'
-		Sprite title = new Sprite("title", "img", "title.png", false, 153, 50);
+		Sprite title = new Sprite("title", "img", "title.png", false, 228, 50);
 		sprites.put("title", title);
 		
 		AnimatedSprite start = new AnimatedSprite("start", "sprites", "press_space.png", false, 166, 470, 627, 29, 200);

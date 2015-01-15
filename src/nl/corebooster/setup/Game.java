@@ -196,7 +196,7 @@ public class Game extends BasicGame {
 	 * @throws SlickException Indicates a failure to initialize the display
 	 */
 	public static void main(String[] args) throws SlickException {
-		AppGameContainer app = new AppGameContainer(new Game("The World Of Zuul"));
+		AppGameContainer app = new AppGameContainer(new Game("Blue Abyss"));
 		int updateInterval = 50;
 		
 		app.setDisplayMode(960, 540, false);

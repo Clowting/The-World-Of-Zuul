@@ -811,6 +811,27 @@ public class GameScene {
 	}
 	
 	/**
+	 * Returns the current trigger box the player is colliding with
+	 * @return The TriggerBox
+	 */
+	public int[] getAlternateCoordinates()
+	{
+		TriggerBox currentTriggerBoxSprites = player.getCurrentTriggerBox(sprites);
+		
+		if(currentTriggerBoxSprites != null) {
+			int[] coordinates = new int[2];
+			
+			int alternateX = currentTriggerBoxSprites.getAlternateX();
+			int alternateY = currentTriggerBoxSprites.getAlternateY();
+			
+			coordinates[0] = alternateX;
+			coordinates[1] = alternateY;
+			
+			return coordinates;
+		}
+	}
+	
+	/**
 	 * Handles all the types of trigger boxes
 	 * @param currentTriggerBox The trigger box to check
 	 */
@@ -912,7 +933,6 @@ public class GameScene {
 					else {
 						if(animatedSprite.isStopped()) {
 							nextScene = currentTriggerBox.getValue();
-							preservePlayerCoordinates = false;
 							preservePlayerCoordinates = true;
 							
 							animatedSprite.resetAnimation();

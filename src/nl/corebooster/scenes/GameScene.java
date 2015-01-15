@@ -38,6 +38,7 @@ public class GameScene {
 	
 	private String sceneName;
 	private String nextScene;
+	private boolean preservePlayerCoordinates;
 	private boolean isActive, isRendered;
 	
 	private Music bgMusic;
@@ -67,6 +68,7 @@ public class GameScene {
 		
 		this.sceneName = sceneName;
 		nextScene = null;
+		preservePlayerCoordinates = true;
 		
 		isActive = false;
 		isRendered = false;
@@ -130,6 +132,15 @@ public class GameScene {
 	public String getNextScene()
 	{
 		return nextScene;
+	}
+	
+	/**
+	 * Returns true if the scene switch needs to preserve the player coordinates, false if not
+	 * @return True when the player coordinates need to be preserved
+	 */
+	public boolean preservePlayerCoordinates()
+	{
+		return preservePlayerCoordinates;
 	}
 	
 	/**
@@ -230,7 +241,7 @@ public class GameScene {
 	
 				background = new Sprite("background", "img", "background1.png", false, 0, 0);
 				
-				sprites.put("switch_right", new Sprite("switch_right", "img", "vertical_line_transparent.png", false, TriggerType.SCENESWITCH, 90, "outside_headquarters", 0, 955, 0));
+				sprites.put("switch_right", new Sprite("switch_right", "img", "vertical_line_transparent.png", false, TriggerType.BORDER_SCENESWITCH, 90, "outside_headquarters", 0, 955, 0));
 	
 				sprites.put("ice_cliff", new Sprite("ice_cliff", "sprites", "ice_cliff.png", true, 0, 0));
 				sprites.put("landingpad", new AnimatedSprite("landingpad", "sprites", "landingpad.png", true, TriggerType.MESSAGE, -1, "This is a test message", 10, 50, 80, 384, 384, 1000));
@@ -248,8 +259,8 @@ public class GameScene {
 	
 				background = new Sprite("background", "img", "background2.png", false, 0, 0);
 	
-				sprites.put("switch_left", new Sprite("switch_left", "img", "vertical_line_transparent.png", false, TriggerType.SCENESWITCH, 270, "ice", 0, 0, 0));
-				sprites.put("switch_bottom", new Sprite("switch_bottom", "img", "horizontal_line_transparent.png", false, TriggerType.SCENESWITCH, 180, "drill", 0, 0, 535));
+				sprites.put("switch_left", new Sprite("switch_left", "img", "vertical_line_transparent.png", false, TriggerType.BORDER_SCENESWITCH, 270, "ice", 0, 0, 0));
+				sprites.put("switch_bottom", new Sprite("switch_bottom", "img", "horizontal_line_transparent.png", false, TriggerType.BORDER_SCENESWITCH, 180, "drill", 0, 0, 535));
 				
 				sprites.put("bush", new Sprite("bush", "sprites", "bush.png", true, 150, 75));
 				sprites.put("headquarters", new Sprite("headquarters", "sprites", "headquarters.png", true, 600, 0));
@@ -317,17 +328,17 @@ public class GameScene {
 				sprites.put("wall_top_left", new Sprite("wall_top_left", "sprites", "wall_top_left.png", true, 0, 0));
 				sprites.put("wall_left", new Sprite("wall_left", "sprites", "wall_left.png", true, 0, 60));
 				
-				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_5x96.png", true, TriggerType.SCENESWITCH, 90, "basement_2", 0, 955, 60));
-				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.SCENESWITCH, 180, "basement_3", 0, 288, 535));
-				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_96x5.png", true, TriggerType.SCENESWITCH, 180, "basement_3", 0, 768, 535));
+				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_5x96.png", true, TriggerType.BORDER_SCENESWITCH, 90, "basement_2", 0, 955, 60));
+				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 180, "basement_3", 0, 288, 535));
+				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 180, "basement_3", 0, 768, 535));
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
 				
 				// Maze overlay
-				/*overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
+				overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
 				overlay.setAlpha(255);
-				overlayFollowsPlayer = true;*/
+				overlayFollowsPlayer = true;
 				
 			break;
 			
@@ -368,17 +379,17 @@ public class GameScene {
 				sprites.put("wall_top_right", new Sprite("wall_top_right", "sprites", "wall_top_right.png", true, 0, 0));
 				sprites.put("wall_right", new Sprite("wall_right", "sprites", "wall_right.png", true, 864, 60));
 				
-				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_5x96.png", true, TriggerType.SCENESWITCH, 270, "basement_1", 0, 0, 60));
-				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.SCENESWITCH, 180, "basement_4", 0, 192, 535));
-				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_96x5.png", true, TriggerType.SCENESWITCH, 180, "basement_4", 0, 672, 535));
+				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_5x96.png", true, TriggerType.BORDER_SCENESWITCH, 270, "basement_1", 0, 0, 60));
+				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 180, "basement_4", 0, 192, 535));
+				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 180, "basement_4", 0, 672, 535));
 
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
 
 				// Maze overlay
-				/*overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
+				overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
 				overlay.setAlpha(255);
-				overlayFollowsPlayer = true;*/
+				overlayFollowsPlayer = true;
 
 			break;
 			
@@ -418,17 +429,17 @@ public class GameScene {
 				sprites.put("wall_bottom_left", new Sprite("wall_bottom_left", "sprites", "wall_bottom_left.png", true, 0, 480));
 				sprites.put("wall_left", new Sprite("wall_left", "sprites", "wall_left.png", true, 0, 0));
 				
-				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_96x5.png", true, TriggerType.SCENESWITCH, 0, "basement_1", 0, 288, 0));
-				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.SCENESWITCH, 0, "basement_4", 0, 768, 0));
-				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_5x96.png", true, TriggerType.SCENESWITCH, 90, "basement_4", 0, 955, 288));
+				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 0, "basement_1", 0, 288, 0));
+				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 0, "basement_1", 0, 768, 0));
+				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_5x96.png", true, TriggerType.BORDER_SCENESWITCH, 90, "basement_4", 0, 955, 288));
 
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
 
 				// Maze overlay
-				/*overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
+				overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
 				overlay.setAlpha(255);
-				overlayFollowsPlayer = true;*/
+				overlayFollowsPlayer = true;
 
 			break;
 			
@@ -468,17 +479,17 @@ public class GameScene {
 				sprites.put("wall_bottom_right", new Sprite("wall_bottom_right", "sprites", "wall_bottom_right.png", true, 0, 480));
 				sprites.put("wall_right", new Sprite("wall_right", "sprites", "wall_right.png", true, 864, 0));
 
-				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_96x5.png", true, TriggerType.SCENESWITCH, 0, "basement_2", 0, 192, 0));
-				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.SCENESWITCH, 0, "basement_2", 0, 672, 0));
-				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_5x96.png", true, TriggerType.SCENESWITCH, 90, "basement_3", 0, 0, 288));
+				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 0, "basement_2", 0, 192, 0));
+				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 0, "basement_2", 0, 672, 0));
+				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_5x96.png", true, TriggerType.BORDER_SCENESWITCH, 270, "basement_3", 0, 0, 288));
 
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
 
 				// Maze overlay
-				/*overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
+				overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
 				overlay.setAlpha(255);
-				overlayFollowsPlayer = true;*/
+				overlayFollowsPlayer = true;
 
 			break;
 			
@@ -487,7 +498,7 @@ public class GameScene {
 				
 				background = new Sprite("background", "img", "background3.png", false, 0, 0);
 				
-				sprites.put("switch_top", new Sprite("switch_top", "img", "horizontal_line_transparent.png", false, TriggerType.SCENESWITCH, 0, "outside_headquarters", 0, 0, 0));
+				sprites.put("switch_top", new Sprite("switch_top", "img", "horizontal_line_transparent.png", false, TriggerType.BORDER_SCENESWITCH, 0, "outside_headquarters", 0, 0, 0));
 				
 				sprites.put("middlecore", new AnimatedSprite("middlecore", "sprites", "middlecore.png", true, 352, 240, 64, 64, 500));
 				sprites.put("conveyer_1", new AnimatedSprite("conveyer_1", "sprites", "conveyer.png", true, 416, 240, 64, 64, 250));
@@ -806,15 +817,31 @@ public class GameScene {
 		if(currentTriggerBox != null) {
 			
 			String itemName = currentTriggerBox.getObjectName();
+			int triggerDirection = -1;
+			int playerRotation = 0;
 			
 			switch(currentTriggerBox.getTriggerType()) {
 				case SCENESWITCH:
 					
-					int triggerDirection = currentTriggerBox.getTriggerDirection();
-					int playerRotation = player.getRotation();
+					triggerDirection = currentTriggerBox.getTriggerDirection();
+					playerRotation = player.getRotation();
 					
 					if(playerRotation == triggerDirection || triggerDirection == 360) {
 						nextScene = currentTriggerBox.getValue();
+						preservePlayerCoordinates = true;
+						currentTriggerBox.resetTrigger();
+					}
+					
+				break;
+			
+				case BORDER_SCENESWITCH:
+					
+					triggerDirection = currentTriggerBox.getTriggerDirection();
+					playerRotation = player.getRotation();
+					
+					if(playerRotation == triggerDirection || triggerDirection == 360) {
+						nextScene = currentTriggerBox.getValue();
+						preservePlayerCoordinates = false;
 						currentTriggerBox.resetTrigger();
 					}
 					
@@ -827,6 +854,7 @@ public class GameScene {
 						 
 						if(inventory.hasItemSelected(keyName) || currentTriggerBox.isTriggered()) {
 							nextScene = currentTriggerBox.getValue();
+							preservePlayerCoordinates = true;
 							currentTriggerBox.setTriggered();
 							 
 							// Remove key from inventory
@@ -882,6 +910,7 @@ public class GameScene {
 					else {
 						if(animatedSprite.isStopped()) {
 							nextScene = currentTriggerBox.getValue();
+							preservePlayerCoordinates = true;
 							
 							animatedSprite.resetAnimation();
 							currentTriggerBox.resetTrigger();

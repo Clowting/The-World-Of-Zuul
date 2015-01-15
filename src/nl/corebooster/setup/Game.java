@@ -93,34 +93,60 @@ public class Game extends BasicGame {
 					// Change player position for next scene
 					Player currentPlayer = currentScene.getPlayer();
 					Player nextPlayer = scene.getPlayer();
+					int playerSize = currentPlayer.getPlayerSize();
 					
 					int currentPlayerRotation = currentPlayer.getRotation();
 					int currentPlayerX = currentPlayer.getX();
 					int currentPlayerY = currentPlayer.getY();
 					int nextPlayerX = nextPlayer.getX();
 					int nextPlayerY = nextPlayer.getY();
-					int offset = 5;
+					boolean preservePlayerCoordinates = currentScene.preservePlayerCoordinates();
+					int offset = 10;
 					int x = 0;
 					int y = 0;
 					
 					switch(currentPlayerRotation) {
 						case 0:
 							x = currentPlayerX;
-							y = nextPlayerY - offset;
+							
+							if(preservePlayerCoordinates) {
+								y = nextPlayerY - offset;
+							}
+							else {
+								y = 540 - playerSize - offset;
+							}
 						break;
 						
 						case 90:
-							x = nextPlayerX + offset;
+							if(preservePlayerCoordinates) {
+								x = nextPlayerX + offset;
+							}
+							else {
+								x = offset;
+							}
+							
 							y = currentPlayerY;
 						break;
 						
 						case 180:
 							x = currentPlayerX;
-							y = nextPlayerY + offset;
+							
+							if(preservePlayerCoordinates) {
+								y = nextPlayerY + offset;
+							}
+							else {
+								y = offset;
+							}
 						break;
 						
 						case 270:
-							x = nextPlayerX - offset;
+							if(preservePlayerCoordinates) {
+								x = nextPlayerX - offset;
+							}
+							else {
+								x = 960 - playerSize - offset;
+							}
+							
 							y = currentPlayerY;
 						break;
 					}
@@ -159,7 +185,7 @@ public class Game extends BasicGame {
 		else
 		{
 			currentScene.render(g);
-			g.drawString("Current scene: " + currentScene.getSceneName(), 10, 30);
+			//g.drawString("Current scene: " + currentScene.getSceneName(), 10, 30);
 			
 		}
 	}

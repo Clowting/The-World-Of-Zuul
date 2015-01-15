@@ -11,7 +11,7 @@ import org.newdawn.slick.geom.Rectangle;
 public class TriggerBox {
 	
 	public enum TriggerType {
-		SCENESWITCH, LOCKEDSCENESWITCH, MESSAGE, LOCKEDMESSAGE, TRAPDOOR, ITEM
+		SCENESWITCH, BORDER_SCENESWITCH, LOCKEDSCENESWITCH, MESSAGE, LOCKEDMESSAGE, TRAPDOOR, ITEM
 	}
 	
 	private String objectName;

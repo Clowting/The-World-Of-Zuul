@@ -244,7 +244,7 @@ public class GameScene {
 				sprites.put("switch_right", new Sprite("switch_right", "img", "vertical_line_transparent.png", false, TriggerType.BORDER_SCENESWITCH, 90, "outside_headquarters", 0, 955, 0));
 	
 				sprites.put("ice_cliff", new Sprite("ice_cliff", "sprites", "ice_cliff.png", true, 0, 0));
-				sprites.put("landingpad", new AnimatedSprite("landingpad", "sprites", "landingpad.png", true, TriggerType.MESSAGE, -1, "This is a test message", 10, 50, 80, 384, 384, 1000));
+				sprites.put("landingpad", new AnimatedSprite("landingpad", "sprites", "landingpad.png", true, 50, 80, 384, 384, 1000));
 				sprites.put("spaceship", new Sprite("spaceship", "sprites", "spaceship_big.png", false, 104, 132));
 				
 				items.put("headquarters_entrance_key", new Item("headquarters_entrance_key", "Key to the HQ", ItemType.KEY, "key_hq_icon.png", "key_hq.png", 700, 80));
@@ -383,6 +383,8 @@ public class GameScene {
 				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 180, "basement_4", 0, 192, 535));
 				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 180, "basement_4", 0, 672, 535));
 
+				sprites.put("teleporter", new AnimatedSprite("teleporter", "sprites", "teleporter.png", false, TriggerType.SCENESWITCH, 360, "outside_headquarters", 0, 768, 15, 96, 96, 100));
+				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
 
@@ -482,7 +484,7 @@ public class GameScene {
 				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 0, "basement_2", 0, 192, 0));
 				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 0, "basement_2", 0, 672, 0));
 				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_5x96.png", true, TriggerType.BORDER_SCENESWITCH, 270, "basement_3", 0, 0, 288));
-
+				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
 
@@ -910,6 +912,7 @@ public class GameScene {
 					else {
 						if(animatedSprite.isStopped()) {
 							nextScene = currentTriggerBox.getValue();
+							preservePlayerCoordinates = false;
 							preservePlayerCoordinates = true;
 							
 							animatedSprite.resetAnimation();

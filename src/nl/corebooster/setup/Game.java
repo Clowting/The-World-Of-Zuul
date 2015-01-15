@@ -44,7 +44,7 @@ public class Game extends BasicGame {
 		scenes.put("ice", new GameScene("ice", 480, 270));
 		scenes.put("outside_headquarters", new GameScene("outside_headquarters", 15, 260));
 		scenes.put("headquarters", new GameScene("headquarters", 75, 270));
-		scenes.put("basement_1", new GameScene("basement_1", 864, 60));
+		scenes.put("basement_1", new GameScene("basement_1", 864, 80));
 		scenes.put("basement_2", new GameScene("basement_2", 15, 60));
 		scenes.put("basement_3", new GameScene("basement_3", 228, 15));
 		scenes.put("basement_4", new GameScene("basement_4", 192, 15));
@@ -197,7 +197,7 @@ public class Game extends BasicGame {
 	 */
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer app = new AppGameContainer(new Game("The World Of Zuul"));
-		int updateInterval = 20;
+		int updateInterval = 50;
 		
 		app.setDisplayMode(960, 540, false);
 		//app.setIcon("data/img/icon.png");

@@ -44,10 +44,10 @@ public class Game extends BasicGame {
 		scenes.put("ice", new GameScene("ice", 480, 270));
 		scenes.put("outside_headquarters", new GameScene("outside_headquarters", 15, 260));
 		scenes.put("headquarters", new GameScene("headquarters", 75, 270));
-		scenes.put("basement_1", new GameScene("basement_1", 304, 75));
-		scenes.put("basement_2", new GameScene("basement_2", 304, 15));
-		scenes.put("basement_3", new GameScene("basement_3", 304, 15));
-		scenes.put("basement_4", new GameScene("basement_4", 304, 15));
+		scenes.put("basement_1", new GameScene("basement_1", 864, 60));
+		scenes.put("basement_2", new GameScene("basement_2", 15, 60));
+		scenes.put("basement_3", new GameScene("basement_3", 228, 15));
+		scenes.put("basement_4", new GameScene("basement_4", 192, 15));
 		scenes.put("drill", new GameScene("drill", 448, 15));
 		
 		currentScene = scenes.get("ice");
@@ -90,9 +90,44 @@ public class Game extends BasicGame {
 		{
 			for(GameScene scene: scenes.values()) {
 				if(scene.isActive()) {
-					// Sets the current scene unrendered and resets the 'nextScene' value
-					int currentPlayerRotation = currentScene.getPlayer().getRotation();
-					scene.getPlayer().rotatePlayer(currentPlayerRotation);
+					// Change player position for next scene
+					Player currentPlayer = currentScene.getPlayer();
+					Player nextPlayer = scene.getPlayer();
+					
+					int currentPlayerRotation = currentPlayer.getRotation();
+					int currentPlayerX = currentPlayer.getX();
+					int currentPlayerY = currentPlayer.getY();
+					int nextPlayerX = nextPlayer.getX();
+					int nextPlayerY = nextPlayer.getY();
+					int offset = 5;
+					int x = 0;
+					int y = 0;
+					
+					switch(currentPlayerRotation) {
+						case 0:
+							x = currentPlayerX;
+							y = nextPlayerY - offset;
+						break;
+						
+						case 90:
+							x = nextPlayerX + offset;
+							y = currentPlayerY;
+						break;
+						
+						case 180:
+							x = currentPlayerX;
+							y = nextPlayerY + offset;
+						break;
+						
+						case 270:
+							x = nextPlayerX - offset;
+							y = currentPlayerY;
+						break;
+					}
+					
+					nextPlayer.rotatePlayer(currentPlayerRotation);
+					nextPlayer.setX(x);
+					nextPlayer.setY(y);
 					
 					// Give the same inventory to the new scene
 					Inventory currentInventory = currentScene.getInventory();

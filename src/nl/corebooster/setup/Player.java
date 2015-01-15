@@ -38,7 +38,7 @@ public class Player {
 		collisionbox = new CollisionBox(x, y, playerSize, playerSize);
 		
 		this.x = x;
-		this.y = y;
+		this.y = y;	
 		
 		angle = 0;
 		
@@ -73,7 +73,7 @@ public class Player {
 	
 	/**
 	 * Returns the X-position
-	 * @return The players x position
+	 * @return The players X-position
 	 */
 	public int getX()
 	{
@@ -82,7 +82,7 @@ public class Player {
 	
 	/**
 	 * Returns the Y-position
-	 * @return The players y position
+	 * @return The players Y-position
 	 */
 	public int getY()
 	{

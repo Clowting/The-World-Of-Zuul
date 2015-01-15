@@ -251,12 +251,12 @@ public class GameScene {
 				sprites.put("switch_left", new Sprite("switch_left", "img", "vertical_line_transparent.png", false, TriggerType.SCENESWITCH, 270, "ice", 0, 0, 0));
 				sprites.put("switch_bottom", new Sprite("switch_bottom", "img", "horizontal_line_transparent.png", false, TriggerType.SCENESWITCH, 180, "drill", 0, 0, 535));
 				
-				sprites.put("bush", new Sprite("bush", "sprites", "bush.png", true, 50, 75));
+				sprites.put("bush", new Sprite("bush", "sprites", "bush.png", true, 150, 75));
 				sprites.put("headquarters", new Sprite("headquarters", "sprites", "headquarters.png", true, 600, 0));
 				sprites.put("headquarters_entrance_light", new Sprite("headquarters_entrance_light", "sprites", "headquarters_entrance_light.png", false, 440, 160));
 				sprites.put("headquarters_entrance", new Sprite("headquarters_entrance", "sprites", "headquarters_entrance.png", true, TriggerType.LOCKEDSCENESWITCH, 90, "headquarters", 0, 500, 160));
 				
-				items.put("cake", new Item("cake", "Very Tasty Spacecake", ItemType.SPACECAKE, "cake_icon.png", "cake.png", 200, 50));
+				items.put("cake", new Item("cake", "Very Tasty Spacecake", ItemType.SPACECAKE, "cake_icon.png", "cake.png", 200, 30));
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
@@ -810,7 +810,10 @@ public class GameScene {
 			switch(currentTriggerBox.getTriggerType()) {
 				case SCENESWITCH:
 					
-					if(player.getRotation() == currentTriggerBox.getTriggerDirection() || currentTriggerBox.getTriggerDirection() == 360) {
+					int triggerDirection = currentTriggerBox.getTriggerDirection();
+					int playerRotation = player.getRotation();
+					
+					if(playerRotation == triggerDirection || triggerDirection == 360) {
 						nextScene = currentTriggerBox.getValue();
 						currentTriggerBox.resetTrigger();
 					}

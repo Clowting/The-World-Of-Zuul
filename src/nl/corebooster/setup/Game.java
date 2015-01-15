@@ -156,10 +156,14 @@ public class Game extends BasicGame {
 					nextPlayer.setY(y);
 					
 					// Checks if the next player is colliding
-					int[] alternateCoordinates = currentScene.getAlternateCoordinates();
+					System.out.println(scene.isPlayerColliding());
 					
-					nextPlayer.setX(alternateCoordinates[0]);
-					nextPlayer.setY(alternateCoordinates[1]);
+					if(scene.isPlayerColliding()) {
+						int[] alternateCoordinates = currentScene.getAlternateCoordinates();
+						
+						nextPlayer.setX(alternateCoordinates[0]);
+						nextPlayer.setY(alternateCoordinates[1]);
+					}
 					
 					// Give the same inventory to the new scene
 					Inventory currentInventory = currentScene.getInventory();

@@ -811,6 +811,15 @@ public class GameScene {
 	}
 	
 	/**
+	 * Returns true if the player is colliding with a sprite
+	 * @return True if the player is colliding with a sprite
+	 */
+	public boolean isPlayerColliding()
+	{
+		return player.isCollidingWith(sprites);
+	}
+	
+	/**
 	 * Returns the current trigger box the player is colliding with
 	 * @return The TriggerBox
 	 */
@@ -821,13 +830,16 @@ public class GameScene {
 		if(currentTriggerBoxSprites != null) {
 			int[] coordinates = new int[2];
 			
-			int alternateX = currentTriggerBoxSprites.getAlternateX();
-			int alternateY = currentTriggerBoxSprites.getAlternateY();
+			int alternateX = 0; //currentTriggerBoxSprites.getAlternateX();
+			int alternateY = 0; //currentTriggerBoxSprites.getAlternateY();
 			
 			coordinates[0] = alternateX;
 			coordinates[1] = alternateY;
 			
 			return coordinates;
+		}
+		else {
+			return null;
 		}
 	}
 	
@@ -1022,7 +1034,7 @@ public class GameScene {
 		
 		// Draws the player collision box and background
 		player.drawCollisionBox(g);
-		background.drawSprite(g);
+		//background.drawSprite(g);
 		
 		// Draws the sprites.
 		for(Object object : sprites.values()) {
@@ -1047,6 +1059,8 @@ public class GameScene {
 		
 		// Draw the player
 		player.drawSprite(g);
+		g.drawString("Player X: " + player.getX(), 10, 25);
+		g.drawString("Player Y: " + player.getY(), 10, 40);
 		
 		// Draw the overlay
 		if(overlay != null) {

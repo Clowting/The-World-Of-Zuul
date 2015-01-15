@@ -241,7 +241,7 @@ public class GameScene {
 	
 				background = new Sprite("background", "img", "background1.png", false, 0, 0);
 				
-				sprites.put("switch_right", new Sprite("switch_right", "img", "vertical_line_transparent.png", false, TriggerType.BORDER_SCENESWITCH, 90, "outside_headquarters", 0, 955, 0));
+				sprites.put("switch_right", new Sprite("switch_right", "img", "vertical_line_transparent.png", false, TriggerType.BORDER_SCENESWITCH, 90, 5, 238, "outside_headquarters", 0, 955, 0));
 	
 				sprites.put("ice_cliff", new Sprite("ice_cliff", "sprites", "ice_cliff.png", true, 0, 0));
 				sprites.put("landingpad", new AnimatedSprite("landingpad", "sprites", "landingpad.png", true, 50, 80, 384, 384, 1000));
@@ -259,13 +259,13 @@ public class GameScene {
 	
 				background = new Sprite("background", "img", "background2.png", false, 0, 0);
 	
-				sprites.put("switch_left", new Sprite("switch_left", "img", "vertical_line_transparent.png", false, TriggerType.BORDER_SCENESWITCH, 270, "ice", 0, 0, 0));
-				sprites.put("switch_bottom", new Sprite("switch_bottom", "img", "horizontal_line_transparent.png", false, TriggerType.BORDER_SCENESWITCH, 180, "drill", 0, 0, 535));
+				sprites.put("switch_left", new Sprite("switch_left", "img", "vertical_line_transparent.png", false, TriggerType.BORDER_SCENESWITCH, 270, 891, 238, "ice", 0, 0, 0));
+				sprites.put("switch_bottom", new Sprite("switch_bottom", "img", "horizontal_line_transparent.png", false, TriggerType.BORDER_SCENESWITCH, 180, 123, 123, "drill", 0, 0, 535));
 				
 				sprites.put("bush", new Sprite("bush", "sprites", "bush.png", true, 150, 75));
 				sprites.put("headquarters", new Sprite("headquarters", "sprites", "headquarters.png", true, 600, 0));
 				sprites.put("headquarters_entrance_light", new Sprite("headquarters_entrance_light", "sprites", "headquarters_entrance_light.png", false, 440, 160));
-				sprites.put("headquarters_entrance", new Sprite("headquarters_entrance", "sprites", "headquarters_entrance.png", true, TriggerType.LOCKEDSCENESWITCH, 90, "headquarters", 0, 500, 160));
+				sprites.put("headquarters_entrance", new Sprite("headquarters_entrance", "sprites", "headquarters_entrance.png", true, TriggerType.LOCKEDSCENESWITCH, 90, 123, 123, "headquarters", 0, 500, 160));
 				
 				items.put("cake", new Item("cake", "Very Tasty Spacecake", ItemType.SPACECAKE, "cake_icon.png", "cake.png", 200, 30));
 				
@@ -279,12 +279,12 @@ public class GameScene {
 	
 				background = new Sprite("background", "img", "headquarters_background.png", false, 0, 0);
 	
-				sprites.put("headquarters_exit", new Sprite("headquarters_exit", "sprites", "headquarters_exit.png", true, TriggerType.SCENESWITCH, 270, "outside_headquarters", 0, 0, 160));
+				sprites.put("headquarters_exit", new Sprite("headquarters_exit", "sprites", "headquarters_exit.png", true, TriggerType.SCENESWITCH, 270, 123, 123, "outside_headquarters", 0, 0, 160));
 				sprites.put("cpanel", new AnimatedSprite("cpanel", "sprites", "cpanel.png", true, 50, 0, 685, 90, 200));
-				sprites.put("trapdoor", new AnimatedSprite("trapdoor", "sprites", "trapdoor.png", false, TriggerType.TRAPDOOR, 360, "basement_1", 5, 860, 10, 90, 90, 50));
+				sprites.put("trapdoor", new AnimatedSprite("trapdoor", "sprites", "trapdoor.png", false, TriggerType.TRAPDOOR, 360, 123, 123, "basement_1", 5, 860, 10, 90, 90, 50));
 				sprites.put("liquid_transporter", new AnimatedSprite("liquid_transporter", "sprites", "liquid_transporter.png", true, 860, 210, 70, 210, 100));
 				sprites.put("radar", new AnimatedSprite("radar", "sprites", "radar.png", true, 425, 240, 95, 95, 150));
-				sprites.put("npc_officer", new Sprite("npc_officer", "sprites", "npc_red_up.png", true, TriggerType.MESSAGE, -1, "Welcome! I'm glad you're here.\nWe have a problem at the construction site. Do you mind taking a look?", 10, 438, 430));
+				sprites.put("npc_officer", new Sprite("npc_officer", "sprites", "npc_red_up.png", true, TriggerType.MESSAGE, -1, 123, 123, "Welcome! I'm glad you're here.\nWe have a problem at the construction site. Do you mind taking a look?", 10, 438, 430));
 	
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
@@ -328,9 +328,9 @@ public class GameScene {
 				sprites.put("wall_top_left", new Sprite("wall_top_left", "sprites", "wall_top_left.png", true, 0, 0));
 				sprites.put("wall_left", new Sprite("wall_left", "sprites", "wall_left.png", true, 0, 60));
 				
-				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_5x96.png", true, TriggerType.BORDER_SCENESWITCH, 90, "basement_2", 0, 955, 60));
-				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 180, "basement_3", 0, 288, 535));
-				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 180, "basement_3", 0, 768, 535));
+				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_5x96.png", true, TriggerType.BORDER_SCENESWITCH, 90, 123, 123, "basement_2", 0, 955, 60));
+				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 180, 123, 123, "basement_3", 0, 288, 535));
+				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 180, 123, 123, "basement_3", 0, 768, 535));
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
@@ -379,11 +379,11 @@ public class GameScene {
 				sprites.put("wall_top_right", new Sprite("wall_top_right", "sprites", "wall_top_right.png", true, 0, 0));
 				sprites.put("wall_right", new Sprite("wall_right", "sprites", "wall_right.png", true, 864, 60));
 				
-				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_5x96.png", true, TriggerType.BORDER_SCENESWITCH, 270, "basement_1", 0, 0, 60));
-				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 180, "basement_4", 0, 192, 535));
-				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 180, "basement_4", 0, 672, 535));
+				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_5x96.png", true, TriggerType.BORDER_SCENESWITCH, 270, 123, 123, "basement_1", 0, 0, 60));
+				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 180, 123, 123, "basement_4", 0, 192, 535));
+				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 180, 123, 123, "basement_4", 0, 672, 535));
 
-				sprites.put("teleporter", new AnimatedSprite("teleporter", "sprites", "teleporter.png", true, TriggerType.SCENESWITCH, 360, "outside_headquarters", 0, 768, 156, 96, 96, 100));
+				sprites.put("teleporter", new AnimatedSprite("teleporter", "sprites", "teleporter.png", true, TriggerType.SCENESWITCH, 360, 123, 123, "outside_headquarters", 0, 768, 156, 96, 96, 100));
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
@@ -431,9 +431,9 @@ public class GameScene {
 				sprites.put("wall_bottom_left", new Sprite("wall_bottom_left", "sprites", "wall_bottom_left.png", true, 0, 480));
 				sprites.put("wall_left", new Sprite("wall_left", "sprites", "wall_left.png", true, 0, 0));
 				
-				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 0, "basement_1", 0, 288, 0));
-				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 0, "basement_1", 0, 768, 0));
-				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_5x96.png", true, TriggerType.BORDER_SCENESWITCH, 90, "basement_4", 0, 955, 288));
+				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 0, 123, 123, "basement_1", 0, 288, 0));
+				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 0, 123, 123, "basement_1", 0, 768, 0));
+				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_5x96.png", true, TriggerType.BORDER_SCENESWITCH, 90, 123, 123, "basement_4", 0, 955, 288));
 
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
@@ -481,9 +481,9 @@ public class GameScene {
 				sprites.put("wall_bottom_right", new Sprite("wall_bottom_right", "sprites", "wall_bottom_right.png", true, 0, 480));
 				sprites.put("wall_right", new Sprite("wall_right", "sprites", "wall_right.png", true, 864, 0));
 
-				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 0, "basement_2", 0, 192, 0));
-				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 0, "basement_2", 0, 672, 0));
-				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_5x96.png", true, TriggerType.BORDER_SCENESWITCH, 270, "basement_3", 0, 0, 288));
+				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 0, 123, 123, "basement_2", 0, 192, 0));
+				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 0, 123, 123, "basement_2", 0, 672, 0));
+				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_5x96.png", true, TriggerType.BORDER_SCENESWITCH, 270, 123, 123, "basement_3", 0, 0, 288));
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
@@ -500,7 +500,7 @@ public class GameScene {
 				
 				background = new Sprite("background", "img", "background3.png", false, 0, 0);
 				
-				sprites.put("switch_top", new Sprite("switch_top", "img", "horizontal_line_transparent.png", false, TriggerType.BORDER_SCENESWITCH, 0, "outside_headquarters", 0, 0, 0));
+				sprites.put("switch_top", new Sprite("switch_top", "img", "horizontal_line_transparent.png", false, TriggerType.BORDER_SCENESWITCH, 0, 123, 123, "outside_headquarters", 0, 0, 0));
 				
 				sprites.put("middlecore", new AnimatedSprite("middlecore", "sprites", "middlecore.png", true, 352, 240, 64, 64, 500));
 				sprites.put("conveyer_1", new AnimatedSprite("conveyer_1", "sprites", "conveyer.png", true, 416, 240, 64, 64, 250));
@@ -510,8 +510,8 @@ public class GameScene {
 				sprites.put("rocks_2", new AnimatedSprite("rocks", "sprites", "rocks_2.png", false, 416, 240, 192, 64, 250));
 				sprites.put("burner", new AnimatedSprite("burner", "sprites", "burner.png", true, 608, 240, 64, 64, 100));
 				
-				sprites.put("npc_officer", new Sprite("npc_officer", "sprites", "npc_red_up.png", true, TriggerType.MESSAGE, -1, "Good to see you here. The drill has stopped working!\nCan you ask around to see what parts the workers need?", 10, 438, 430));
-				sprites.put("npc_1", new Sprite("npc_1", "sprites", "npc_yellow_left.png", true, TriggerType.LOCKEDMESSAGE, -1, "Niks", 10, 900, 240));
+				sprites.put("npc_officer", new Sprite("npc_officer", "sprites", "npc_red_up.png", true, TriggerType.MESSAGE, -1, 123, 123, "Good to see you here. The drill has stopped working!\nCan you ask around to see what parts the workers need?", 10, 438, 430));
+				sprites.put("npc_1", new Sprite("npc_1", "sprites", "npc_yellow_left.png", true, TriggerType.LOCKEDMESSAGE, -1, 123, 123, "Niks", 10, 900, 240));
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;

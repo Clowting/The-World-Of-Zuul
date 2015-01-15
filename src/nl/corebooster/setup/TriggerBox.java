@@ -16,7 +16,7 @@ public class TriggerBox {
 	
 	private String objectName;
 	private TriggerType triggerType;
-	private int triggerDirection;
+	private int triggerDirection, alternateX, alternateY;
 	private Rectangle box;
 	private int boxMargin = 1;
 	private String value;
@@ -27,6 +27,8 @@ public class TriggerBox {
 	 * @param objectName Name of the corresponding object
 	 * @param type The type of trigger, SCENESWITCH/LOCKEDSCENESWITCH/MESSAGE/ANIMATE/ITEM
 	 * @param triggerDirection The direction the player has to approach from for the trigger to work
+	 * @param alternateX The x position to use if the normal position is blocked
+	 * @param alternateY The y position to use if the normal position is blocked
 	 * @param value The value of the trigger
 	 * @param x The initial x position of the trigger box
 	 * @param y The initial y position of the trigger box
@@ -34,7 +36,7 @@ public class TriggerBox {
 	 * @param height The height of the trigger box
 	 * @param boxMargin The margin of the trigger box
 	 */
-	public TriggerBox(String objectName, TriggerType type, int triggerDirection, String value, int x, int y, int width, int height, int boxMargin)
+	public TriggerBox(String objectName, TriggerType type, int triggerDirection, int alternateX, int alternateY, String value, int x, int y, int width, int height, int boxMargin)
 	{
 		this.objectName = objectName;
 		this.triggerType = type;
@@ -43,6 +45,8 @@ public class TriggerBox {
 		this.value = value;
 		this.isTriggered = false;
 		this.triggerDirection = triggerDirection;
+		this.alternateX = alternateX;
+		this.alternateX = alternateY;
 	}
 	
 	/**
@@ -70,6 +74,22 @@ public class TriggerBox {
 	public int getTriggerDirection()
 	{
 		return triggerDirection;
+	}
+	
+	/**
+	 * Returns the alternate x position
+	 * @return The alternate x position
+	 */
+	public int getAlternateX() {
+		return alternateX;
+	}
+	
+	/**
+	 * Returns the alternate y position
+	 * @return The alternate y position
+	 */
+	public int getAlternateY() {
+		return alternateY;
 	}
 	
 	/**

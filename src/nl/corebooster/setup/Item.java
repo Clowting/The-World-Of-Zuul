@@ -38,7 +38,7 @@ public class Item {
 		this.itemName = itemName;
 		this.itemType = itemType;
 		itemIcon = new Sprite(keyValue, "items", itemIconName, false, 0, 484);
-		sprite = new Sprite(keyValue, "items", spriteName, false, TriggerType.ITEM, 0, "You picked up a " + itemName, 0, x, y);
+		sprite = new Sprite(keyValue, "items", spriteName, false, TriggerType.ITEM, 0, 0, 0, "You picked up a " + itemName, 0, x, y);
 	}
 	
 	/**

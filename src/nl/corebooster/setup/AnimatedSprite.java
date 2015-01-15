@@ -64,6 +64,8 @@ public class AnimatedSprite {
 	 * @param isCollidable Depends if you can collide with the animated sprite or not, true/false
 	 * @param triggerType The type of trigger called when collided, SCENESWITCH/MESSAGE/ANIMATE
 	 * @param triggerDirection The direction the player has to approach from for the trigger to work
+	 * @param alternateX The x position to use if the normal position is blocked
+	 * @param alternateY The y position to use if the normal position is blocked
 	 * @param triggerValue The value of the trigger called when collided
 	 * @param triggerMargin The margin of the trigger box
 	 * @param x The initial x position of the animated sprite
@@ -73,7 +75,7 @@ public class AnimatedSprite {
 	 * @param interval The animation interval
 	 * @throws SlickException Indicates a failure to initialize the display
 	 */
-	public AnimatedSprite(String spriteName, String folder, String filename, boolean isCollidable, TriggerType triggerType, int triggerDirection, String triggerValue, int triggerMargin, int x, int y, int width, int height, int interval) throws SlickException
+	public AnimatedSprite(String spriteName, String folder, String filename, boolean isCollidable, TriggerType triggerType, int triggerDirection, int alternateX, int alternateY, String triggerValue, int triggerMargin, int x, int y, int width, int height, int interval) throws SlickException
 	{
 		this.spriteName = spriteName;
 		this.spritesheet = getSpriteSheet(folder, filename, width, height);
@@ -86,7 +88,7 @@ public class AnimatedSprite {
 			collisionbox = null;
 		}
 		
-		this.triggerbox = new TriggerBox(spriteName, triggerType, triggerDirection, triggerValue, x, y, width, height, triggerMargin);
+		this.triggerbox = new TriggerBox(spriteName, triggerType, triggerDirection, alternateX, alternateY, triggerValue, x, y, width, height, triggerMargin);
 		
 		if(triggerType == TriggerType.TRAPDOOR) {
 			stopAnimation();

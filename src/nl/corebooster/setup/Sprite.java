@@ -59,13 +59,15 @@ public class Sprite {
 	 * @param isCollidable Depends if you can collide with the sprite or not, true/false
 	 * @param triggerType The type of trigger called when collided, SCENESWITCH/MESSAGE/ANIMATE
 	 * @param triggerDirection The direction the player has to approach from for the trigger to work
+	 * @param alternateX The x position to use if the normal position is blocked
+	 * @param alternateY The y position to use if the normal position is blocked
 	 * @param triggerValue The value of the trigger called when collided
 	 * @param triggerMargin The margin of the trigger box
 	 * @param x The initial x position of the sprite
 	 * @param y The initial y position of the sprite
 	 * @throws SlickException Indicates a failure to initialize the display 
 	 */
-	public Sprite(String spriteName, String folder, String filename, boolean isCollidable, TriggerType triggerType, int triggerDirection, String triggerValue, int triggerMargin, int x, int y) throws SlickException
+	public Sprite(String spriteName, String folder, String filename, boolean isCollidable, TriggerType triggerType, int triggerDirection, int alternateX, int alternateY, String triggerValue, int triggerMargin, int x, int y) throws SlickException
 	{
 		this.spriteName = spriteName;
 		this.image = getImage(folder, filename);
@@ -80,7 +82,7 @@ public class Sprite {
 			collisionbox = null;
 		}
 		
-		this.triggerbox = new TriggerBox(spriteName, triggerType, triggerDirection, triggerValue, x, y, image.getWidth(), image.getHeight(), triggerMargin);
+		this.triggerbox = new TriggerBox(spriteName, triggerType, triggerDirection, alternateX, alternateY, triggerValue, x, y, image.getWidth(), image.getHeight(), triggerMargin);
 		
 		this.x = x;
 		this.y = y;

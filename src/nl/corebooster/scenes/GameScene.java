@@ -688,6 +688,8 @@ public class GameScene {
 	 */
 	private void inventoryKeyHandler(Input input)
 	{
+		boolean isColliding = player.isCollidingWith(sprites);
+		
 		if(input.isKeyDown(Input.KEY_1)) {
 			inventory.setSelectedSlot(0);
 		} 
@@ -701,11 +703,13 @@ public class GameScene {
 			inventory.setSelectedSlot(3);
 		}
 		
-		if(input.isKeyPressed(Input.KEY_D)) {
-			dropItem();
-		} 
-		else if(input.isKeyPressed(Input.KEY_SPACE)) {
-			useItem();
+		if(!isColliding) {
+			if(input.isKeyPressed(Input.KEY_D)) {
+				dropItem();
+			} 
+			else if(input.isKeyPressed(Input.KEY_SPACE)) {
+				useItem();
+			}
 		}
 	}
 	
@@ -721,10 +725,7 @@ public class GameScene {
 			int y = player.getY();
 			int playerSize = player.getPlayerSize();
 			int rotation = player.getRotation();
-			int dropDistance = 20;
-			
-			System.out.println("Player X: " + x);
-			System.out.println("Player Y: " + y);
+			int dropDistance = 5;
 			
 			// Item info
 			String selectedItemName = selectedItem.getKeyValue();
@@ -750,17 +751,14 @@ public class GameScene {
 				break;
 			}
 			
-			System.out.println("Item X: " + x);
-			System.out.println("Item Y: " + y);
-			
 			// Update item position
 			if(x > 0 && y > 0 && x < screenWidth && y < screenHeight) {
-				inventory.deleteSelectedItem();
 				selectedItem.moveItem(x, y);
+				inventory.deleteSelectedItem();
 				items.put(selectedItemName, selectedItem);
 			}
 			else {
-				inventory.setCurrentMessage("Can't drop this item here!");
+				inventory.setCurrentMessage("You can't drop an item here!");
 			}
 		}
 	}
@@ -1031,7 +1029,7 @@ public class GameScene {
 		
 		// Draws the player collision box and background
 		player.drawCollisionBox(g);
-		//background.drawSprite(g);
+		background.drawSprite(g);
 		
 		// Draws the sprites.
 		for(Object object : sprites.values()) {

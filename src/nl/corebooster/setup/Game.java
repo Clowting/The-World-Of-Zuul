@@ -43,6 +43,7 @@ public class Game extends BasicGame {
 		
 		scenes.put("ice", new GameScene("ice", 480, 270));
 		scenes.put("outside_headquarters", new GameScene("outside_headquarters", 15, 260));
+		scenes.put("above_headquarters", new GameScene("above_headquarters", 488, 461));
 		scenes.put("headquarters", new GameScene("headquarters", 75, 270));
 		scenes.put("basement_1", new GameScene("basement_1", 864, 80));
 		scenes.put("basement_2", new GameScene("basement_2", 15, 60));

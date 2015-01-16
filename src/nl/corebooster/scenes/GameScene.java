@@ -259,6 +259,7 @@ public class GameScene {
 				background = new Sprite("background", "img", "background2.png", false, 0, 0);
 	
 				sprites.put("switch_left", new Sprite("switch_left", "img", "vertical_line_transparent.png", false, TriggerType.BORDER_SCENESWITCH, 270, 886, 238, "ice", 0, 0, 0));
+				sprites.put("switch_top", new Sprite("switch_top", "img", "horizontal_line_transparent.png", false, TriggerType.BORDER_SCENESWITCH, 0, 448, 466, "above_headquarters", 0, 0, 0));
 				sprites.put("switch_bottom", new Sprite("switch_bottom", "img", "horizontal_line_transparent.png", false, TriggerType.BORDER_SCENESWITCH, 180, 448, 10, "drill", 0, 0, 535));
 				
 				sprites.put("bush", new Sprite("bush", "sprites", "bush.png", true, 150, 75));
@@ -268,6 +269,31 @@ public class GameScene {
 				sprites.put("npc_officer", new Sprite("npc_officer", "sprites", "npc_red_up.png", true, TriggerType.MESSAGE, -1, -1, -1, "Welcome! I'm glad you're here.\nWe have a problem at the construction site. Do you mind taking a look?", 10, 405, 405));
 				
 				items.put("cake", new Item("cake", "Very Tasty Spacecake", ItemType.SPACECAKE, "cake_icon.png", "cake.png", 200, 30));
+				
+				bgMusicName = "GameSong01.ogg";
+				bgMusicVolume = 0.05f;
+	
+			break;
+			
+			// "Above headquarters"-scene
+			case "above_headquarters":
+				
+				background = new Sprite("background", "img", "background1.png", false, 0, 0);
+				
+				sprites.put("switch_bottom", new Sprite("switch_bottom", "img", "horizontal_line_transparent.png", false, TriggerType.BORDER_SCENESWITCH, 180, 448, 10, "outside_headquarters", 0, 0, 535));
+				
+				sprites.put("bush1", new Sprite("bush1", "sprites", "bush.png", true, 30, 140));
+				sprites.put("bush2", new Sprite("bush2", "sprites", "bush.png", true, 110, 90));
+				sprites.put("bush3", new Sprite("bush3", "sprites", "bush.png", true, 300, 70));
+				sprites.put("bush4", new Sprite("bush4", "sprites", "bush.png", true, 200, 10));
+				sprites.put("bush5", new Sprite("bush5", "sprites", "bush.png", true, 110, 260));
+				sprites.put("bush6", new Sprite("bush6", "sprites", "bush.png", true, 50, 350));
+				sprites.put("bush7", new Sprite("bush7", "sprites", "bush.png", true, 400, 20));
+				sprites.put("bush8", new Sprite("bush8", "sprites", "bush.png", true, 530, 140));
+				sprites.put("bush9", new Sprite("bush9", "sprites", "bush.png", true, 650, 80));
+				sprites.put("bush10", new Sprite("bush10", "sprites", "bush.png", true, 810, 60));
+				
+				items.put("drill_bit", new Item("drill_bit", "drill bit, the main part of the drill", ItemType.SUPPLY, "drill_bit_icon.png", "drill_bit.png", 200, 125));
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
@@ -933,7 +959,7 @@ public class GameScene {
 							inventory.setCurrentMessage(currentTriggerBox.getValue());
 						}
 						else {
-							inventory.setCurrentMessage("Talk to the officer first! If you don't know who he is, it's the guy with the red suit.");
+							inventory.setCurrentMessage("Talk to the officer first!\nIf you don't know who he is, it's the guy with the red suit.");
 						}
 					}
 					

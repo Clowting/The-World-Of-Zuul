@@ -94,6 +94,7 @@ public class Game extends BasicGame {
 				nextScene.setActive();
 			}
 			
+			currentScene.update();
 			currentScene.keyHandler(input);
 			currentScene.triggerHandler();
 		}
@@ -166,10 +167,7 @@ public class Game extends BasicGame {
 					nextPlayer.setX(x);
 					nextPlayer.setY(y);
 					
-					// Give the same inventory to the new scene
-					Inventory currentInventory = currentScene.getInventory();
-					scene.setInventory(currentInventory);
-					
+					// Disables current scene
 					currentScene.stopAllSounds();
 					currentScene.setUnrendered();
 					currentScene.resetNextScene();
@@ -208,7 +206,7 @@ public class Game extends BasicGame {
 	 */
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer app = new AppGameContainer(new Game("Blue Abyss"));
-		int updateInterval = 50;
+		int updateInterval = 20;
 		
 		app.setDisplayMode(960, 540, false);
 		app.setIcon("data/img/icon.png");

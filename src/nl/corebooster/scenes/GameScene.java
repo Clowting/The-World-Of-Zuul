@@ -16,6 +16,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 /**
  * Describes a game scene with the standard features
@@ -32,12 +33,13 @@ public class GameScene {
 	
 	private Sprite background;
 	private Player player;
-	private Inventory inventory;
+	private static Inventory inventory;
 	private AnimatedSprite overlay;
 	private boolean overlayFollowsPlayer;
 	private static AnimatedSprite secondOverlay;
 	
 	private String sceneName;
+	private static long itemExpireTimestamp;
 	private String nextScene;
 	private boolean preservePlayerCoordinates;
 	private boolean isActive, isRendered;
@@ -67,7 +69,11 @@ public class GameScene {
 		secondOverlay.stopAnimation();
 		overlayFollowsPlayer = false;
 		
+		// Scene info
 		this.sceneName = sceneName;
+		itemExpireTimestamp = System.currentTimeMillis();
+		
+		// Next scene info
 		nextScene = null;
 		preservePlayerCoordinates = true;
 		
@@ -87,15 +93,6 @@ public class GameScene {
 	public Player getPlayer()
 	{
 		return player;
-	}
-	
-	/**
-	 * Returns the inventory from the game scene
-	 * @return The inventory
-	 */
-	public Inventory getInventory()
-	{
-		return inventory;
 	}
 	
 	/**
@@ -151,15 +148,6 @@ public class GameScene {
 	public boolean isActive()
 	{
 		return isActive;
-	}
-	
-	/**
-	 * Replaces the inventory with the given inventory
-	 * @param inventory The new inventory
-	 */
-	public void setInventory(Inventory inventory)
-	{
-		this.inventory = inventory;
 	}
 	
 	/**
@@ -292,6 +280,7 @@ public class GameScene {
 				sprites.put("bush8", new Sprite("bush8", "sprites", "bush.png", true, 530, 140));
 				sprites.put("bush9", new Sprite("bush9", "sprites", "bush.png", true, 650, 80));
 				sprites.put("bush10", new Sprite("bush10", "sprites", "bush.png", true, 810, 60));
+				sprites.put("bush11", new Sprite("bush11", "sprites", "bush.png", true, 10, 10));
 				
 				items.put("drill_bit", new Item("drill_bit", "drill bit, the main part of the drill", ItemType.SUPPLY, "drill_bit_icon.png", "drill_bit.png", 200, 125));
 				
@@ -616,10 +605,23 @@ public class GameScene {
 	 * Plays the given music in the background
 	 * @throws SlickException Indicates a failure to initialize the display
 	 */
-	public void playMusic() throws SlickException {
+	public void playMusic() throws SlickException 
+	{
 		if(bgMusicName != null) {
 			bgMusic.loop(1f, bgMusicVolume);
 		}
+	}
+	
+	/**
+	 * Plays the sound with the given name one time
+	 * @param soundName The filename of the sound
+	 * @throws SlickException Indicates a failure to initialize the display
+	 */
+	public void playSound(String soundName) throws SlickException
+	{
+		Sound sound = new Sound("data/soundeffects/" + soundName);
+		
+		sound.play();
 	}
 	
 	/**
@@ -718,11 +720,10 @@ public class GameScene {
 	/**
 	 * Handles the inventory keys
 	 * @param input The input key
+	 * @throws SlickException Indicates a failure to initialize the display 
 	 */
-	private void inventoryKeyHandler(Input input)
+	private void inventoryKeyHandler(Input input) throws SlickException
 	{
-		boolean isColliding = player.isCollidingWith(sprites);
-		
 		if(input.isKeyDown(Input.KEY_1)) {
 			inventory.setSelectedSlot(0);
 		} 
@@ -736,13 +737,11 @@ public class GameScene {
 			inventory.setSelectedSlot(3);
 		}
 		
-		if(!isColliding) {
-			if(input.isKeyPressed(Input.KEY_D)) {
-				dropItem();
-			} 
-			else if(input.isKeyPressed(Input.KEY_SPACE)) {
-				useItem();
-			}
+		if(input.isKeyPressed(Input.KEY_D)) {
+			dropItem();
+		} 
+		else if(input.isKeyPressed(Input.KEY_SPACE)) {
+			useItem();
 		}
 	}
 	
@@ -798,8 +797,9 @@ public class GameScene {
 	
 	/**
 	 * Allows you to use an item
+	 * @throws SlickException Indicates a failure to initialize the display 
 	 */
-	private void useItem()
+	private void useItem() throws SlickException
 	{
 		Item selectedItem = inventory.getSelectedItem();
 		
@@ -807,22 +807,29 @@ public class GameScene {
 		
 			switch(selectedItem.getItemType()) {
 			
+				case KEY:
+					
+					inventory.setCurrentMessage("You can use this key to unlock a door!");
+					
+				break;
+				
+				case SUPPLY:
+					
+					inventory.setCurrentMessage("Give this " + selectedItem.getItemName() + ", to a worker.");
+					
+				break;
+			
 				case SPACECAKE:
+					
+					itemExpireTimestamp = System.currentTimeMillis() + 20 * 1000;
+					inventory.deleteSelectedItem();
+					playSound("SpaceCakeSoundEffect.ogg");
 					
 					if(secondOverlay.isStopped()) {
 						secondOverlay.startAnimation();
 						secondOverlay.setAlpha(255);
 						player.setMovementSpeed(2);
 					}
-					else {
-						secondOverlay.setAlpha(0);
-						secondOverlay.stopAnimation();
-						player.setMovementSpeed(5);
-					}
-					
-				break;
-			
-				default:
 					
 				break;
 				
@@ -832,9 +839,26 @@ public class GameScene {
 	}
 	
 	/**
-	 * Checks if the player is triggering an event
+	 * Checks if the current item usage is not expired
 	 */
-	public void triggerHandler() 
+	public void checkItemUsage()
+	{
+		long timestamp = System.currentTimeMillis();
+				
+		if(itemExpireTimestamp < timestamp) {
+			if(!secondOverlay.isStopped()) {
+				secondOverlay.setAlpha(0);
+				secondOverlay.stopAnimation();
+				player.setMovementSpeed(5);
+			}
+		}
+	}
+	
+	/**
+	 * Checks if the player is triggering an event
+	 * @throws SlickException Indicates a failure to initialize the display
+	 */
+	public void triggerHandler() throws SlickException 
 	{
 		TriggerBox currentTriggerBoxSprites = player.getCurrentTriggerBox(sprites);
 		TriggerBox currentTriggerBoxItems = player.getCurrentItemTriggerBox(items);
@@ -846,8 +870,9 @@ public class GameScene {
 	/**
 	 * Returns the current trigger box the player is colliding with
 	 * @return The TriggerBox
+	 * @throws SlickException Indicates a failure to initialize the display
 	 */
-	public int[] getAlternateCoordinates()
+	public int[] getAlternateCoordinates() throws SlickException
 	{
 		triggerHandler();
 		
@@ -875,8 +900,9 @@ public class GameScene {
 	/**
 	 * Handles all the types of trigger boxes
 	 * @param currentTriggerBox The trigger box to check
+	 * @throws SlickException Indicates a failure to initialize the display
 	 */
-	private void triggerBoxHandler(TriggerBox currentTriggerBox)
+	private void triggerBoxHandler(TriggerBox currentTriggerBox) throws SlickException
 	{
 		if(currentTriggerBox != null) {
 			
@@ -918,6 +944,9 @@ public class GameScene {
 						String keyName = itemName + "_key";
 						 
 						if(inventory.hasItemSelected(keyName) || currentTriggerBox.isTriggered()) {
+							// Play unlocked lock effect
+							playSound("UnlockDoorSoundEffect.ogg");
+							
 							nextScene = currentTriggerBox.getValue();
 							preservePlayerCoordinates = true;
 							currentTriggerBox.setTriggered();
@@ -988,12 +1017,14 @@ public class GameScene {
 				
 				case ITEM:
 					
-					currentTriggerBox.setTriggered();
-					Item item = items.get(itemName);
-					items.remove(itemName);
-					
-					inventory.addItem(item);
-					inventory.setCurrentMessage(currentTriggerBox.getValue());
+					if(inventory.canAddItem()) {
+						currentTriggerBox.setTriggered();
+						Item item = items.get(itemName);
+						items.remove(itemName);
+						
+						inventory.addItem(item);
+						inventory.setCurrentMessage(currentTriggerBox.getValue());
+					}
 					
 				break;
 				
@@ -1029,12 +1060,21 @@ public class GameScene {
 	}
 	
 	/**
+	 * Updates elements in the game, called every update of the game
+	 */
+	public void update()
+	{
+		// Check item usage
+		checkItemUsage();
+	}
+	
+	/**
 	 * Renders the scene
 	 * @param g The graphics to draw the scene on
 	 * @throws SlickException Indicates a failure to initialize the display
 	 */
 	public void render(Graphics g) throws SlickException
-	{		
+	{
 		// If the overlay needs to follow the player
 		// Call the next method
 		if(overlayFollowsPlayer) {

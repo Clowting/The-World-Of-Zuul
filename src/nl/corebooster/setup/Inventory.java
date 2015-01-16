@@ -146,12 +146,26 @@ public class Inventory {
 	}
 	
 	/**
+	 * Returns true if you can add an item to the inventory, false when full
+	 * @return True if you can add an item, false if not
+	 */
+	public boolean canAddItem()
+	{
+		if(items.size() < maxItemCount) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	/**
 	 * Adds an item to the items ArrayList
 	 * @param item The item to be added
 	 */
 	public void addItem(Item item)
 	{
-		if(items.size() < maxItemCount) {
+		if(canAddItem()) {
 			items.add(item);
 		}
 		else {

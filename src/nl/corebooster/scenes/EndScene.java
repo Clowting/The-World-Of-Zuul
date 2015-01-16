@@ -12,7 +12,7 @@ import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 
 /**
- * Describes the intro scene
+ * Describes the end scene
  * @author Raymon de Looff, Thijs Clowting, Richard Weug
  * @version 1.0
  */

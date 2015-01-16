@@ -11,7 +11,7 @@ import org.newdawn.slick.geom.Rectangle;
 public class TriggerBox {
 	
 	public enum TriggerType {
-		SCENESWITCH, BORDER_SCENESWITCH, LOCKEDSCENESWITCH, MESSAGE, LOCKEDMESSAGE, TRAPDOOR, ITEM
+		SCENESWITCH, BORDER_SCENESWITCH, LOCKEDSCENESWITCH, MESSAGE, LOCKEDMESSAGE, TRADEINSUPPLY, TRAPDOOR, ITEM;
 	}
 	
 	private String objectName;
@@ -25,7 +25,7 @@ public class TriggerBox {
 	/**
 	 * Constructs a new trigger box with a specific type and value
 	 * @param objectName Name of the corresponding object
-	 * @param type The type of trigger, SCENESWITCH/LOCKEDSCENESWITCH/MESSAGE/ANIMATE/ITEM
+	 * @param type The type of trigger: SCENESWITCH, BORDER_SCENESWITCH, LOCKEDSCENESWITCH, MESSAGE, LOCKEDMESSAGE, TRADEINSUPPLY, TRAPDOOR, ITEM
 	 * @param triggerDirection The direction the player has to approach from for the trigger to work
 	 * @param alternateX The x position to use if the normal position is blocked
 	 * @param alternateY The y position to use if the normal position is blocked

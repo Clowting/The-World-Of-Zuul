@@ -25,6 +25,7 @@ public class AnimatedSprite {
 	
 	/**
 	 * Constructs a new animated sprite from a spritesheet
+	 * @param spriteName The name of the sprite
 	 * @param folder The folder where the spritesheet is located
 	 * @param filename The filename of the spritesheet
 	 * @param isCollidable Depends if you can collide with the animated sprite or not, true/false
@@ -59,6 +60,7 @@ public class AnimatedSprite {
 	
 	/**
 	 * Constructs a new animated sprite from a spritesheet with a trigger
+	 * @param spriteName The name of the sprite
 	 * @param folder The folder where the spritesheet is located
 	 * @param filename The filename of the spritesheet
 	 * @param isCollidable Depends if you can collide with the animated sprite or not, true/false

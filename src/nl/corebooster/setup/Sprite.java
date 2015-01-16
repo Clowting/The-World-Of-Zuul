@@ -22,6 +22,7 @@ public class Sprite {
 	
 	/**
 	 * Constructs a new sprite from an image
+	 * @param spriteName The name of the sprite
 	 * @param folder The folder where the sprite is located
 	 * @param filename The filename of the sprite
 	 * @param isCollidable Depends if you can collide with the sprite or not, true/false
@@ -54,6 +55,7 @@ public class Sprite {
 	
 	/**
 	 * Constructs a new sprite from an image with a trigger
+	 * @param spriteName The name of the sprite
 	 * @param folder The folder where the sprite is located
 	 * @param filename The filename of the sprite
 	 * @param isCollidable Depends if you can collide with the sprite or not, true/false
@@ -245,7 +247,7 @@ public class Sprite {
 	 */
 	public void animateUp(int yChange)
 	{
-		int minY = newY - yChange;
+  		int minY = newY - yChange;
 		
 		if(maxYReached && y > minY) {
 			y -= 1;

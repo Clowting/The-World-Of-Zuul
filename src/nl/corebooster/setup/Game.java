@@ -2,6 +2,7 @@ package nl.corebooster.setup;
 
 import java.util.HashMap;
 
+import nl.corebooster.scenes.EndScene;
 import nl.corebooster.scenes.GameScene;
 import nl.corebooster.scenes.IntroScene;
 
@@ -21,6 +22,7 @@ public class Game extends BasicGame {
 	
 	private IntroScene intro;
 	private GameScene currentScene;
+	private EndScene end;
 	private HashMap<String, GameScene> scenes;
 	
 	/**
@@ -53,6 +55,8 @@ public class Game extends BasicGame {
 		
 		currentScene = scenes.get("ice");
 		currentScene.setActive();
+		
+		end = new EndScene();
 	}
 	
 	/**
@@ -64,15 +68,15 @@ public class Game extends BasicGame {
 	public void update(GameContainer container, int delta) throws SlickException {
 		Input input = container.getInput();
 		
-		if(!intro.hasEnded())
-		{
+		if(!intro.hasEnded()) {
 			intro.animate();
 			intro.keyHandler(input);
 		}
-		else if(currentScene.isActive())
-		{
-			if(!currentScene.isRendered())
-			{
+		else if(currentScene.getSceneName().equals("drill") && currentScene.checkTradeInSupplies()) {
+			end.animate();
+		}
+		else if(currentScene.isActive()) {
+			if(!currentScene.isRendered()) {
 				currentScene.playMusic();
 				currentScene.setRendered();
 				
@@ -90,6 +94,7 @@ public class Game extends BasicGame {
 			if(currentScene.getNextScene() != null) {
 				GameScene nextScene = scenes.get(currentScene.getNextScene());
 				
+				// Disables the current scene and enables the next scene
 				currentScene.setInactive();
 				nextScene.setActive();
 			}
@@ -98,8 +103,7 @@ public class Game extends BasicGame {
 			currentScene.keyHandler(input);
 			currentScene.triggerHandler();
 		}
-		else
-		{
+		else {
 			for(GameScene scene: scenes.values()) {
 				if(scene.isActive()) {
 					// Change player position for next scene
@@ -191,6 +195,16 @@ public class Game extends BasicGame {
 			intro.getOverlay().fadeOut(150);
 			//g.drawString("Current scene: intro", 10, 30);
 		}
+		else if(currentScene.getSceneName().equals("drill") && currentScene.checkTradeInSupplies()) {
+			// Disables the Game Scene and makes everything ready for the end scene
+			currentScene.setInactive();
+			currentScene.stopAllSounds();
+			currentScene.setUnrendered();
+			currentScene.resetNextScene();
+			
+			// Renders end scene
+			end.render(g);
+		}
 		else
 		{
 			currentScene.render(g);
@@ -206,7 +220,7 @@ public class Game extends BasicGame {
 	 */
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer app = new AppGameContainer(new Game("Blue Abyss"));
-		int updateInterval = 20;
+		int updateInterval = 50;
 		
 		app.setDisplayMode(960, 540, false);
 		app.setIcon("data/img/icon.png");

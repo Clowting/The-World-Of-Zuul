@@ -531,7 +531,10 @@ public class GameScene {
 				sprites.put("burner", new AnimatedSprite("burner", "sprites", "burner.png", true, 608, 240, 64, 64, 100));
 				
 				sprites.put("npc_officer", new Sprite("npc_officer", "sprites", "npc_red_up.png", true, TriggerType.MESSAGE, -1, -1, -1, "Good to see you here. The drill has stopped working!\nCan you ask around to see what parts the workers need?", 10, 438, 430));
-				sprites.put("npc_1", new Sprite("npc_1", "sprites", "npc_yellow_left.png", true, TriggerType.LOCKEDMESSAGE, -1, -1, -1, "Niks", 10, 900, 240));
+				sprites.put("drill_bit_npc", new Sprite("drill_bit_npc", "sprites", "npc_yellow_left.png", true, TriggerType.TRADEINSUPPLY, -1, -1, -1, "Could you please get me the drill bit.", 10, 900, 240));
+				sprites.put("cogwheel_npc", new Sprite("cogwheel_npc", "sprites", "npc_yellow_right.png", true, TriggerType.TRADEINSUPPLY, -1, -1, -1, "It would be nice if you could get my a cogwheel.", 10, 60, 330));
+				sprites.put("screw_npc", new Sprite("screw_npc", "sprites", "npc_yellow_bottom.png", true, TriggerType.TRADEINSUPPLY, -1, -1, -1, "I need a screw to continue my work.", 10, 360, 135));
+				sprites.put("wrench_npc", new Sprite("wrench_npc", "sprites", "npc_yellow_bottom.png", true, TriggerType.TRADEINSUPPLY, -1, -1, -1, "Have you seen my wrench by any chance?", 10, 580, 110));
 				
 				items.put("headquarters_entrance_key", new Item("headquarters_entrance_key", "Key to the HQ", ItemType.KEY, "key_hq_icon.png", "key_hq.png", 885, 335));
 				
@@ -841,7 +844,7 @@ public class GameScene {
 	/**
 	 * Checks if the current item usage is not expired
 	 */
-	public void checkItemUsage()
+	private void checkItemUsage()
 	{
 		long timestamp = System.currentTimeMillis();
 				
@@ -852,6 +855,31 @@ public class GameScene {
 				player.setMovementSpeed(5);
 			}
 		}
+	}
+	
+	/**
+	 * Checks if all the NPCs received all the required items
+	 * @return Whether or not all the supplies have been traded in, true/false
+	 */
+	public boolean checkTradeInSupplies()
+	{
+		for(Object object : sprites.values()) {
+			if(object instanceof Sprite) {
+				
+				Sprite sprite = (Sprite) object;
+				TriggerBox spriteTriggerBox = sprite.getTriggerBox();
+				
+				if(spriteTriggerBox != null) {
+					if(spriteTriggerBox.getTriggerType() == TriggerType.TRADEINSUPPLY) {
+						if(!spriteTriggerBox.isTriggered()) {
+							return false;
+						}
+					}
+				}
+				
+			}
+		}
+		return true;
 	}
 	
 	/**
@@ -912,7 +940,7 @@ public class GameScene {
 			player.setLatestTriggerBox(currentTriggerBox);
 			
 			switch(currentTriggerBox.getTriggerType()) {
-				case SCENESWITCH:
+				case SCENESWITCH: {
 					
 					triggerDirection = currentTriggerBox.getTriggerDirection();
 					playerRotation = player.getRotation();
@@ -923,9 +951,10 @@ public class GameScene {
 						currentTriggerBox.resetTrigger();
 					}
 					
-				break;
-			
-				case BORDER_SCENESWITCH:
+					break;
+				}
+				
+				case BORDER_SCENESWITCH: {
 					
 					triggerDirection = currentTriggerBox.getTriggerDirection();
 					playerRotation = player.getRotation();
@@ -936,9 +965,10 @@ public class GameScene {
 						currentTriggerBox.resetTrigger();
 					}
 					
-				break;
+					break;
+				}
 				
-				case LOCKEDSCENESWITCH:
+				case LOCKEDSCENESWITCH: {
 					
 					if(player.getRotation() == currentTriggerBox.getTriggerDirection()) {
 						String keyName = itemName + "_key";
@@ -965,19 +995,20 @@ public class GameScene {
 							}
 						}
 					}
-					 
-					 
-					 break;
+					
+					break;
+				}
 				
-				case MESSAGE:
+				case MESSAGE: {
 					
 					inventory.setCurrentMessage(currentTriggerBox.getValue());
 					
 					currentTriggerBox.setTriggered();
 					
-				break;
+					break;
+				}
 				
-				case LOCKEDMESSAGE:
+				case LOCKEDMESSAGE: {
 					
 					Sprite npc_officer = (Sprite) sprites.get("npc_officer");
 					
@@ -988,13 +1019,45 @@ public class GameScene {
 							inventory.setCurrentMessage(currentTriggerBox.getValue());
 						}
 						else {
-							inventory.setCurrentMessage("Talk to the officer first!\nIf you don't know who he is, it's the guy with the red suit.");
+							inventory.setCurrentMessage("Talk to the officer first!\nIf you don't know who he is, he's the guy with the red suit.");
 						}
 					}
 					
-				break;
+					break;
+				}
 				
-				case TRAPDOOR:
+				case TRADEINSUPPLY: {
+					
+					if(!currentTriggerBox.isTriggered()) {
+						
+						Sprite npc_officer = (Sprite) sprites.get("npc_officer");
+						
+						if(npc_officer != null) {
+							TriggerBox npc_officer_triggerbox = npc_officer.getTriggerBox();
+							
+							if(npc_officer_triggerbox.isTriggered()) {
+								Item currentItem = inventory.getSelectedItem();	
+								String npcName = currentItem.getKeyValue() + "_npc";
+								
+								if(npcName.equals(itemName)) {
+									currentTriggerBox.setTriggered();
+									inventory.setCurrentMessage("Thank you for giving me a " + currentItem.getItemName());
+									inventory.deleteItem(currentItem.getKeyValue());
+								} else {
+									inventory.setCurrentMessage(currentTriggerBox.getValue());
+								}
+								
+							}
+							else {
+								inventory.setCurrentMessage("Talk to the officer first!\nIf you don't know who he is, he's the guy with the red suit.");
+							}
+						}
+					}
+					
+					break;
+				}
+				
+				case TRAPDOOR: {
 					
 					AnimatedSprite animatedSprite = (AnimatedSprite) sprites.get(itemName);
 					
@@ -1013,9 +1076,10 @@ public class GameScene {
 						
 					currentTriggerBox.setTriggered();
 					
-				break;
+					break;
+				}
 				
-				case ITEM:
+				case ITEM: {
 					
 					if(inventory.canAddItem()) {
 						currentTriggerBox.setTriggered();
@@ -1025,12 +1089,17 @@ public class GameScene {
 						inventory.addItem(item);
 						inventory.setCurrentMessage(currentTriggerBox.getValue());
 					}
+					else {
+						inventory.setCurrentMessage("Your inventory is full, drop or use an item first.");
+					}
 					
-				break;
+					break;
+				}
 				
-				default:
+				default: {
 					// Do nothing
-				break;
+					break;
+				}
 				
 			}
 		}

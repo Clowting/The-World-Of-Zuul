@@ -8,7 +8,6 @@ import nl.corebooster.setup.Sprite;
 import nl.corebooster.setup.StarBackground;
 
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 
@@ -17,14 +16,12 @@ import org.newdawn.slick.SlickException;
  * @author Raymon de Looff, Thijs Clowting, Richard Weug
  * @version 1.0
  */
-public class IntroScene {
+public class EndScene {
 	
 	private LinkedHashMap<String, Object> sprites;
-	private boolean sceneEnded;
 	
 	private Sprite background;
 	private StarBackground stars;
-	private Sprite overlay;
 	
 	private Music bgMusic;
 			
@@ -35,42 +32,27 @@ public class IntroScene {
 	 * Initializes the scene
 	 * @throws SlickException Indicates a failure to initialize the display 
 	 */
-	public IntroScene() throws SlickException
+	public EndScene() throws SlickException
 	{
 		sprites = new LinkedHashMap<String, Object>();
 		stars = new StarBackground(screenWidth, screenHeight);
-		sceneEnded = false;
 		
 		// Set background
 		background = new Sprite("background", "img", "intro_background.png", false, 0, -2160);
 		
 		// Set title and 'press space to start'
-		Sprite title = new Sprite("title", "img", "title.png", false, 228, 50);
+		Sprite title = new Sprite("title", "img", "title.png", false, 228, 150);
+		title.getImage().setAlpha(0);
 		sprites.put("title", title);
-		
-		AnimatedSprite start = new AnimatedSprite("start", "sprites", "press_space.png", false, 166, 470, 627, 29, 200);
-		sprites.put("start", start);
 		
 		// Make sprite objects
 		Sprite spaceship = new Sprite("spaceship", "sprites", "spaceship.png", false, 416, 210);
 		sprites.put("spaceship", spaceship);
 		
-		// Black overlay for fade in and fade out
-		overlay = new Sprite("overlay", "img", "overlay.png", false, 0, 0);
-		
 		// Stars playing background music
 		bgMusic = new Music("data/music/IntroSong.ogg");
 		bgMusic.loop(1f, 0.1f);
 		
-	}
-	
-	/**
-	 * Returns true if scene has ended
-	 * @return Whether or not the intro scene has ended, true/false
-	 */
-	public boolean hasEnded()
-	{
-		return sceneEnded;
 	}
 	
 	/**
@@ -81,28 +63,6 @@ public class IntroScene {
 	private Sprite getSprite(String key)
 	{
 		return (Sprite) sprites.get(key);
-	}
-	
-	/**
-	 * Returns the overlay
-	 * @return The sprite object of the overlay
-	 */
-	public Sprite getOverlay()
-	{
-		return overlay;
-	}
-	
-	/**
-	 * Handles user input
-	 * @param input The input key
-	 */
-	public void keyHandler(Input input)
-	{
-		if(input.isKeyDown(Input.KEY_SPACE))
-		{
-			stopBackgroundMusic();
-			sceneEnded = true;
-		}
 	}
 	
 	/**
@@ -119,8 +79,12 @@ public class IntroScene {
 		stars.animateStars();
 		
 		// Move spaceship
-		getSprite("spaceship").animateUpDown(randInt(50, 150));
+		getSprite("spaceship").animateDown(540);
 		getSprite("spaceship").animateLeftRight(randInt(50, 250));
+		
+		if(getSprite("spaceship").getY() >= screenHeight) {
+			getSprite("title").fadeIn(100);
+		}
 	}
 
 	/**
@@ -142,16 +106,6 @@ public class IntroScene {
 				as.drawSprite(g);
 			}
 		}
-		
-		// Draw the overlay
-		overlay.drawSprite(g);
-	}
-	
-	/**
-	 * Stops playing background music
-	 */
-	private void stopBackgroundMusic() {
-		bgMusic.stop();
 	}
 	
 	/**

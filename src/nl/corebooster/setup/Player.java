@@ -20,7 +20,7 @@ public class Player {
 	private Animation spritesheetAnimation;
 	private static TriggerBox latestTriggerBox;
 	private int x, y;
-	private static final int movementSpeed = 5;
+	private static int movementSpeed;
 	private int angle;
 	private static final int playerSize = 64;
 	private Sound footstep;
@@ -42,6 +42,7 @@ public class Player {
 		this.x = x;
 		this.y = y;	
 		
+		movementSpeed = 5;
 		angle = 0;
 		
 		footstep = new Sound("data/soundeffects/FootstepIce.ogg");
@@ -141,6 +142,15 @@ public class Player {
 	public void setY(int y)
 	{
 		this.y = y;
+	}
+	
+	/**
+	 * Sets the movementSpeed
+	 * @param movementSpeed The speed the player moves at
+	 */
+	public void setMovementSpeed(int movementSpeed)
+	{
+		Player.movementSpeed = movementSpeed;
 	}
 	
 	/**

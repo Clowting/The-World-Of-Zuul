@@ -35,6 +35,7 @@ public class GameScene {
 	private Inventory inventory;
 	private AnimatedSprite overlay;
 	private boolean overlayFollowsPlayer;
+	private static AnimatedSprite secondOverlay;
 	
 	private String sceneName;
 	private String nextScene;
@@ -61,9 +62,9 @@ public class GameScene {
 		inventory = new Inventory();
 		
 		// Rainbow overlay
-		overlay = new AnimatedSprite("overlay", "sprites", "spacecake_effect.png", false, 0, 0, 960, 540, 50);
-		overlay.setAlpha(0);
-		overlay.stopAnimation();
+		secondOverlay = new AnimatedSprite("secondOverlay", "sprites", "spacecake_effect.png", false, 0, 0, 960, 540, 50);
+		secondOverlay.setAlpha(0);
+		secondOverlay.stopAnimation();
 		overlayFollowsPlayer = false;
 		
 		this.sceneName = sceneName;
@@ -247,8 +248,6 @@ public class GameScene {
 				sprites.put("landingpad", new AnimatedSprite("landingpad", "sprites", "landingpad.png", true, 50, 80, 384, 384, 1000));
 				sprites.put("spaceship", new Sprite("spaceship", "sprites", "spaceship_big.png", false, 104, 132));
 				
-				items.put("headquarters_entrance_key", new Item("headquarters_entrance_key", "Key to the HQ", ItemType.KEY, "key_hq_icon.png", "key_hq.png", 700, 80));
-				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
 	
@@ -266,6 +265,7 @@ public class GameScene {
 				sprites.put("headquarters", new Sprite("headquarters", "sprites", "headquarters.png", true, 600, 0));
 				sprites.put("headquarters_entrance_light", new Sprite("headquarters_entrance_light", "sprites", "headquarters_entrance_light.png", false, 440, 160));
 				sprites.put("headquarters_entrance", new Sprite("headquarters_entrance", "sprites", "headquarters_entrance.png", true, TriggerType.LOCKEDSCENESWITCH, 90, 80, 238, "headquarters", 0, 500, 160));
+				sprites.put("npc_officer", new Sprite("npc_officer", "sprites", "npc_red_up.png", true, TriggerType.MESSAGE, -1, -1, -1, "Welcome! I'm glad you're here.\nWe have a problem at the construction site. Do you mind taking a look?", 10, 405, 405));
 				
 				items.put("cake", new Item("cake", "Very Tasty Spacecake", ItemType.SPACECAKE, "cake_icon.png", "cake.png", 200, 30));
 				
@@ -284,7 +284,6 @@ public class GameScene {
 				sprites.put("trapdoor", new AnimatedSprite("trapdoor", "sprites", "trapdoor.png", false, TriggerType.TRAPDOOR, 360, 880, 76, "basement_1", 5, 860, 10, 90, 90, 50));
 				sprites.put("liquid_transporter", new AnimatedSprite("liquid_transporter", "sprites", "liquid_transporter.png", true, 860, 210, 70, 210, 100));
 				sprites.put("radar", new AnimatedSprite("radar", "sprites", "radar.png", true, 425, 240, 95, 95, 150));
-				sprites.put("npc_officer", new Sprite("npc_officer", "sprites", "npc_red_up.png", true, TriggerType.MESSAGE, -1, -1, -1, "Welcome! I'm glad you're here.\nWe have a problem at the construction site. Do you mind taking a look?", 10, 438, 430));
 	
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
@@ -332,8 +331,8 @@ public class GameScene {
 				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 180, 304, 16, "basement_3", 0, 288, 535));
 				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 180, 784, 16, "basement_3", 0, 768, 535));
 				
-				bgMusicName = "GameSong01.ogg";
-				bgMusicVolume = 0.05f;
+				bgMusicName = "GameSong02.ogg";
+				bgMusicVolume = 0.1f;
 				
 				// Maze overlay
 				overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
@@ -385,8 +384,10 @@ public class GameScene {
 
 				sprites.put("teleporter", new AnimatedSprite("teleporter", "sprites", "teleporter.png", true, TriggerType.SCENESWITCH, 360, 420, 238, "outside_headquarters", 0, 768, 156, 96, 96, 100));
 				
-				bgMusicName = "GameSong01.ogg";
-				bgMusicVolume = 0.05f;
+				items.put("wrench", new Item("wrench", "wrench, needed to fix the drill", ItemType.SUPPLY, "wrench_icon.png", "wrench.png", 736, 60));
+				
+				bgMusicName = "GameSong02.ogg";
+				bgMusicVolume = 0.1f;
 
 				// Maze overlay
 				overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
@@ -434,9 +435,11 @@ public class GameScene {
 				sprites.put("trigger_1", new Sprite("trigger_1", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 0, 304, 460, "basement_1", 0, 288, 0));
 				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 0, 784, 460, "basement_1", 0, 768, 0));
 				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_5x96.png", true, TriggerType.BORDER_SCENESWITCH, 90, 16, 304, "basement_4", 0, 955, 288));
+				
+				items.put("screw", new Item("screw", "screw, a part of the drill", ItemType.SUPPLY, "screw_icon.png", "screw.png", 640, 352));
 
-				bgMusicName = "GameSong01.ogg";
-				bgMusicVolume = 0.05f;
+				bgMusicName = "GameSong02.ogg";
+				bgMusicVolume = 0.1f;
 
 				// Maze overlay
 				overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
@@ -485,8 +488,10 @@ public class GameScene {
 				sprites.put("trigger_2", new Sprite("trigger_2", "img", "maze_trigger_96x5.png", true, TriggerType.BORDER_SCENESWITCH, 0, 688, 460, "basement_2", 0, 672, 0));
 				sprites.put("trigger_3", new Sprite("trigger_3", "img", "maze_trigger_5x96.png", true, TriggerType.BORDER_SCENESWITCH, 270, 880, 304, "basement_3", 0, 0, 288));
 				
-				bgMusicName = "GameSong01.ogg";
-				bgMusicVolume = 0.05f;
+				items.put("cogwheel", new Item("cogwheel", "cogwheel, a part of the drill", ItemType.SUPPLY, "cogwheel_icon.png", "cogwheel.png", 640, 256));
+				
+				bgMusicName = "GameSong02.ogg";
+				bgMusicVolume = 0.1f;
 
 				// Maze overlay
 				overlay = new AnimatedSprite("overlay", "img", "overlay_maze.png", false, 0, 0, 2880, 1620, 1000);
@@ -512,6 +517,8 @@ public class GameScene {
 				
 				sprites.put("npc_officer", new Sprite("npc_officer", "sprites", "npc_red_up.png", true, TriggerType.MESSAGE, -1, -1, -1, "Good to see you here. The drill has stopped working!\nCan you ask around to see what parts the workers need?", 10, 438, 430));
 				sprites.put("npc_1", new Sprite("npc_1", "sprites", "npc_yellow_left.png", true, TriggerType.LOCKEDMESSAGE, -1, -1, -1, "Niks", 10, 900, 240));
+				
+				items.put("headquarters_entrance_key", new Item("headquarters_entrance_key", "Key to the HQ", ItemType.KEY, "key_hq_icon.png", "key_hq.png", 885, 335));
 				
 				bgMusicName = "GameSong01.ogg";
 				bgMusicVolume = 0.05f;
@@ -776,13 +783,15 @@ public class GameScene {
 			
 				case SPACECAKE:
 					
-					if(overlay.isStopped()) {
-						overlay.startAnimation();
-						overlay.setAlpha(255);
+					if(secondOverlay.isStopped()) {
+						secondOverlay.startAnimation();
+						secondOverlay.setAlpha(255);
+						player.setMovementSpeed(2);
 					}
 					else {
-						overlay.setAlpha(0);
-						overlay.stopAnimation();
+						secondOverlay.setAlpha(0);
+						secondOverlay.stopAnimation();
+						player.setMovementSpeed(5);
 					}
 					
 				break;
@@ -1054,6 +1063,11 @@ public class GameScene {
 		
 		// Draw the player
 		player.drawSprite(g);
+		
+		// Draw the space cake effect
+		if(secondOverlay != null) {
+			secondOverlay.drawSprite(g);
+		}
 		
 		// Draw the overlay
 		if(overlay != null) {

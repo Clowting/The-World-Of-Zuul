@@ -41,7 +41,7 @@ public class EndScene {
 		background = new Sprite("background", "img", "intro_background.png", false, 0, -2160);
 		
 		// Set title and 'press space to start'
-		Sprite title = new Sprite("title", "img", "title.png", false, 228, 150);
+		Sprite title = new Sprite("title", "img", "theend.png", false, 228, 150);
 		title.getImage().setAlpha(0);
 		sprites.put("title", title);
 		

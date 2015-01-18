@@ -18,7 +18,7 @@ public class TriggerBox {
 	private TriggerType triggerType;
 	private int triggerDirection, alternateX, alternateY;
 	private Rectangle box;
-	private int boxMargin = 1;
+	private int boxMargin;
 	private String value;
 	private boolean isTriggered;
 	

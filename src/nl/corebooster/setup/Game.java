@@ -36,6 +36,20 @@ public class Game extends BasicGame {
 	}
 	
 	/**
+	 * Returns the game scene with the given key
+	 * @return The game scene
+	 */
+	public GameScene getScene(String key)
+	{
+		if(scenes.containsKey(key)) {
+			return scenes.get(key);
+		}
+		else {
+			return null;
+		}
+	}
+	
+	/**
 	 * Initializes the game
 	 * @param container The game container to initialize
 	 * @throws SlickException Indicates a failure to initialize the display
@@ -193,7 +207,6 @@ public class Game extends BasicGame {
 		{
 			intro.render(g);
 			intro.getOverlay().fadeOut(150);
-			//g.drawString("Current scene: intro", 10, 30);
 		}
 		else if(currentScene.getSceneName().equals("drill") && currentScene.checkTradeInSupplies()) {
 			// Disables the Game Scene and makes everything ready for the end scene
@@ -208,7 +221,6 @@ public class Game extends BasicGame {
 		else
 		{
 			currentScene.render(g);
-			//g.drawString("Current scene: " + currentScene.getSceneName(), 10, 30);
 			
 		}
 	}

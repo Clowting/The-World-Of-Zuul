@@ -7,6 +7,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.newdawn.slick.geom.Rectangle;
 
+/**
+ * Test class for the CollisionBox class
+ * @author Raymon de Looff, Thijs Clowting, Richard Weug
+ * @version 1.0
+ */
 public class CollisionBoxTest {
 	
 	private CollisionBox collisionBox;

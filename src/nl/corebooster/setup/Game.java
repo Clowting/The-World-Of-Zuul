@@ -55,6 +55,9 @@ public class Game extends BasicGame {
 	 * @throws SlickException Indicates a failure to initialize the display
 	 */
 	public void init(GameContainer container) throws SlickException {
+		// Container preferences
+		container.setShowFPS(false);
+		
 		intro = new IntroScene();
 		
 		scenes.put("ice", new GameScene("ice", 480, 270));

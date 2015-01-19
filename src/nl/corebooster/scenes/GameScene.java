@@ -1209,10 +1209,6 @@ public class GameScene {
 			overlay.drawSprite(g);
 		}
 		
-		// Draw debug info
-		g.drawString("Player X: " + player.getX(), 10, 25);
-		g.drawString("Player Y: " + player.getY(), 10, 40);
-		
 		// Draw the inventory
 		inventory.render(g);
 	}

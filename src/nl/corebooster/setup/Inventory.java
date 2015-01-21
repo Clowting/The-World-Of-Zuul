@@ -16,6 +16,7 @@ public class Inventory {
 	private Sprite background;
 	private String currentMessage;
 	private static final int maxItemCount = 4;
+	private Sprite selectedSlotImage;
 	private int selectedSlot;
 	private ArrayList<Item> items;
 	
@@ -27,6 +28,7 @@ public class Inventory {
 	{
 		background = new Sprite("inventory", "img", "inventory.png", false, 0, 465);
 		currentMessage = "Thanks for playing our game!";
+		selectedSlotImage = new Sprite("selectedSlot", "img", "selected_slot.png", false, 718, 481);
 		selectedSlot = 0;
 		items = new ArrayList<Item>();
 	}
@@ -216,8 +218,8 @@ public class Inventory {
 		
 		// Draw selected slot
 		int slotOffsetLeft = 718 + (selectedSlot * 61);
-		Sprite selectedSlot = new Sprite("selectedSlot", "img", "selected_slot.png", false, slotOffsetLeft, 481);
-		selectedSlot.drawSprite(g);
+		selectedSlotImage.setX(slotOffsetLeft);
+		selectedSlotImage.drawSprite(g);
 		
 		// Draw items
 		int offsetLeft = 721;

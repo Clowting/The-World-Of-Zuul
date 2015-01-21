@@ -1037,12 +1037,17 @@ public class GameScene {
 							
 							if(npc_officer_triggerbox.isTriggered()) {
 								Item currentItem = inventory.getSelectedItem();	
-								String npcName = currentItem.getKeyValue() + "_npc";
 								
-								if(npcName.equals(itemName)) {
-									currentTriggerBox.setTriggered();
-									inventory.setCurrentMessage("Thank you for giving me a " + currentItem.getItemName());
-									inventory.deleteItem(currentItem.getKeyValue());
+								if(currentItem != null) {
+									String npcName = currentItem.getKeyValue() + "_npc";
+									
+									if(npcName.equals(itemName)) {
+										currentTriggerBox.setTriggered();
+										inventory.setCurrentMessage("Thank you for giving me a " + currentItem.getItemName());
+										inventory.deleteItem(currentItem.getKeyValue());
+									} else {
+										inventory.setCurrentMessage(currentTriggerBox.getValue());
+									}
 								} else {
 									inventory.setCurrentMessage(currentTriggerBox.getValue());
 								}
